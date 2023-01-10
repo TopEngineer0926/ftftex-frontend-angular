@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: "https://stgapi.ftftx.com/",
+  baseUrl2: "https://staging-verification.ftftx.com/"
 };
 
 /*
