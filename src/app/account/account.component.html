@@ -1,0 +1,74 @@
+<div class="vh-100">
+  <div class="container">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="wt-box mt-3 p-lg-3">
+        <h4 class="s-bld">{{'My Account' | translate}}</h4>
+        <hr>
+
+        <div class="acc-box mb-2">
+          <span class="material-symbols-outlined acc-box-i align-self-center mr-3">account_circle</span>
+          <div class="align-self-center">
+            <p class="mb-0">Account</p>
+            <p class="mb-0 s-bld">{{LogginIn[0]}} {{LogginIn[1]}}</p>
+          </div>
+          <div class="align-self-center ml-auto">
+            <a class="btn btn-outline-primary">Edit</a>
+          </div>
+        </div>
+
+        <div class="acc-box mb-2">
+          <span class="material-symbols-outlined acc-box-i align-self-center mr-3">verified_user</span>
+          <div class="align-self-center">
+            <p class="mb-0">Personal Verification</p>
+            <p class="mb-0 s-bld">-- Not verified -- </p>
+          </div>
+          <div class="align-self-center ml-auto">
+            <a class="btn btn-primary" [routerLink]="'/account/verification'">Verify</a>
+          </div>
+        </div>
+
+        <div class="acc-box mb-2">
+          <span class="material-symbols-outlined acc-box-i align-self-center mr-3">smartphone</span>
+          <div class="align-self-center">
+            <p class="mb-0">Mobile No.</p>
+            <p class="mb-0 s-bld sht-txt">{{LogginIn[2]}}</p>
+          </div>
+          <div class="align-self-center ml-auto">
+            <a class="btn btn-outline-primary mr-3">Edit</a>
+            <a class="btn btn-primary">Verify</a>
+          </div>
+        </div>
+
+
+        <div class="acc-box mb-2">
+          <span class="material-symbols-outlined acc-box-i align-self-center mr-3">email</span>
+          <div class="align-self-center ">
+            <p class="mb-0">Email</p>
+            <p class="mb-0 s-bld sht-txt">{{LogginIn[3]}}</p>
+          </div>
+          <div class="align-self-center ml-auto">
+          <a class="btn btn-outline-primary mr-3">Edit</a>
+          <a class="btn btn-primary">Verify</a>
+          </div>
+        </div>
+
+        <div class="acc-box mb-2">
+          <span class="material-symbols-outlined acc-box-i align-self-center mr-3">lock</span>
+          <div class="align-self-center ">
+            <p class="mb-0">Password</p>
+            <p class="mb-0 s-bld ">*******</p>
+          </div>
+          <div class="align-self-center ml-auto">
+            <a class="btn btn-outline-primary">Change</a>
+          </div>
+        </div>
+
+        <div class="w-100 d-block text-center mt-5">
+          <a class="btn btn-primary align-self-center px-5 mx-auto" (click)="logOut()">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

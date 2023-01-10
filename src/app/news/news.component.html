@@ -1,0 +1,110 @@
+<div class="min-h-full mb-5">
+  <app-tadingviewticker></app-tadingviewticker>
+  <div class="row d-none d-lg-block">
+    <div class="col-md-10 offset-md-1">
+      <h1 class="s-bld my-4">{{"News" | translate}}</h1>
+    </div>
+    <div class="col-lg-10 offset-lg-1 ">
+      <div class="row wt-box">
+        <div class="col-lg-8 px-0 ">
+          <div class="n-title-top">
+            <div class="d-flex justify-content-between">
+              <p class="s-bld mb-0">{{SelectedNews?.source_id | titlecase}}</p>
+              <p class="s-bld mb-0" *ngIf="SelectedNews?.creator">by {{SelectedNews?.creator}}</p>
+              <p class="s-bld mb-0">{{SelectedNews?.pubDate | date}}</p>
+            </div>
+          </div>
+          <img  [src]="SelectedNews?.image_url" (error)="setDefaultPic($event)" class="w-100 thumbnail">
+          <div class="n-title">
+            <a class="s-bld mb-0" [href]="SelectedNews?.link" target="_blank">{{SelectedNews?.title}}</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12  d-none d-lg-block">
+          <div class="d-flex">
+            <div class="btn btn-def flex-fill p-3" [ngClass]="{'btn-def-activated': NewsFilter === 'crypto' }" (click)="changeTab('crypto')">TOP</div>
+            <div class="btn btn-def flex-fill p-3" [ngClass]="{'btn-def-activated': NewsFilter === 'bitcoin' }" (click)="changeTab('bitcoin')">BITCOIN</div>
+          </div>
+          <div class="mv-h">
+          <ng-container *ngFor="let dta of NewsData">
+          <div class="p-3 n-btn" (click)="selectOneNews(dta)">
+            <div class="row">
+              <div class="col-md-12">
+                <p class="s-bld mb-0" >{{dta.title}}</p>
+              </div>
+            </div>
+          </div>
+          </ng-container>
+          </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-lg-10 offset-lg-1">
+      <div class="row mt-5">
+        <ng-container *ngFor="let dta of NewsDataAll">
+        <div class="col-lg-4 col-md-12 mt-3">
+            <div class="wt-box h-100 ">
+              <a href="{{dta.link}}" target="_blank"><img [src]="dta?.image_url" (error)="setDefaultPic($event)" class="w-100 thumbnail-cont"></a>
+              <div class="p-4 d-flex flex-column justify-content-between">
+                <a class="s-bld mb-0 cu-p mb-3" [href]="dta?.link" target="_blank">{{dta?.title}}</a>
+                <div class="d-flex justify-content-between mt-auto">
+                  <p class=" mb-0" style="font-size: 13px;">by {{dta?.creator}}</p>
+                  <p class="mb-0 ml-4" style="font-size: 13px;white-space: nowrap">{{dta?.pubDate | fromNow}}</p>
+                </div>
+              </div>
+            </div>
+        </div>
+        </ng-container>
+      </div>
+    </div>
+    </div>
+
+
+
+
+
+
+  <div class="row d-block d-lg-none">
+    <div class="col-lg-4  col-md-12 ">
+      <div class="d-flex mb-3">
+        <div class="btn btn-def flex-fill p-3" [ngClass]="{'btn-def-activated': NewsFilter === 'crypto' }" (click)="changeTab('crypto')">TOP</div>
+        <div class="btn btn-def flex-fill p-3" [ngClass]="{'btn-def-activated': NewsFilter === 'bitcoin' }" (click)="changeTab('bitcoin')">BITCOIN</div>
+      </div>
+        <ng-container *ngFor="let dta of NewsData">
+          <div class="wt-box h-100 mb-3">
+            <a href="{{dta.link}}" target="_blank"><img [src]="dta?.image_url" (error)="setDefaultPic($event)" class="w-100 thumbnail-cont"></a>
+            <div class="p-4 d-flex flex-column justify-content-between">
+              <a class="s-bld mb-0 cu-p mb-3" [href]="dta?.link" target="_blank">{{dta?.title}}</a>
+              <div class="d-flex justify-content-between mt-auto">
+                <p class=" mb-0" style="font-size: 13px;">by {{dta?.creator}}</p>
+                <p class="mb-0 ml-4" style="font-size: 13px;white-space: nowrap">{{dta?.pubDate | fromNow}}</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+    </div>
+  </div>
+
+  <div class="row more-stories">
+    <div class="col-lg-10 offset-lg-1 ">
+    <div class="wt-box h-100 my-5 p-2" *ngIf="NoImageNews.length > 0">
+      <h3 class="s-bld p-3">{{"More Stories" | translate}}</h3>
+      <div class="row">
+      <ng-container *ngFor="let dta of NoImageNews">
+        <div class="col-lg-4">
+        <a class="p-3   w-100 d-block s-bld"   [href]="dta?.link" target="_blank">
+             {{dta.title}}
+        </a>
+        </div>
+      </ng-container>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
+

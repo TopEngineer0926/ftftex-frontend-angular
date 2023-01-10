@@ -1,0 +1,14 @@
+<div class="min-h-full ">
+  <div class="container">
+    <div class="wt-box my-5">
+      <div class="d-flex flex-wrap mt-4 mt-md-0">
+      <div class="sub-menu-btn btn mr-md-4  px-4 "  [routerLink]="'/about/product-introduction'" [routerLinkActive]="'sub-menu-btn-activate'">{{"About us" | translate}}</div>
+      <div class="sub-menu-btn btn mr-md-4  px-4 " [routerLink]="'/about/service-terms'" [routerLinkActive]="'sub-menu-btn-activate'">{{"Terms" | translate}}</div>
+      <div class="sub-menu-btn btn mr-md-4  px-4 " [routerLink]="'/about/aml-policy'" [routerLinkActive]="'sub-menu-btn-activate'">{{"AML Policy" | translate}}</div>
+      <div class="sub-menu-btn btn mr-md-4  px-4 " [routerLink]="'/about/privacy-policy'" [routerLinkActive]="'sub-menu-btn-activate'">{{"Privacy Policy" | translate}}</div>
+      </div>
+      <hr>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

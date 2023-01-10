@@ -1,0 +1,44 @@
+<div class="bg-wt">
+<div class="container fh-minus-100">
+  <div class="row">
+  <div class="col-lg-4 offset-lg-4">
+    <div class="wt-box p-4 mt-lg-5">
+      <h1 class="s-bld mb-4">{{"Login" | translate}}</h1>
+      <hr>
+      <div class="d-flex w-100 mb-5">
+        <button class="btn sub-menu-btn flex-fill" [ngClass]="{'sub-menu-btn-activate' : loginType === 'email'}" (click)="switchLoginType('email')">{{"Email" | translate}}</button>
+        <button class="btn sub-menu-btn flex-fill" [ngClass]="{'sub-menu-btn-activate' : loginType === 'mobile'}" (click)="switchLoginType('mobile')">{{"Mobile" | translate}}</button>
+      </div>
+
+      <form [formGroup]="Form">
+      <ng-container *ngIf="loginType === 'email'">
+        <label>{{"Email" | translate}}</label>
+        <input class="form-control" placeholder="Email" formControlName="email">
+      </ng-container>
+
+      <ng-container *ngIf="loginType === 'mobile'">
+        <label>{{"Mobile" | translate}}</label>
+
+        <div class="d-flex">
+          <div class="btn co-code-btn  d-flex" (click)="openDialingCodes()">
+            <img [src]="DialingCode.flag" height="20" width="20" class="align-self-center ">
+            <p class="mb-0 align-self-center s-bld ml-2"> {{DialingCode.dialCode}}</p>
+          </div>
+          <input type="number" class="form-control mobile-field" placeholder="Mobile No" formControlName="phone">
+        </div>
+
+      </ng-container>
+
+      <label class="mt-3">{{"Password" | translate}}</label>
+      <input type="password" class="form-control" placeholder="Password" formControlName="password">
+        <p class="mt-4 text-center error-msg">{{LoginErrors}} </p>
+      <button class="btn btn-primary btn-lg mt-5 mx-auto d-block font-weight-bold px-5" [disabled]="Form.invalid" (click)="login()">{{"Login" | translate}}</button>
+      </form>
+      <p class="mt-4 text-center "><a routerLink="/forgot-password">Forgot your password ? </a></p>
+      <hr>
+      <h5 class="text-center">{{"Don't have an account ?" | translate}} <a [routerLink]="'/register'"><b>{{"Register here" | translate}}</b></a></h5>
+    </div>
+  </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,30 @@
+<ng-container *ngFor="let dta of posts">
+  <div class="d-flex post-cont" >
+    <img  [src]="dta.profile_img" class="user-img">
+    <div class="post ml-3" >
+      <div class="profile">
+        <p class="display-name">{{dta.display_name}}</p>
+        <p class="user-name">{{dta.user_name}}</p>
+        <p class="posted-time">{{dta.date | fromNow}}</p>
+      </div>
+      <p class="post-content" [innerHTML]="dta.content.text">
+
+      </p>
+      <img [routerLink]="'/community/post/123'" [src]="dta.content.image" class="post-img">
+      <div class="post-comments">
+        <div class="d-flex post-comment-type">
+          <span class="material-symbols-outlined">mode_comment</span>
+          <span> 10</span>
+        </div>
+        <div class="d-flex post-comment-type">
+          <span class="material-symbols-outlined">sync</span>
+          <span> 86</span>
+        </div>
+        <div class="d-flex post-comment-type">
+          <span class="material-symbols-outlined">favorite</span>
+          <span> 112</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

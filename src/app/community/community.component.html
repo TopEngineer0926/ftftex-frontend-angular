@@ -1,0 +1,21 @@
+<div class="min-h-full">
+  <app-tadingviewticker></app-tadingviewticker>
+  <div class="container mt-2">
+    <div class="row">
+    <div class="col-lg-2 " style="position: sticky;top: 0">
+      <h3 class="s-bld mt-3">{{"Community" | translate}}</h3>
+      <div class="d-flex d-lg-block mb-4">
+      <div class="btn sub-menu-btn w-100" [routerLink]="'/community/feed'"><span class="material-symbols-outlined">rss_feed</span><span class="ml-2">{{"Feed" | translate}}</span></div>
+      <div class="btn sub-menu-btn w-100" [routerLink]="'/community/notifications'"><span class="material-symbols-outlined">notifications</span><span class="ml-2">{{"Notifications" | translate}}</span></div>
+      <div class="btn sub-menu-btn w-100" [routerLink]="'/community/profile'"><span class="material-symbols-outlined">person</span><span class="ml-2">{{"Profile" | translate}}</span></div>
+      </div>
+    </div>
+    <div class="col-lg-7 wt-box rounded-0 mb-5" style="overflow: visible">
+    <router-outlet></router-outlet>
+    </div>
+    <div class="col-md-3">
+      <app-trending-coins [ViewType]="'widget'"></app-trending-coins>
+    </div>
+    </div>
+  </div>
+</div>

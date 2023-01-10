@@ -1,0 +1,108 @@
+<div class="d-flex t-head">
+  <h2 class="mr-auto s-bld mb-0">{{"Top Gainers & Losers" | translate}}</h2>
+  <div class="sub-menu-btn btn mr-2 px-4" [ngClass]="{'sub-menu-btn-activate' : sortDir === 'desc'}" (click)="changeTag('desc')">Gainers</div>
+  <div class="sub-menu-btn btn mr-2 px-4" [ngClass]="{'sub-menu-btn-activate' : sortDir === 'asc'}" (click)="changeTag('asc')">Losers</div>
+</div>
+<div class="wt-box x-m-overflow mt-4">
+  <table class="table" >
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" class="cu-p" (click)="doSort('name')">
+        <div class="d-flex">{{"Name" | translate}}
+          <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'name' && order.reversed === true">arrow_drop_up</span>
+          <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'name' && order.reversed === false">arrow_drop_down</span>
+        </div>
+      </th>
+      <th scope="col" class="cu-p" (click)="doSort('quote.USD.price')">
+        <div class="d-flex">{{"Price" | translate}}
+          <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'quote.USD.price' && order.reversed === true">arrow_drop_up</span>
+          <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'quote.USD.price' && order.reversed === false">arrow_drop_down</span>
+        </div>
+      </th>
+      <ng-container *ngIf="!isMobile">
+      <th scope="col" class="cu-p" (click)="doSort('quote.USD.percent_change_24h')">
+        <div class="d-flex">{{"24h" | translate}}
+          <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'quote.USD.percent_change_24h' && order.reversed === true">arrow_drop_up</span>
+          <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'quote.USD.percent_change_24h' && order.reversed === false">arrow_drop_down</span>
+        </div>
+      </th>
+      </ng-container>
+      <th scope="col" class="cu-p" (click)="doSort('quote.USD.volume_24h')">
+        <div class="d-flex justify-content-end">{{"Volume(24h)" | translate}}
+          <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'quote.USD.volume_24h' && order.reversed === true">arrow_drop_up</span>
+          <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'quote.USD.volume_24h' && order.reversed === false">arrow_drop_down</span>
+        </div>
+      </th>
+    </tr>
+    </thead>
+    <tbody *ngIf="loader === false">
+    <ng-container *ngFor="let dta of CoinData | orderBy: order.field : order.reversed; let i = index">
+      <tr>
+        <td class="s-bld">{{i + 1}}</td>
+        <td class="font-weight-bold">
+          <div class="d-flex cu-p" [routerLink]="'/coin/' + dta.id + '/' + dta.slug">
+            <img class="align-self-center" loading="lazy" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{dta.id}}.png" height="30">
+            <div class="align-self-center ml-2">
+              <p class="mb-0 s-bld c-symb"> {{dta.symbol}}</p>
+              <p class="mb-0 c-name " > {{dta.name}}</p>
+            </div>
+          </div>
+        </td>
+        <td class="s-bld" *ngIf="dta.quote.USD.price > 1.1" style="width: 120px">$ {{dta.quote.USD.price | number}}
+        <span class="txt-green s-bld" [ngClass]="{'txt-red' :dta?.quote.USD.percent_change_24h < 0}" *ngIf="isMobile">
+          <span class="d-flex">
+            <span class="material-symbols-outlined align-self-center" *ngIf="dta?.quote.USD.percent_change_24h < 0">arrow_drop_down</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="dta?.quote.USD.percent_change_24h > 0">arrow_drop_up</span>
+            <span class="align-self-center">{{dta.quote.USD.percent_change_24h | number: '0.0-2' | removeMinus}} %</span>
+          </span>
+        </span>
+        </td>
+        <td class="s-bld" *ngIf="dta.quote.USD.price < 1.1" style="width: 120px">$ {{dta.quote.USD.price | number: '0.8-8'}}
+
+          <span class="txt-green s-bld" [ngClass]="{'txt-red' :dta?.quote.USD.percent_change_24h < 0}" *ngIf="isMobile">
+          <span class="d-flex">
+            <span class="material-symbols-outlined align-self-center" *ngIf="dta?.quote.USD.percent_change_24h < 0">arrow_drop_down</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="dta?.quote.USD.percent_change_24h > 0">arrow_drop_up</span>
+            <span class="align-self-center">{{dta.quote.USD.percent_change_24h | number: '0.0-2' | removeMinus}} %</span>
+          </span>
+        </span>
+        </td>
+
+        <ng-container *ngIf="!isMobile">
+        <td class="txt-green s-bld" [ngClass]="{'txt-red' :dta?.quote.USD.percent_change_24h < 0}">
+          <div class="d-flex">
+            <span class="material-symbols-outlined align-self-center" *ngIf="dta?.quote.USD.percent_change_24h < 0">arrow_drop_down</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="dta?.quote.USD.percent_change_24h > 0">arrow_drop_up</span>
+            <span class="align-self-center">{{dta.quote.USD.percent_change_24h | number: '0.0-2' | removeMinus}} %</span>
+          </div>
+        </td>
+        </ng-container>
+        <td class="s-bld text-right">$ {{dta.quote.USD.volume_24h | numberSuffix}}</td>
+
+      </tr>
+    </ng-container>
+
+    </tbody>
+  </table>
+
+
+
+
+  <table class="table" *ngIf="loader === true">
+    <tbody>
+    <tr *ngFor="let item of [].constructor(9)">
+      <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+      <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+      <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+      <ng-container *ngIf="!isMobile">
+      <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+      <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+      </ng-container>
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>
+

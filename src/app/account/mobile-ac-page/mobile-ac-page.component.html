@@ -1,0 +1,40 @@
+<div class="vh-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <h4 class="s-bld mb-0 mt-3">{{'Account' | translate}}</h4>
+        <hr>
+        <div class="wt-box mt-3 p-lg-3" [routerLink]="'/account'">
+          <div class="acc-box mb-lg-0">
+            <span class="material-symbols-outlined acc-box-i align-self-center mr-3" style="font-size: 35px">account_circle</span>
+            <div>
+              <h5 class="s-bld mb-0">{{'Profile' | translate}}</h5>
+              {{LogginIn[0]}} {{LogginIn[1]}}
+            </div>
+            <span class="material-symbols-outlined acc-box-i align-self-center ml-auto" style="font-size: 35px; opacity: 0.6">arrow_forward_ios</span>
+          </div>
+        </div>
+        <div class="wt-box mt-3 p-lg-3" [routerLink]="'/spot-wallet'">
+          <div class="acc-box  mb-lg-0">
+            <span class="material-symbols-outlined acc-box-i align-self-center mr-3" style="font-size: 35px">wallet</span>
+            <div>
+              <h5 class="s-bld mb-0">{{'Wallet' | translate}}</h5>
+<!--              Balance : <span class="s-bld">$ {{TotalUSD | number:'0.3-8'}}</span>-->
+              Balance : <span class="s-bld">$ {{ 0 | number:'0.3-8'}}</span>
+            </div>
+            <span class="material-symbols-outlined acc-box-i align-self-center  ml-auto" style="font-size: 35px; opacity: 0.6">arrow_forward_ios</span>
+          </div>
+        </div>
+        <div class="wt-box mt-3 p-lg-3" [routerLink]="'/account/settings'">
+          <div class="acc-box  mb-lg-0">
+            <span class="material-symbols-outlined acc-box-i align-self-center mr-3" style="font-size: 35px">settings</span>
+            <div class="align-self-center">
+              <h5 class="s-bld mb-0">{{'Settings' | translate}}</h5>
+            </div>
+            <span class="material-symbols-outlined acc-box-i align-self-center  ml-auto" style="font-size: 35px; opacity: 0.6">arrow_forward_ios</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

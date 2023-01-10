@@ -1,0 +1,119 @@
+<div class="container mb-5">
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <div class="d-flex t-head">
+        <h2 class="mr-auto s-bld mb-0">{{"Top Cryptocurrency Exchanges" | translate}}</h2>
+       <!-- <div class="sub-menu-btn btn mr-2 px-4" [ngClass]="{'sub-menu-btn-activate' : Category === 'spot'}" (click)="switchSubTab('spot')">{{"Spot" | translate}}</div>-->
+<!--        <div class="sub-menu-btn btn mr-2 px-4" [ngClass]="{'sub-menu-btn-activate' : Category === 'derivatives'}" (click)="switchSubTab('derivatives')">{{"Derivatives" | translate}}</div>-->
+  <!--      <div class="sub-menu-btn btn mr-2" [ngClass]="{'sub-menu-btn-activate' : Category === 'dex'}" (click)="switchSubTab('dex')">Dex</div>
+        <div class="sub-menu-btn btn mr-2" [ngClass]="{'sub-menu-btn-activate' : Category === 'lending'}" (click)="switchSubTab('lending')">Lending</div>-->
+      </div>
+    </div>
+  </div>
+  <div class="wt-box x-m-overflow mt-2 mt-lg-4">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col" class="cu-p" (click)="doSort('rank')">
+          <div class="d-flex">#
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'rank' && order.reversed === true">arrow_drop_up</span>
+          </div>
+        </th>
+        <th scope="col" class="cu-p" (click)="doSort('name')">
+          <div class="d-flex">{{"Exchange" | translate}}
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'name' && order.reversed === true">arrow_drop_up</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'name' && order.reversed === false">arrow_drop_down</span>
+          </div>
+        </th>
+
+        <th scope="col" class="cu-p" (click)="doSort('quote.USD.volume_24h')">
+          <div class="d-flex">{{"Volume(24h)" | translate}}
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'quote.USD.volume_24h' && order.reversed === true">arrow_drop_up</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'quote.USD.volume_24h' && order.reversed === false">arrow_drop_down</span>
+          </div>
+        </th>
+        <ng-container *ngIf="isMobile ===false">
+          <th scope="col" class="cu-p" (click)="doSort('exchange_score')">
+            <div class="d-flex">{{"Exchange Score" | translate}}
+              <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'exchange_score' && order.reversed === true">arrow_drop_up</span>
+              <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'exchange_score' && order.reversed === false">arrow_drop_down</span>
+            </div>
+          </th>
+        <th scope="col" class="cu-p" (click)="doSort('quote.USD.effective_liquidity_24h')">
+          <div class="d-flex">{{"Avg.Liquidity" | translate}}
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'quote.USD.effective_liquidity_24h' && order.reversed === true">arrow_drop_up</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'quote.USD.effective_liquidity_24h' && order.reversed === false">arrow_drop_down</span>
+          </div>
+        </th>
+        <th scope="col" class="cu-p" (click)="doSort('num_market_pairs')">
+          <div class="d-flex">{{"#Markets" | translate}}
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'num_market_pairs' && order.reversed === true">arrow_drop_up</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'num_market_pairs' && order.reversed === false">arrow_drop_down</span>
+          </div>
+        </th>
+        <th scope="col" class="cu-p" (click)="doSort('num_coins')">
+          <div class="d-flex">{{"#Coins" | translate}}
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'num_coins' && order.reversed === true">arrow_drop_up</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="order.field === 'num_coins' && order.reversed === false">arrow_drop_down</span>
+          </div>
+        </th>
+        <th scope="col">{{"Volume Graph (7d)" | translate}}</th>
+        </ng-container>
+
+      </tr>
+      </thead>
+      <tbody *ngIf="loader === false">
+
+      <ng-container *ngFor="let dta of ExchangeData | orderBy: order.field : order.reversed | paginate: { id: 'foo', itemsPerPage: 100,currentPage: page, totalItems: this.totalCount } ">
+        <tr>
+          <td class="s-bld">{{dta.rank}}</td>
+          <td class="font-weight-bold">
+            <div class="d-flex cu-p" [routerLink]="'/exchange/' + dta.id + '/' + dta.slug">
+              <img class="align-self-center" loading="lazy" src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/{{dta.id}}.png" height="30">
+              <div class="align-self-center ml-2">
+                <p class="mb-0 s-bld"> {{dta.name.replace('Exchange' , '')}}</p>
+              </div>
+            </div>
+          </td>
+
+          <td class=" s-bld" >
+            <span class="align-self-center"  *ngIf="dta.quote.USD.volume_24h > 0">$ {{dta.quote.USD.volume_24h | number}}</span>
+            <span class="align-self-center"  *ngIf="dta.quote.USD.volume_24h < 0">--</span>
+            <div class="d-flex txt-green" [ngClass]="{'txt-red' :dta?.quote.USD.percent_change_volume_24h < 0}">
+              <span class="material-symbols-outlined align-self-center" *ngIf="dta?.quote.USD.percent_change_volume_24h < 0">arrow_drop_down</span>
+              <span class="material-symbols-outlined align-self-center" *ngIf="dta?.quote.USD.percent_change_volume_24h > 0">arrow_drop_up</span>
+              <span class="align-self-center">{{dta.quote.USD.percent_change_volume_24h | number: '0.0-2' | removeMinus}} %</span>
+            </div>
+          </td>
+          <ng-container *ngIf="isMobile ===false">
+          <td class="s-bld">{{dta.exchange_score | number}}</td>
+          <td class="s-bld">{{dta.quote.USD.effective_liquidity_24h | number}}</td>
+          <td class="s-bld" *ngIf="dta.num_market_pairs > 0">{{dta.num_market_pairs}}</td>
+          <td class="s-bld" *ngIf="dta.num_market_pairs < 0">--</td>
+          <td class="s-bld">{{dta.num_coins}}</td>
+          <td><img class="grp-clr" src="https://s3.coinmarketcap.com/generated/sparklines/exchanges/web/7d/usd/{{dta.id}}.svg" loading="lazy" height="40"></td>
+          </ng-container>
+        </tr>
+      </ng-container>
+
+      </tbody>
+    </table>
+    <table class="table" *ngIf="loader === true">
+      <tbody>
+      <tr *ngFor="let item of [].constructor(10)">
+        <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+        <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="500" height="60" /></content-loader></td>
+        <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="500" height="60" /></content-loader></td>
+        <ng-container *ngIf="isMobile ===false">
+        <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+        <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+        <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+        <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+        <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+        </ng-container>
+      </tr>
+      </tbody>
+    </table>
+   <!-- <pagination-controls [id]="'foo'"  (pageChange)="changePage($event)"   [maxSize]="10"  [directionLinks]="false" ></pagination-controls>-->
+  </div>
+</div>

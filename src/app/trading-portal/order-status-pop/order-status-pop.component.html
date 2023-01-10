@@ -1,0 +1,8 @@
+<div class="modal-body">
+  <img *ngIf="Theme === 'light'" src="assets/images/checked.gif" class="mx-auto d-block mb-2 mt-5">
+  <img *ngIf="Theme === 'dark'"  src="assets/images/checked-dark.gif" class="mx-auto d-block mb-2 mt-5">
+<h4 class="mb-5 s-bld text-center">Order Completed !</h4>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-primary d-block mx-auto" (click)="activeModal.dismiss()">OK</button>
+</div>

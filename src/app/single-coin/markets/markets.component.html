@@ -1,0 +1,59 @@
+<div class="d-flex flex-wrap justify-content-between mb-3">
+  <h3 class="s-bld mb-0">{{coinData.name}} {{"Markets" | translate}}</h3>
+  <div class="chart-filters">
+    <div class="btn btn-sm" [ngClass]="{'btn-sm-activated' : category === 'spot'}" (click)="changeDataType('spot')">{{"Spot" | translate}}</div>
+    <div class="btn btn-sm" [ngClass]="{'btn-sm-activated' : category === 'perpetual'}"  (click)="changeDataType('perpetual')">{{"Perpetual" | translate}}</div>
+   <!-- <div class="btn btn-sm"  [ngClass]="{'btn-sm-activated' : category === 'futures'}" (click)="changeDataType('futures')">Futures</div>-->
+  </div>
+</div>
+<div class="x-m-overflow">
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col" >{{"Source" | translate}}</th>
+    <th scope="col">{{"Pairs" | translate}}</th>
+    <th scope="col">{{"Price" | translate}}</th>
+    <th scope="col">{{"Volume" | translate}}</th>
+    <th scope="col">{{"Fee Type" | translate}}</th>
+    <th class="text-right">{{"Updated" | translate}}</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <ng-container *ngFor="let dta of MarketData; let i = index">
+    <tr>
+      <td class="s-bld">{{i + 1}}</td>
+      <td class="font-weight-bold">
+        <div class="d-flex" [routerLink]="'/exchange/' + dta.exchange.id + '/' + dta.exchange.slug">
+          <img class="align-self-center" loading="lazy" src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/{{dta.exchange.id}}.png" height="30">
+          <div class="align-self-center ml-2">
+            <p class="mb-0 s-bld"> {{dta.exchange.name}}</p>
+          </div>
+        </div>
+      </td>
+      <td class="s-bld">{{dta.market_pair}}</td>
+      <td class="s-bld">$ {{dta.quote.USD.price | number}} </td>
+      <td>$ {{dta.quote.USD.volume_24h | number | numberSuffix}}</td>
+      <td>{{dta.fee_type}}</td>
+      <td class="text-right">{{dta.quote.USD.last_updated | fromNow}}</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
+</div>
+
+<table class="table" *ngIf="loader === true">
+  <tbody>
+  <tr *ngFor="let item of [].constructor(10)">
+    <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+    <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="500" height="60" /></content-loader></td>
+    <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="500" height="60" /></content-loader></td>
+    <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+    <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+    <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+    <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+    <td ><content-loader [primaryColor]="'rgba(217,217,217,0.24)'" [secondaryColor]="'rgba(187,187,187,0.06)'"><svg:rect x="0" y="0" rx="3" ry="3" width="250" height="60" /></content-loader></td>
+  </tr>
+  </tbody>
+</table>

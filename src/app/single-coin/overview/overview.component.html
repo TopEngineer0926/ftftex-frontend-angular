@@ -1,0 +1,87 @@
+<div class="row" *ngIf="Submenu === 'overview'">
+  <div class="col-lg-8 col-md-12">
+    <div class="d-flex justify-content-between mb-4 flex-wrap">
+      <div class="chart-filters mb-4">
+        <div class="btn btn-sm"  [ngClass]="{'btn-sm-activated' : ChartType === 'price'}" (click)="changeChartType('price')">{{"Price" | translate}}</div>
+        <div class="btn btn-sm" [ngClass]="{'btn-sm-activated' : ChartType === 'market-cap'}" (click)="changeChartType('market-cap')">{{"Market Cap" | translate}}</div>
+        <div class="btn btn-sm" [ngClass]="{'btn-sm-activated' : ChartType === 'candle-chart'}" (click)="changeChartType('candle-chart')">{{"Candle Chart" | translate}}</div>
+      </div>
+
+      <div class="chart-filters mb-4" *ngIf="ShowTradingView === false">
+        <div class="btn btn-sm" (click)="changeChartInterval('daily' , 'daily' , 50)">{{"7D" | translate}}</div>
+        <div class="btn btn-sm" (click)="changeChartInterval('daily' , 'daily' , 100)">{{"1M" | translate}}</div>
+        <div class="btn btn-sm" (click)="changeChartInterval('daily' , 'daily' , 150)">{{"3M" | translate}}</div>
+        <div class="btn btn-sm" (click)="changeChartInterval('daily' , 'daily' , 200)">{{"1Y" | translate}}</div>
+      </div>
+    </div>
+    <div style="display: block; height: auto" *ngIf="ShowTradingView === false">
+      <ng-container *ngIf="ChartType === 'price'">
+        <ejs-chart id="spline-chartcontainer"  [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [legendSettings]='legendSettings' [tooltip]='tooltip' [crosshair]='crosshair'>
+          <e-series-collection>
+            <e-series [dataSource]='chartData' width=3 type='Line' xName='date' yName='price' name='price' fill="#1577FF" [marker]='marker'></e-series>
+            <!--   <e-series [dataSource]='chartData'  type='Column' width=2 type='Line' xName='date' yName='market_cap' name='Market Cap' fill="#000" [marker]='marker'></e-series>-->
+          </e-series-collection>
+        </ejs-chart>
+      </ng-container>
+
+      <ng-container *ngIf="ChartType === 'market-cap'">
+        <ejs-chart id="spline-chartcontainer"  [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [legendSettings]='legendSettings' [tooltip]='tooltip' [crosshair]='crosshair'>
+          <e-series-collection>
+            <e-series [dataSource]='chartData' width=3 type='Line' xName='date' yName='market_cap' name='Market Cap' fill="#1577FF" [marker]='marker'></e-series>
+            <!--   <e-series [dataSource]='chartData'  type='Column' width=2 type='Line' xName='date' yName='market_cap' name='Market Cap' fill="#000" [marker]='marker'></e-series>-->
+          </e-series-collection>
+        </ejs-chart>
+      </ng-container>
+      <ng-container *ngIf="ChartType === 'candle-chart'">
+        <app-candle-chart [chartData]="chartData" [Coin]="Data.symbol"></app-candle-chart>
+      </ng-container>
+    </div>
+
+
+
+
+
+    <div class="d-block">
+      <app-trading-view-td-chart  [COIN]="Data.symbol" [chartType]="ChartType" [EXCHANGE]="'BINANCE'" [PAIR]="'USD'" *ngIf="ShowTradingView === true && ChartType === 'candle-chart'"></app-trading-view-td-chart>
+      <app-trading-view-td-chart  [COIN]="Data.symbol" [chartType]="ChartType" [EXCHANGE]="'BINANCE'" [PAIR]="'USD'" *ngIf="ShowTradingView === true && ChartType === 'price'"></app-trading-view-td-chart>
+      <app-trading-view-td-chart  [COIN]="Data.symbol" [chartType]="ChartType" [EXCHANGE]="'BINANCE'" [PAIR]="'USD'" *ngIf="ShowTradingView === true && ChartType === 'market-cap'"></app-trading-view-td-chart>
+    </div>
+
+
+    <p class="mt-4">{{Data.description}}</p>
+  </div>
+  <div class="col-lg-4 col-md-12">
+
+    <app-trading-view-buy-and-sell [COIN]="Data.symbol"></app-trading-view-buy-and-sell>
+
+    <div class="detail-sec">
+      <h2>{{Data.name}} {{"Statistics" | translate}}</h2>
+      <div class="d-list-d d-flex justify-content-between" *ngIf="PriceData?.quote?.USD?.price > 0">
+        <p class="mb-0">{{Data.name}} {{"Price" | translate}}</p>
+        <p class="mb-0 s-bld " *ngIf="PriceData?.quote?.USD?.price > 1.1" style="white-space: nowrap"> $ {{PriceData?.quote?.USD?.price | number}}</p>
+        <p class="mb-0 s-bld "  *ngIf="PriceData?.quote?.USD?.price < 1.1" style="white-space: nowrap"> $ {{PriceData?.quote?.USD?.price | number: '0.0-8'}}</p>
+      </div>
+      <div class="d-list-d d-flex justify-content-between" *ngIf="PriceData?.quote?.USD?.volume_24h > 0">
+        <p class="mb-0">{{"Trading Volume" | translate}}</p>
+        <p class="mb-0 s-bld "  style="white-space: nowrap"> $ {{PriceData?.quote?.USD?.volume_24h | number}}</p>
+      </div>
+      <div class="d-list-d d-flex justify-content-between" *ngIf="PriceData?.max_supply > 0">
+        <p class="mb-0">{{"Max Supply" | translate}}</p>
+        <p class="mb-0 s-bld "  style="white-space: nowrap"> {{Data.symbol}}  {{PriceData?.max_supply | number}}</p>
+      </div>
+      <div class="d-list-d d-flex justify-content-between" *ngIf="PriceData?.circulating_supply > 0">
+        <p class="mb-0">{{"Circulating Supply" | translate}}</p>
+        <p class="mb-0 s-bld "  style="white-space: nowrap"> {{Data.symbol}} {{PriceData?.circulating_supply | number}}</p>
+      </div>
+      <div class="d-list-d d-flex justify-content-between" *ngIf="PriceData?.quote?.USD?.market_cap > 0">
+        <p class="mb-0">{{"Market Cap" | translate}}</p>
+        <p class="mb-0 s-bld " *ngIf="PriceData?.quote?.USD?.market_cap > 1.1" style="white-space: nowrap"> $ {{PriceData?.quote?.USD?.market_cap | number}}</p>
+        <p class="mb-0 s-bld "  *ngIf="PriceData?.quote?.USD?.market_cap < 1.1" style="white-space: nowrap"> $ {{PriceData?.quote?.USD?.market_cap | number: '0.0-8'}}</p>
+      </div>
+      <div class="d-list-d d-flex justify-content-between" *ngIf="PriceData?.cmc_rank">
+        <p class="mb-0">{{"Market Rank" | translate}}</p>
+        <p class="mb-0 s-bld" style="white-space: nowrap"> # {{PriceData?.cmc_rank| number}}</p>
+      </div>
+    </div>
+  </div>
+</div>
