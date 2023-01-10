@@ -1,0 +1,96 @@
+<div class="bg-wt">
+<div class="container fh-minus-100">
+  <div class="row">
+    <div class="col-lg-4 offset-lg-4">
+      <div class="wt-box p-4 mt-lg-5 mb-5">
+        <h1 class="s-bld mb-4">{{"Register" | translate}}</h1>
+        <hr>
+       <!-- <div class="d-flex w-100 mb-4">
+          <button class="btn sub-menu-btn flex-fill" [ngClass]="{'sub-menu-btn-activate' : RegisterType === 'email'}" (click)="switchRegisterType('email')">Email</button>
+          <button class="btn sub-menu-btn flex-fill" [ngClass]="{'sub-menu-btn-activate' : RegisterType === 'mobile'}" (click)="switchRegisterType('mobile')">Mobile</button>
+        </div>-->
+        <form [formGroup]="Form">
+        <label>{{"First Name" | translate}}</label>
+        <input formControlName="firstName" class="form-control" placeholder="First Name">
+
+        <label class="mt-3">{{"Last Name" | translate}}</label>
+        <input formControlName="lastName" class="form-control" placeholder="Last Name">
+
+
+          <label class="mt-3">{{"Email" | translate}}</label>
+          <div class="d-flex">
+          <input formControlName="email" class="form-control" placeholder="Email">
+   <!--       <button class="btn sub-menu-btn OTP-btn px-2" *ngIf="!Verifications.email" (click)="open(emailVerifyPop , 'email')">GET OTP</button>
+          <button class="btn sub-menu-btn OTP-btn px-4" *ngIf="Verifications.email"><span class="material-symbols-outlined">check_circle</span></button>-->
+          </div>
+
+
+
+          <label class="mt-3">{{"Mobile" | translate}}</label>
+          <div class="d-flex">
+            <div class="btn co-code-btn  d-flex" (click)="openDialingCodes()">
+              <img [src]="DialingCode.flag" height="20" width="20" class="align-self-center ">
+              <p class="mb-0 align-self-center s-bld ml-2"> {{DialingCode.dialCode}}</p>
+            </div>
+            <input formControlName="phone" class="form-control mobile-field">
+            <!--<button class="btn sub-menu-btn OTP-btn px-2" *ngIf="!Verifications.phone" (click)="open(mobileVerifyPop , 'phone')">GET OTP</button>
+            <button class="btn sub-menu-btn OTP-btn px-4" *ngIf="Verifications.phone"><span class="material-symbols-outlined">check_circle</span></button>-->
+          </div>
+
+
+
+        <label class="mt-3">{{"Password" | translate}}</label>
+        <input formControlName="password" type="password" placeholder="Password" class="form-control">
+        </form>
+
+        <p class="mt-4 text-center error-msg">{{Errors}} </p>
+        <button class="btn btn-primary btn-lg my-5 mx-auto d-block font-weight-bold px-5" [disabled]="Form.invalid" (click)="register()">Register</button>
+
+        <p class="agree-txt">{{"Registration means that you have read and agreed to the FTFTEX" | translate}}
+          <a [routerLink]="'/about/service-terms'" target="_blank">{{"Terms of Service" |  translate}}</a> ,
+          <a [routerLink]="'/about/aml-policy'" target="_blank">{{"Anti Money Laundering" | translate}}</a>.</p>
+        <hr>
+        <h5 class=" text-center">{{"Already have an account ?" | translate}} <a [routerLink]="'/login'"><b>{{"Login here" | translate}} </b></a></h5>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<ng-template #emailVerifyPop let-modal>
+  <div class="modal-body">
+    <span class="material-symbols-outlined d-block mx-auto text-center" style="font-size: 90px">mail</span>
+    <p class="text-center mt-2">verification code has been sent to <br> <b>{{Form.value.email}}</b></p>
+    <input class="form-control mx-auto w-75 mt-4" [(ngModel)]="OTP" placeholder="OTP">
+    <p class="text-center error-msg mt-4" *ngIf="OTPVerificationMessage">{{OTPVerificationMessage}}</p>
+    <div class="d-flex justify-content-center mt-5">
+      <button type="button" class="btn btn-outline-primary btn-lg px-5  d-block" (click)="modal.dismiss('Cross click')">Cancel</button>
+      <button type="button" class="btn btn-primary btn-lg px-5 ml-3  d-block" (click)="VerifyOTP('email')">Verify</button>
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #mobileVerifyPop let-modal>
+  <div class="modal-body">
+    <span class="material-symbols-outlined d-block mx-auto text-center mt-4" style="font-size: 90px">smartphone</span>
+    <p class="text-center mt-2">verification code has been sent to <br> <b>{{Form.value.phone}}</b></p>
+    <h2 class="text-center">{{RegisterResponse.pinCode}}</h2>
+    <input class="form-control mx-auto w-75 mt-4" [(ngModel)]="OTP" placeholder="OTP">
+    <p class="text-center error-msg mt-4" *ngIf="OTPVerificationMessage">{{OTPVerificationMessage}}</p>
+    <div class="d-flex justify-content-center mt-5">
+      <button type="button" class="btn btn-outline-primary btn-lg px-5  d-block" (click)="modal.dismiss('Cross click')">Cancel</button>
+      <button type="button" class="btn btn-primary btn-lg px-5 ml-3  d-block" (click)="VerifyOTP('mobile')">Verify</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #registrationDone let-modal>
+  <div class="modal-body">
+    <img src="assets/images/check.svg" class="mx-auto d-block mb-3 mt-5" height="60">
+    <h2 class="mb-5 text-center s-bld">Registration Completed</h2>
+  </div>
+</ng-template>

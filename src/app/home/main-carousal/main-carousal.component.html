@@ -1,0 +1,100 @@
+<div class="row" *ngIf="!isMobile">
+  <div class="col-md-12">
+    <swiper [pagination]="false" class="mySwiper"    [autoplay]="{delay: 4000, disableOnInteraction: false}">
+      <ng-template swiperSlide>
+        <div class="main-slider">
+          <img class="lg-carousal" src="assets/images/header-banner.svg">
+          <div class="container">
+            <div class="swp-text">
+            <div class="row">
+              <div class="col-md-10">
+                  <h1>{{"BT1" | translate}} <br>{{"BT11" | translate}}</h1>
+                  <h5>{{"BT2" | translate}}</h5>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-template>
+    </swiper>
+  </div>
+</div>
+
+<!--Desktop-->
+<div class="container ov-margin" *ngIf="!isMobile">
+  <swiper [slidesPerView]="4" [spaceBetween]="30" [navigation]="true" [pagination]="{clickable: true}" [autoplay]="{delay: 4000, disableOnInteraction: false}" class="mySwiper">
+    <ng-container *ngFor="let dta of Slides">
+      <ng-template swiperSlide>
+        <a class="card-box w-100" [href]="dta.link" target="_blank">
+          <img class="sm-card" [src]="dta.image">
+        </a>
+      </ng-template>
+    </ng-container>
+  </swiper>
+</div>
+
+
+
+
+<!--Small Devices-->
+<div class="container d-block d-md-none mb-caro" style="margin-top: 65px">
+  <swiper [slidesPerView]="1" [spaceBetween]="30"  [pagination]="{clickable: true}" [autoplay]="{delay: 4000, disableOnInteraction: false}" class="mySwiper">
+    <ng-container *ngFor="let dta of SlidesMB">
+      <ng-template swiperSlide>
+        <a class="card-box w-100" [href]="dta.link" target="_blank">
+          <img class="sm-card" [src]="dta.image">
+        </a>
+      </ng-template>
+    </ng-container>
+  </swiper>
+</div>
+
+<ng-container *ngIf="isMobile">
+<div class="row mt-2 mx-1" >
+  <div class="col px-1">
+    <div class="m-btn" [routerLink]="'/spot-wallet/buy'">
+      <span  class="material-symbols-outlined icon">toll</span>
+      <p class="mb-0">Buy Crypto</p>
+    </div>
+  </div>
+  <div class="col px-1" [routerLink]="'/exchange/270/binance'">
+    <div class="m-btn">
+      <span  class="material-symbols-outlined icon">compare_arrows</span>
+      <p class="mb-0">Agg. Trade</p>
+    </div>
+  </div>
+  <div class="col px-1" [routerLink]="'/news'">
+    <div class="m-btn">
+      <span  class="material-symbols-outlined icon">newspaper</span>
+      <p class="mb-0">{{'News' | translate}}</p>
+    </div>
+  </div>
+</div>
+  <div class="row mt-2 mx-1" >
+    <div class="col px-1">
+      <div class="m-btn" [routerLink]="'/trade/BTC_USDT'">
+        <span  class="material-symbols-outlined icon">local_fire_department</span>
+        <p class="mb-0">BTC/USDT</p>
+      </div>
+    </div>
+    <div class="col px-1">
+      <div class="m-btn" [routerLink]="'/exchanges'">
+        <span  class="material-symbols-outlined icon">monitoring</span>
+        <p class="mb-0">Exchanges / Pairs</p>
+      </div>
+    </div>
+    <div class="col px-1" *ngIf="LoggedIn[1]">
+      <div class="m-btn" [routerLink]="'/spot-wallet'">
+        <span  class="material-symbols-outlined icon">wallet</span>
+        <p class="mb-0">{{'My Wallet' | translate}}</p>
+      </div>
+    </div>
+    <div class="col px-1" *ngIf="!LoggedIn[1]">
+      <div class="m-btn" [routerLink]="'/community'">
+        <span  class="material-symbols-outlined icon">people</span>
+        <p class="mb-0">{{'Community' | translate}}</p>
+      </div>
+    </div>
+  </div>
+</ng-container>

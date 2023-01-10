@@ -1,0 +1,97 @@
+<div class="min-h-full">
+<div class="my-4 container wt-box p-4" *ngIf="Data && Pairs">
+  <div class="row">
+    <div class="col mt-md-0">
+      <div class="d-flex flex-wrap m-head">
+        <img class="align-self-center" src="{{Data?.logo}}" height="45" width="45">
+        <div class="align-self-center ml-3">
+          <h1 class="mb-0 s-bld"> {{Data?.name}}</h1>
+          <div class="d-flex">
+            <div class="stk-gr font-weight-bold">{{"Exchange" | translate}}</div>
+          </div>
+        </div>
+        <div class="ml-md-5 p-tik">
+          <p class="title mb-0 s-bld">{{"Market Cap" | translate}}</p>
+          <h1 class="mb-0 s-bld price" style="white-space: nowrap"> $ {{Data?.spot_volume_usd | number}}</h1>
+        </div>
+      </div>
+      <div class="d-flex my-4 flex-wrap">
+        <div class="btn-def  d-flex m-1" *ngIf="Data?.urls?.website[0]">
+          <span class="material-symbols-outlined align-self-center">link </span>
+          <a class="align-self-center ml-2" href="{{Data?.urls?.website[0]}}" target="_blank">{{Data?.urls?.website[0] | shortHTTP}}</a>
+        </div>
+        <div class="btn-def  d-flex m-1" *ngIf="Data?.urls?.fee[0]">
+          <span class="material-symbols-outlined align-self-center">account_balance </span>
+          <a class="align-self-center ml-2" href="{{Data?.urls?.fee[0]}}" target="_blank">Fee</a>
+        </div>
+        <div class="btn-def  d-flex m-1" *ngIf="Data?.urls?.twitter[0]">
+          <span class="material-symbols-outlined align-self-center">groups </span>
+          <a class="align-self-center ml-2" href="{{Data?.urls?.twitter[0]}}" target="_blank">{{Data?.urls?.twitter[0] | shortHTTP}}</a>
+        </div>
+        <div class="btn-def  d-flex m-1" *ngIf="Data?.urls?.chat[0]">
+          <span class="material-symbols-outlined align-self-center">chat </span>
+          <a class="align-self-center ml-2" href="{{Data?.urls?.chat[0]}}" target="_blank">{{Data?.urls?.chat[0] | shortHTTP}}</a>
+        </div>
+    </div>
+      <hr>
+  </div>
+</div>
+  <div class="row" *ngIf="Pairs.length > 0">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-between mb-3">
+        <h3 class="s-bld mb-0">{{"Pairs" | translate}}</h3>
+        <div class="chart-filters">
+          <div class="btn btn-sm" [ngClass]="{'btn-sm-activated' : category === 'spot'}" (click)="changeDataType('spot')">Spot</div>
+<!--          <div class="btn btn-sm" [ngClass]="{'btn-sm-activated' : category === 'perpetual'}"  (click)="changeDataType('perpetual')">Perpetual</div>
+           <div class="btn btn-sm"  [ngClass]="{'btn-sm-activated' : category === 'futures'}" (click)="changeDataType('futures')">Futures</div>-->
+        </div>
+      </div>
+      <div class="x-m-overflow">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{"Pair" | translate}}</th>
+
+          <th scope="col">{{"Price" | translate}}</th>
+          <ng-container *ngIf="!isMobile">
+          <th scope="col">{{"Volume" | translate}}</th>
+          <th scope="col" *ngIf="category !== 'futures'">{{"Volume %" | translate}}</th>
+          <th class="text-right">{{"Updated" | translate}}</th>
+          </ng-container>
+          <th class="text-right" *ngIf="Data?.name === 'Binance'"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <ng-container *ngFor="let dta of Pairs; let i = index">
+          <tr>
+            <td class="s-bld">{{i + 1}}</td>
+            <td class="font-weight-bold">
+              <div class="d-flex" >
+                <img class="align-self-center" loading="lazy" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{dta?.market_pair_base?.currency_id}}.png" height="30">
+                <div class="align-self-center ml-2">
+                  <p class="mb-0 s-bld"> {{dta?.market_pair}}</p>
+                </div>
+              </div>
+            </td>
+
+            <td class="s-bld">$ {{dta?.quote?.USD?.price | number}} </td>
+            <ng-container *ngIf="!isMobile">
+        <!--    <td *ngIf="category === 'spot'"><ng-container *ngIf="dta?.quote?.USD?.depth_negative_two">$ {{dta?.quote?.USD?.depth_negative_two | number}} </ng-container> </td>
+            <td *ngIf="category === 'spot'"><ng-container *ngIf="dta?.quote?.USD?.depth_positive_two">$ {{dta?.quote?.USD?.depth_positive_two | number}} </ng-container> </td>-->
+            <td>$ {{dta?.quote.USD?.volume_24h | number | numberSuffix}}</td>
+            <td class="s-bld" *ngIf="category !== 'futures'">{{dta?.quote.exchange_reported?.volume_percentage | number}} %</td>
+            <td class="text-right">{{dta.quote.USD.last_updated | fromNow}}</td>
+            </ng-container>
+            <td class="text-right" *ngIf="Data?.name === 'Binance'"><a class="btn text-white buy-btn px-4" [routerLink]="'/trade/'+ dta?.market_pair_base?.currency_symbol + '_' + dta?.market_pair_quote?.currency_symbol">Trade</a></td>
+          </tr>
+        </ng-container>
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

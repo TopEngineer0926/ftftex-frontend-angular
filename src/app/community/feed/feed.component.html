@@ -1,0 +1,68 @@
+
+<!--<div class="d-flex post-cont" *ngIf="LogginIn[0]">
+  <img   [src]="" class="user-img d-none d-lg-block">
+  <div class="post ml-3 flex-fill create-post" >
+    <div class="profile">
+      <img   [src]="" class="user-img d-block d-lg-none mr-2">
+      <div class="d-flex align-self-center flex-wrap">
+        <p class="display-name mb-0">{{LogginIn[0]}} {{LogginIn[1]}}</p>
+      </div>
+    </div>
+   <textarea class="form-control w-100 mt-2" [(ngModel)]="CreatePostText"></textarea>
+    <div class="d-block w-100" *ngIf="TheImage">
+    <div class="image-preview" >
+      <div class="remove-btn" (click)="TheImage = ''"> <span class=" material-symbols-outlined">close</span></div>
+      <img id="blah" class="w-100 my-4"  [src]="TheImage" alt="your image" />
+
+    </div>
+    </div>
+
+    <div class="d-flex mt-3">
+    <span class="ml-1 material-symbols-outlined cu-p align-self-center" (click)="toggled = !toggled" [(emojiPickerIf)]="toggled" [emojiPickerDirection]="'right'" (emojiPickerSelect)="handleSelection($event)">mood</span>
+
+
+      <label class="filebutton align-self-center ml-3 cu-p mb-0" style="line-height: 15px">
+      <span class=" material-symbols-outlined">image</span>
+       <input  accept="image/*" type="file" class="form-control fileUpload w-100 mt-2" (change)="OnFileUpload($event)">
+      </label>
+
+    <div class="btn btn-primary ml-auto px-4" (click)="post()">Post</div>
+    </div>
+  </div>
+
+</div>-->
+
+
+<ng-container *ngFor="let dta of posts">
+  <div class="d-flex post-cont" >
+    <img   [src]="dta.profile_img" class="user-img d-none d-lg-block">
+    <div class="post ml-3" >
+      <div class="profile">
+        <img   [src]="dta.profile_img" class="user-img d-block d-lg-none mr-2">
+        <div class="d-flex align-self-center flex-wrap">
+        <p class="display-name mb-0">{{dta.display_name}}</p>
+        <p class="user-name mb-0">{{dta.user_name}}</p>
+        <p class="posted-time mb-0">{{dta.date | fromNow}}</p>
+        </div>
+      </div>
+      <p class="post-content mt-4" [innerHTML]="dta.content.text">
+
+      </p>
+      <img  [src]="dta.content.image" class="post-img">
+      <!--<div class="post-comments">
+        <div class="d-flex post-comment-type">
+          <span class="material-symbols-outlined">mode_comment</span>
+          <span> 10</span>
+        </div>
+        <div class="d-flex post-comment-type">
+          <span class="material-symbols-outlined">sync</span>
+          <span> 86</span>
+        </div>
+        <div class="d-flex post-comment-type">
+          <span class="material-symbols-outlined">favorite</span>
+          <span> 112</span>
+        </div>
+      </div>-->
+    </div>
+  </div>
+</ng-container>

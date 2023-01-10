@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h2 class="modal-title s-bld">{{"Select area code" | translate}}</h2>
+  <button class="btn h-fit" style="line-height: 1"  aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span class="material-symbols-outlined">close</span>
+  </button>
+</div>
+<div class="modal-body">
+  <input class="form-control mb-2" placeholder="Search" [(ngModel)]="Search">
+  <div class="list-cont">
+  <ng-container *ngFor="let dta of AllCountryDialingCodes">
+    <div class="country-list" *ngIf="dta.name.toLowerCase().includes(Search.toLowerCase())" (click)="selectCode(dta)">
+      <img [src]="dta.flag" height="30" width="30" >
+      <p class="align-self-center mb-0 mr-auto ml-2">{{dta.name}}</p>
+      <p class="align-self-center mb-0 s-bld">{{dta.dialCode}}</p>
+    </div>
+  </ng-container>
+  </div>
+</div>

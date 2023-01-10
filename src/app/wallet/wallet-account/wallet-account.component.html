@@ -1,0 +1,232 @@
+<div class="min-h-full">
+ <div class="row">
+    <div class="col-lg-2 pr-0">
+      <div class="wt-box rounded-0 p-3">
+        <h4 class="s-bld">Exchanges</h4>
+        <hr>
+        <div class="p-2 d-flex a-button" [ngClass]="{'a-button-selected' : SelectedExchange.id === 270}" (click)="switchExchanges({id: 270 , slug: 'binance' , name: 'BINANCE'})">
+          <img src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/270.png" class="align-self-center" height="30">
+          <p class="mb-0 ml-3 align-self-center s-bld">Binance</p>
+        </div>
+        <div class="p-2 d-flex a-button" [ngClass]="{'a-button-selected' : SelectedExchange.id === 89}" (click)="switchExchanges({id: 89 , slug: 'coinbase-exchange' , name: 'COINBASE'})">
+          <img src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/89.png" height="30">
+          <p class="mb-0 ml-3 align-self-center s-bld">Coinbase</p>
+        </div>
+       <!-- <div class="p-2 d-flex a-button" [ngClass]="{'a-button-selected' : SelectedExchange.id === 89}" (click)="switchExchanges({id: 24 , slug: 'coinbase-exchange' , name: 'KRAKEN'})">
+          <img src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/24.png" height="30">
+          <p class="mb-0 ml-3 align-self-center s-bld">Kraken</p>
+        </div>-->
+      </div>
+      <div class="wt-box rounded-0 px-3 mt-2 pairs-sec" >
+        <h4 class="s-bld pt-3">Spot</h4>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Pair</th>
+            <th scope="col">Price</th>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let dta of Pairs; let i = index">
+            <ng-container *ngIf="ALLOWEDMARKETPAIRS.includes(dta.market_pair)">
+            <tr (click)="changePairs(dta)" class="cu-p">
+              <td class="font-weight-bold">
+                <div class="d-flex">
+                  <img class="align-self-center" loading="lazy" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{dta?.market_pair_base?.currency_id}}.png" height="20">
+                  <div class="align-self-center ml-2">
+                    <p class="mb-0 s-bld"> {{dta?.market_pair}}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="s-bld">$ {{dta?.quote?.USD?.price | number}} </td>
+            </tr>
+          </ng-container>
+          </ng-container>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-10 mb-5">
+
+      <div class="row">
+        <div class="col-lg-9 px-0">
+          <div class="wt-box rounded-0">
+          <app-trading-view-td-chart *ngIf="showChart === true" [COIN]="SelectedPair.coin" [PAIR]="SelectedPair.pair" [EXCHANGE]="SelectedExchange.name" [chartType]="'candle-chart'"></app-trading-view-td-chart>
+          <div class="row">
+            <div class="col-lg-5 offset-md-1">
+              <div class="m-3">
+                <p class="mt-4">Available <b>{{Available1}} {{SelectedPair.pair}}</b></p>
+                <input class="form-control" placeholder="Price" [(ngModel)]="BUY.price" type="number">
+                <input class="form-control mt-3" placeholder="Amount" [(ngModel)]="BUY.Amount" type="number">
+                <div class="form-control mt-3">{{BUY.price * BUY.Amount}} {{SelectedPair.pair}}</div>
+                <button class="btn btn-primary mt-4 w-100 buy-btn s-bld" (click)="BuyCoin()" [disabled]="Available1 < BUY.price * BUY.Amount || !BUY.Amount">BUY {{SelectedPair.coin}}</button>
+              </div>
+
+            </div>
+            <div class="col-lg-5">
+              <div class="m-3">
+              <p class="mt-4">Available <b>0 {{SelectedPair.coin}}</b></p>
+              <input class="form-control" placeholder="Price" type="number">
+              <input class="form-control mt-3" placeholder="Amount" type="number">
+                <div class="form-control mt-3" > </div>
+              <div class="btn btn-primary mt-4 w-100 sell-btn s-bld">SELL {{SelectedPair.pair}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="showOrder === true">
+            <div class="col-md-10 offset-md-1">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col">Order</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Total</th>
+                  <th scope="col" class="text-right">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    <tr class="cu-p">
+                      <td class="font-weight-bold">
+                        <div class="d-flex">
+                          <img class="align-self-center" loading="lazy" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{SelectedPairFull?.market_pair_base?.currency_id}}.png" height="20">
+                          <div class="align-self-center ml-2">
+                            <p class="mb-0 s-bld"> {{SelectedPairFull?.market_pair_base.currency_symbol}}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="s-bld">$ {{BUY.price | number}} </td>
+                      <td class="s-bld">{{BUY.Amount | number}} </td>
+                      <td class="s-bld">{{BUY.price * BUY.Amount | number}} {{SelectedPairFull?.market_pair_base.currency_symbol}} </td>
+                      <td class="s-bld text-right">Completed </td>
+                    </tr>
+
+
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+          </div>
+        </div>
+       <!-- <div class="col-lg-2 px-0">
+          <div class="wt-box rounded-0 p-3">
+            <h4 class="s-bld">Orders</h4>
+            <hr>
+          </div>
+        </div>-->
+        <div class="col-lg-3 px-0">
+          <div class="wt-box  rounded-0 p-3">
+            <div class="d-flex my-4 justify-content-center">
+              <h2 class="s-bld align-self-center mr-3">My Wallet  </h2>
+              <span class="material-symbols-outlined align-self-center cu-p" style="font-size: 25px">refresh</span>
+            </div>
+
+            <div class="address-ar ">
+              <p class="mb-0 mx-4">0x000...0000 </p>
+              <span class="material-symbols-outlined">content_copy</span>
+            </div>
+            <hr>
+            <p class="mb-0 text-center">Estimated Balance </p>
+            <h3 class="s-bld text-center">$ {{Total | number: '0.0-3'}}</h3>
+
+            <div class="d-flex w-100 justify-content-center mt-4">
+              <div class="mx-4">
+                <div class="btn btn-primary action-btn">
+                  <span class="material-symbols-outlined">south</span>
+                </div>
+                <p class="text-center">Deposit</p>
+              </div>
+              <div class="mx-4">
+                <div class="btn btn-primary action-btn">
+                  <span class="material-symbols-outlined">north_east</span>
+                </div>
+                <p class="text-center">Send</p>
+              </div>
+              <div class="mx-4">
+                <div class="btn btn-primary action-btn">
+                  <span class="material-symbols-outlined">loop</span>
+                </div>
+                <p class="text-center">Swap</p>
+              </div>
+
+            </div>
+
+            <div class="d-flex w-100 mt-4">
+              <div class="btn tab-btn flex-fill" [ngClass]="{'tab-btn-selected' : walletTab === 'assets'}" (click)="SwitchWalletTab('assets')">Assets</div>
+              <div class="btn tab-btn tab-btn-selected flex-fill" [ngClass]="{'tab-btn-selected' : walletTab === 'activity'}" (click)="SwitchWalletTab('activity')">Activity</div>
+            </div>
+
+
+            <ng-container *ngIf="walletTab === 'assets'">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col">Coin</th>
+                  <th scope="col" style="width: 100px"></th>
+                 <!-- <th scope="col" style="width: 100px"></th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let dta of Coins | orderBy: 'holding' : true">
+                  <tr>
+                    <td class="font-weight-bold">
+                      <div class="d-flex">
+                        <img class="align-self-center" loading="lazy" [src]="dta.img" height="35">
+                        <div class="align-self-center ml-2">
+                          <p class="mb-0 s-bld">{{dta.symbol}}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="s-bld">{{dta.holding}} = ${{dta.holding}} </td>
+                  <!--  <td class="s-bld">
+                      <button class="btn btn-primary w-100 buy-btn" (click)="open(subscibe)">BUY</button>
+                    </td>-->
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </ng-container>
+
+
+            <ng-container *ngIf="walletTab === 'activity'">
+              <p class="my-5 text-center">No activities</p>
+            </ng-container>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #subscibe let-modal>
+  <div class="modal-body p-0 overflow-hidden">
+    <div class="">
+      <div class="row">
+        <div class="col-lg-6 d-lg-block d-none bg-pattern overflow-hidden">
+
+        </div>
+        <div class="col-lg-6 ">
+          <div class="p-4">
+            <h1 class="s-bld my-lg-5 my-4" >Subscribe !</h1>
+            <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
+            <h5 class="mt-3">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+            <hr>
+            <div class="d-flex my-5">
+              <input class="form-control rounded-0" placeholder="Email">
+              <button class="btn btn-primary rounded-0">Subscribe</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

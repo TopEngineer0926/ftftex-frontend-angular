@@ -1,0 +1,47 @@
+<h2 class="mr-auto s-bld mb-0 mt-5">{{"News" | translate}}</h2>
+<div class="container   news-caro" *ngIf="!isMobile">
+  <swiper [slidesPerView]="1"  [navigation]="true" [autoplay]="{delay: 8000, disableOnInteraction: false}" [spaceBetween]="70"  class="mySwiper">
+    <ng-container *ngFor="let item of [].constructor(this.pageIndex); let i = index">
+    <ng-template swiperSlide>
+    <div class="row more-stories">
+      <div class="col-lg-12 ">
+        <div class="wt-box h-100 p-2" *ngIf="NewsDataAll?.length > 0">
+          <div class="row">
+            <ng-container *ngFor="let dta of NewsDataAll?.slice((i) * 6, ((i) * 6) + 6)">
+              <div class="col-lg-4">
+                <a class="p-3   w-100 d-flex s-bld "   [href]="dta?.link" target="_blank">
+                  <img [src]="dta?.image_url" class="news-img" (error)="setDefaultPic($event)">
+                  <p class="ml-3 align-self-center text-left">{{dta.title}}</p>
+                </a>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    </ng-template>
+    </ng-container>
+  </swiper>
+</div>
+
+<div class="container  mt-5" *ngIf="isMobile">
+  <swiper [slidesPerView]="1" [navigation]="true" [autoplay]="{delay: 8000, disableOnInteraction: true}" [spaceBetween]="30" [pagination]="{clickable: true}" class="mySwiper">
+    <ng-container *ngFor="let dta of NewsDataAll">
+      <ng-template swiperSlide>
+        <div class="wt-box h-100 p-2 w-100" *ngIf="NewsDataAll?.length > 0">
+          <div class="row">
+              <div class="col-lg-4">
+                <a class="p-3   w-100 d-flex s-bld "   [href]="dta?.link" target="_blank">
+                  <img [src]="dta?.image_url" class="news-img" (error)="setDefaultPic($event)">
+                  <p class="ml-3 align-self-center text-left">{{dta.title}}</p>
+                </a>
+              </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+  </swiper>
+</div>
+
+
+

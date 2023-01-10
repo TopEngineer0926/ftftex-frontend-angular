@@ -1,0 +1,25 @@
+<div class="modal-body">
+  <table class="table">
+    <thead>
+    <tr class="fixed-header">
+      <th scope="col">Pairs</th>
+      <th scope="col">Price</th>
+      <th scope="col">Change</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let dta of AllPairs; let i = index">
+      <ng-container *ngIf="dta.quoteAsset.includes(s_tableFilter)">
+        <tr *ngIf="AllPairsPrice[dta.symbol]?.lastPrice > 0"  (click)="navigate(dta.baseAsset , dta.quoteAsset)">
+          <td class="s-bld">{{dta.baseAsset}}/{{dta.quoteAsset}}</td>
+          <td class="">{{AllPairsPrice[dta.symbol]?.lastPrice  | number:'0.0-16'}}</td>
+          <td class="">{{AllPairsPrice[dta.symbol]?.priceChangePercent | number:'0.0-2'}}%</td>
+        </tr>
+      </ng-container>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-primary d-block mx-auto" (click)="activeModal.dismiss()">Close</button>
+</div>

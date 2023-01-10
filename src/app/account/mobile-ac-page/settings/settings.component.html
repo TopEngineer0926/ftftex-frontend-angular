@@ -1,0 +1,28 @@
+<div class="vh-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <h4 class="s-bld mt-3">{{'Settings' | translate}}</h4>
+        <hr>
+        <div class="wt-box mt-3 p-lg-3">
+          <div class="acc-box mb-2">
+            <div class="align-self-center">
+              <p class="s-bld mb-0">{{'Language' | translate}}</p>
+            </div>
+            <div class="ml-auto d-flex flex-row align-self-center">
+              <div class="nav-item ">
+                <a class="nav-link" (click)="changeLanguage('ch')">中文</a>
+              </div>
+              <div class="nav-item ">
+                <a class="nav-link" >|</a>
+              </div>
+              <div class="nav-item ">
+                <a class="nav-link" (click)="changeLanguage('en')">ENG</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,332 @@
+<div class="container-fluid mb-5 d-none d-lg-block port-page" *ngIf="isMobile === false">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="d-flex mt-3 mb-3">
+        <h3 class="mb-0 align-self-center s-bld">{{SymbolSeperated}}</h3>
+        <div class="mx-4 align-self-center">
+          <h5 class=" mb-0 font-weight-bold" [ngClass]="{'green-text' : upOrDown === 1 , 'red-text' : upOrDown === -1}">{{AllPairsPrice[Symbol]?.lastPrice}}</h5>
+        </div>
+        <div class="mx-4 align-self-center ticker-detail">
+          <p class="mb-0 ti-head">24h Change</p>
+          <p class=" mb-0 ti-cont">{{AllPairsPrice[Symbol]?.priceChangePercent}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col pr-0">
+      <div class="card ">
+        <div class="card-ask-and-bit">
+          <table class="table">
+            <thead>
+            <tr class="fixed-header">
+              <th scope="col">Price</th>
+              <th scope="col" class="text-right">Qty</th>
+              <th scope="col" class="text-right">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let dta of bidsAndAsks?.asks | orderBy: 0: true; let i = index">
+              <tr class="bidder-r" [ngStyle]="{'background-size': dta[1]/BestBidsAndAskUpdate.B * 100 + '%'  + ' 100%'}">
+                <td class="red-text">{{dta[0] | number:'0.0-8'}}</td>
+                <td class="text-right">{{dta[1] | number:'0.0-8'}}</td>
+                <td class="text-right">{{dta[0] * dta[1] | number:'0.0-8'}}</td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card d-flex justify-content-between">
+        <h5 class="mb-0 s-bld mt-2 mb-2 w-auto" [ngClass]="{'green-text' : upOrDown === 1 , 'red-text' : upOrDown === -1}">{{AllPairsPrice[Symbol]?.lastPrice | number: '0.0-8'}}
+          <span class="m-r-arr material-symbols-outlined" *ngIf="upOrDown === 1">north</span>
+          <span class="m-r-arr material-symbols-outlined" *ngIf="upOrDown === -1">south</span>
+        </h5>
+
+      </div>
+      <div class="card">
+        <div class="card-ask-and-bit">
+          <table class="table">
+            <thead>
+            <tr class="fixed-header">
+              <th scope="col">Price</th>
+              <th class="text-right" scope="col">Qty</th>
+              <th class="text-right" scope="col">Total </th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let dta of bidsAndAsks?.bids | orderBy: 0: true; let i = index">
+              <tr class="bidder-g"  [ngStyle]="{'background-size': dta[1]/BestBidsAndAskUpdate.B * 100 + '%'  + ' 100%'}" >
+                <td class="green-text">{{dta[0] | number:'0.0-8'}}</td>
+                <td class="text-right">{{dta[1] | number:'0.0-8'}}</td>
+                <td class="text-right">{{dta[0] * dta[1] | number:'0.0-8'}}</td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+    <div class="col-lg-7 px-0">
+      <div class="card p-0">
+        <app-trading-view-td-chart [COIN]="Pair.Coin" [chartType]="'candle-chart'" [EXCHANGE]="'BINANCE'" [PAIR]="Pair.Base"></app-trading-view-td-chart>
+        <div class="row">
+          <div class="col-lg-12">
+            <h5 class="s-bld px-3 pt-3">SPOT</h5>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-lg-6">
+            <div class="px-3">
+              <p class="mt-2" style="font-size: 14px">Avl. {{Assets.coins[Pair.Base.toLowerCase()] | number: '0.3-6'}} <b>{{Pair.Base}}</b></p>
+              <input class="form-control" placeholder="Market Price" disabled type="number">
+              <input class="form-control mt-3" placeholder="Amount {{Pair.Base}}" [(ngModel)]="BUY.Amount" type="number">
+              <div class="d-flex p-select-cont">
+                <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()] * 0.25">25%</div>
+                <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()] * 0.50">50%</div>
+                <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()] * 0.75">75%</div>
+                <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()]">100%</div>
+              </div>
+              <div class="form-control mt-3">{{  BUY.Amount / AllPairsPrice[Symbol].lastPrice | number: '0.4-8'}} {{Pair.Coin}}</div>
+              <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld"  [disabled]="Assets.coins[Pair.Base.toLowerCase()] <  BUY.Amount || !BUY.Amount" (click)="doBuy(AllPairsPrice[Symbol].lastPrice , BUY.Amount , Pair.Coin)">BUY {{Pair.Coin}}</button>
+              <button *ngIf="!LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld" [routerLink]="'/login'">{{'LOGIN' | translate}}</button>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="px-3">
+              <p class="mt-2" style="font-size: 14px">Avl. <b>{{Assets.coins[Pair.Coin.toLowerCase()] | number: '0.3-6'}} {{Pair.Coin}}</b></p>
+              <input class="form-control" placeholder="Market Price" disabled type="number">
+              <input class="form-control mt-3" [(ngModel)]="SELL.Amount" placeholder="Amount {{Pair.Coin}}" type="number">
+              <div class="d-flex p-select-cont">
+                <div class="p-select" (click)="SELL.Amount = Assets.coins[Pair.Coin.toLowerCase()] * 0.25">25%</div>
+                <div class="p-select" (click)="SELL.Amount = Assets.coins[Pair.Coin.toLowerCase()] * 0.50">50%</div>
+                <div class="p-select" (click)="SELL.Amount = Assets.coins[Pair.Coin.toLowerCase()] * 0.75">75%</div>
+                <div class="p-select" (click)="SELL.Amount = Assets.coins[Pair.Coin.toLowerCase()]">100%</div>
+              </div>
+              <div class="form-control mt-3" >{{  SELL.Amount * AllPairsPrice[Symbol].lastPrice | number: '0.4-8'}} {{Pair.Base}} </div>
+              <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" [disabled]="Assets.coins[Pair.Coin.toLowerCase()] <  SELL.Amount || !SELL.Amount" (click)="doSell(AllPairsPrice[Symbol].lastPrice , SELL.Amount , Pair.Coin)">SELL {{(Pair.Base)}}</button>
+              <button *ngIf="!LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" [routerLink]="'/login'">{{'LOGIN' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col pl-0 d-lg-block d-none">
+      <div class="card">
+        <div class="card-pair">
+          <table class="table">
+            <thead>
+            <tr class="fixed-header">
+              <th scope="col">Pairs</th>
+              <th scope="col">Price</th>
+              <th scope="col">Change</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let dta of AllPairs; let i = index">
+              <ng-container *ngIf="dta.quoteAsset.includes(s_tableFilter)">
+                <tr *ngIf="AllPairsPrice[dta.symbol]?.lastPrice > 0"  (click)="navigate(dta.baseAsset , dta.quoteAsset)">
+                  <td class="fw-bold">{{dta.baseAsset}}/{{dta.quoteAsset}}</td>
+                  <td class="">{{AllPairsPrice[dta.symbol]?.lastPrice  | number:'0.0-16'}}</td>
+                  <td class="">{{AllPairsPrice[dta.symbol]?.priceChangePercent | number:'0.0-2'}}%</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <p class="mb-0 card-title">Market Trade</p>
+        <div class="card-pair">
+          <table class="table">
+            <thead>
+            <tr class="fixed-header">
+              <th scope="col">Price</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let dta of LatestTrade | orderBy: 'time' : true">
+              <tr>
+                <td class=" green-text" [ngClass]="{'red-text' :dta.price < AllPairsPrice[Symbol]?.lastPrice}">{{dta.price | number: '0.0-8'}}</td>
+                <td class="">{{dta.qty}}</td>
+                <td class="">{{dta.time | date: 'hh:mm:ss'}}</td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="container-fluid mb-5 port-page" *ngIf="isMobile === true">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="d-flex mt-3 mb-1">
+        <h5 class="mb-0 align-self-center s-bld" (click)="SwitchSymbol()">{{SymbolSeperated}} <span class="m-r-arr material-symbols-outlined">arrow_drop_down</span></h5>
+        <div class="ml-auto align-self-center">
+          <h5 class=" mb-0 font-weight-bold" [ngClass]="{'green-text' : upOrDown === 1 , 'red-text' : upOrDown === -1}">{{AllPairsPrice[Symbol]?.lastPrice}}
+            <span class="m-r-arr material-symbols-outlined" *ngIf="upOrDown === 1">north</span>
+            <span class="m-r-arr material-symbols-outlined" *ngIf="upOrDown === -1">south</span>
+          </h5>
+        </div>
+      </div>
+      <div class="d-flex w-100 ticker-detail justify-content-between">
+        <p class=" mb-0 ti-cont s-bld">• Binance</p>
+        <p class=" mb-0 ti-cont s-bld">{{AllPairsPrice[Symbol]?.priceChangePercent | number: '0.3-3'}}</p>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="d-flex mt-2 switch-btns mb-3">
+        <button class="btn btn-sm mr-2" [ngClass]="{'btn-s' : currenttab === 'chart'}" (click)="currenttab = 'chart'">{{'Chart' | translate}}</button>
+        <button class="btn btn-sm mr-2" [ngClass]="{'btn-s' : currenttab === 'orders'}" (click)="currenttab = 'orders'">{{'Order book' | translate}}</button>
+        <button class="btn btn-sm mr-2" [ngClass]="{'btn-s' : currenttab === 'trades'}" (click)="currenttab = 'trades'">{{'All Trades' | translate}}</button>
+        <button class="btn btn-sm mr-2" [ngClass]="{'btn-s' : currenttab === 'my_orders'}" (click)="currenttab = 'my_orders'">{{'My Orders' | translate}}</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col px-1" *ngIf="currenttab === 'orders'">
+      <div class="card ">
+        <div class="card-ask-and-bit">
+          <div class="row px-2">
+            <div class="col px-0">
+              <table class="table">
+                <thead>
+                <tr class="fixed-header">
+                  <th scope="col">Bids</th>
+                  <th scope="col" class="text-right">Qty</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let dta of bidsAndAsks?.asks | orderBy: 0: true; let i = index">
+                  <tr class="bidder-r" [ngStyle]="{'background-size': dta[1]/BestBidsAndAskUpdate.B * 100 + '%'  + ' 100%'}">
+                    <td class="red-text">{{dta[0] | number:'0.0-8'}}</td>
+                    <td class="text-right">{{dta[1] | number:'0.0-8'}}</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <div class="col px-0">
+              <table class="table">
+                <thead>
+                <tr class="fixed-header">
+                  <th scope="col">Asks</th>
+                  <th class="text-right" scope="col">Qty</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let dta of bidsAndAsks?.bids | orderBy: 0: true; let i = index">
+                  <tr class="bidder-g"  [ngStyle]="{'background-size': dta[1]/BestBidsAndAskUpdate.B * 100 + '%'  + ' 100%'}" >
+                    <td class="green-text">{{dta[0] | number:'0.0-8'}}</td>
+                    <td class="text-right">{{dta[1] | number:'0.0-8'}}</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7 px-0" >
+      <div class="card p-0">
+        <app-trading-view-td-chart *ngIf="currenttab === 'chart'" [COIN]="Pair.Coin" [chartType]="'candle-chart'" [EXCHANGE]="'BINANCE'" [PAIR]="Pair.Base"></app-trading-view-td-chart>
+
+        <ng-container *ngIf="currenttab === 'chart' || currenttab === 'orders'">
+          <div class="row mb-4 mx-1">
+            <div class="col-12 px-1">
+              <h5 class="s-bld pt-3">SPOT</h5>
+            </div>
+            <div class="col px-1">
+              <div class="mx-0">
+                <p class="mt-2" style="font-size: 14px">Avl. <b>{{Assets.coins[Pair.Base.toLowerCase()] | number: '0.3-6'}} {{Pair.Base}}</b></p>
+                <input class="form-control" placeholder="Market Price" disabled type="number">
+                <input class="form-control mt-3" placeholder="Amount {{Pair.Base}}" [(ngModel)]="BUY.Amount" type="number">
+                <div class="d-flex p-select-cont">
+                  <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()] * 0.25">25%</div>
+                  <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()] * 0.50">50%</div>
+                  <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()] * 0.75">75%</div>
+                  <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()]">100%</div>
+                </div>
+                <div class="form-control mt-3">{{  BUY.Amount / AllPairsPrice[Symbol].lastPrice | number: '0.4-8'}} {{Pair.Coin}}</div>
+                <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld"  [disabled]="Assets.coins[Pair.Base.toLowerCase()] <  BUY.Amount || !BUY.Amount" (click)="doBuy(AllPairsPrice[Symbol].lastPrice , BUY.Amount , Pair.Coin)">BUY {{Pair.Coin}}</button>
+                <button *ngIf="!LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld" [routerLink]="'/login'">{{'LOGIN' | translate}}</button>
+              </div>
+            </div>
+            <div class="col px-1">
+              <div class="mx-0">
+                <p class="mt-2" style="font-size: 14px">Avl. <b>{{Assets.coins[Pair.Coin.toLowerCase()] | number: '0.3-6'}} {{Pair.Coin}}</b></p>
+                <input class="form-control" placeholder="Market Price" disabled type="number">
+                <input class="form-control mt-3" [(ngModel)]="SELL.Amount" placeholder="Amount {{Pair.Coin}}" type="number">
+                <div class="d-flex p-select-cont">
+                  <div class="p-select" (click)="SELL.Amount = Assets.coins[Pair.Coin.toLowerCase()] * 0.25">25%</div>
+                  <div class="p-select" (click)="SELL.Amount = Assets.coins[Pair.Coin.toLowerCase()] * 0.50">50%</div>
+                  <div class="p-select" (click)="SELL.Amount = Assets.coins[Pair.Coin.toLowerCase()] * 0.75">75%</div>
+                  <div class="p-select" (click)="SELL.Amount = Assets.coins[Pair.Coin.toLowerCase()]">100%</div>
+                </div>
+                <div class="form-control mt-3" >{{  SELL.Amount * AllPairsPrice[Symbol].lastPrice | number: '0.4-8'}} {{Pair.Base}} </div>
+                <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" [disabled]="Assets.coins[Pair.Coin.toLowerCase()] <  SELL.Amount || !SELL.Amount" (click)="doSell(AllPairsPrice[Symbol].lastPrice , SELL.Amount , Pair.Coin)">SELL {{(Pair.Base)}}</button>
+                <button *ngIf="!LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" [routerLink]="'/login'">{{'LOGIN' | translate}}</button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+      </div>
+    </div>
+    <div class="col px-0" *ngIf="currenttab === 'trades'">
+      <div class="card" style="max-height: 68vh;overflow: hidden">
+        <div class="card-pair">
+          <table class="table">
+            <thead>
+            <tr class="fixed-header">
+              <th scope="col">Price</th>
+              <th scope="col">Amount</th>
+              <th scope="col" class="text-right">Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let dta of LatestTrade | orderBy: 'time' : true">
+              <tr>
+                <td class=" green-text" [ngClass]="{'red-text' :dta.price < AllPairsPrice[Symbol]?.lastPrice}">{{dta.price | number: '0.0-8'}}</td>
+                <td class="">{{dta.qty}}</td>
+                <td class="text-right">{{dta.time | date: 'hh:mm:ss'}}</td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col px-0" *ngIf="currenttab === 'my_orders'">
+      <p class="mx-auto my-5 text-center">You don't have any active orders</p>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #confirmation let-modal>
+  <div class="modal-body">
+    <span class="m-r-arr material-symbols-outlined mx-auto d-block mt-5  text-center" style="font-size: 70px;color: #0563e5">info</span>
+    <h4 class="mt-4 mb-5 s-bld text-center">Are you sure you want to proceed this transaction ?</h4>
+    <hr>
+    <button class="btn btn-primary px-4 mx-auto d-block btn-bg" (click)="performOrder()">Confirm</button>
+  </div>
+</ng-template>

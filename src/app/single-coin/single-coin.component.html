@@ -1,0 +1,171 @@
+<div class="min-h-full">
+<div class="my-4 container wt-box p-4 " *ngIf="Data && PriceData">
+  <div class="row">
+    <div class="col mt-4 mt-md-0">
+      <div class="d-flex flex-wrap m-head">
+        <img class="align-self-center" src="{{Data.logo}}" height="45" width="45">
+        <div class="align-self-center ml-3">
+          <h1 class="mb-0 s-bld"> {{Data.name}}</h1>
+          <div class="d-flex">
+            <div class="stk-gr font-weight-bold"> {{Data.symbol}}</div>
+            <div class="stk-gr font-weight-bold ml-2">Rank #{{PriceData.cmc_rank}}</div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between">
+        <div class="ml-md-5 price align-self-center mr-3">
+          <h1 class="mb-0 s-bld " *ngIf="PriceData?.quote?.USD?.price > 1.1" style="white-space: nowrap"> $ {{PriceData?.quote?.USD?.price | number}}</h1>
+          <h1 class="mb-0 s-bld "  *ngIf="PriceData?.quote?.USD?.price < 1.1" style="white-space: nowrap"> $ {{PriceData?.quote?.USD?.price | number: '0.0-8'}}</h1>
+        </div>
+        <div class="ml-md-3 price-p align-self-center">
+          <div class="stk-green txt-sm font-weight-bold d-flex px-2" [ngClass]="{'stk-red' :PriceData?.quote?.USD?.percent_change_24h < 0}">
+            <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_24h < 0">arrow_drop_down</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_24h > 0">arrow_drop_up</span>
+            <span class="align-self-center" style="white-space: nowrap">{{PriceData?.quote?.USD?.percent_change_24h | number | removeMinus}} %</span>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="d-flex my-4 flex-wrap">
+        <div class="btn-def  d-flex m-1" *ngIf="Data?.urls?.website[0]">
+          <span class="material-symbols-outlined align-self-center">link </span>
+          <a class="align-self-center ml-2" href="{{Data?.urls?.website[0]}}" target="_blank">{{Data?.urls?.website[0] | shortHTTP}}</a>
+        </div>
+
+        <div class="dropdown m-1" *ngIf="Data.urls.explorer">
+          <div class="btn-def d-flex">
+            <span class="material-symbols-outlined align-self-center">search </span>
+            <span class="align-self-center ml-2">Explorer</span>
+          </div>
+          <div class="dropdown-content">
+            <ng-container *ngFor="let dta of Data.urls.explorer">
+              <a class="d-block" href="{{dta}}" target="_blank">{{dta | shortHTTP}}</a>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="dropdown m-1">
+          <div class="btn-def d-flex">
+            <span class="material-symbols-outlined align-self-center">groups </span>
+            <span class="align-self-center ml-2">Community</span>
+          </div>
+          <div class="dropdown-content">
+            <a class="d-block" *ngIf="Data.urls.facebook[0]" href="{{Data.urls.facebook[0]}}" target="_blank">{{Data.urls.facebook[0] | shortHTTP}}</a>
+            <a class="d-block" *ngIf="Data.urls.twitter[0]" href="{{Data.urls.twitter[0]}}" target="_blank">{{Data.urls.twitter[0] | shortHTTP}}</a>
+            <a class="d-block" *ngIf="Data.urls.reddit[0]" href="{{Data.urls.reddit[0]}}" target="_blank">{{Data.urls.reddit[0] | shortHTTP}}</a>
+            <a class="d-block" *ngIf="Data.urls.message_board[0]" href="{{Data.urls.message_board[0]}}" target="_blank">{{Data.urls.message_board[0] | shortHTTP}}</a>
+          </div>
+        </div>
+        <div class="btn-def  d-flex m-1" *ngIf="Data?.urls?.source_code[0]">
+          <span class="material-symbols-outlined align-self-center">code </span>
+          <a class="align-self-center ml-2" href="{{Data?.urls?.source_code[0]}}" target="_blank">Source Code</a>
+        </div>
+        <div class="btn-def  d-flex m-1" *ngIf="Data?.urls?.technical_doc[0]">
+          <span class="material-symbols-outlined align-self-center">description </span>
+          <a class="align-self-center ml-2" href="{{Data?.urls?.technical_doc[0]}}" target="_blank">White Paper</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <div class="d-flex coin-info flex-wrap">
+          <div class="block-c flex-fill">
+            <p class="title">{{"Market Cap" | translate}}</p>
+            <p class="value mt-2">{{PriceData?.quote.USD.market_cap | numberSuffix}}</p>
+            <div>
+          <span class="txt-green d-flex" [ngClass]="{'txt-red' :PriceData?.quote.USD.percent_change_24h < 0}">
+            <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_24h < 0">arrow_drop_down</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_24h > 0">arrow_drop_up</span>
+            <span class=" align-self-center">{{PriceData?.quote.USD.percent_change_24h | number | removeMinus}} %</span>
+          </span>
+            </div>
+          </div>
+          <div class="block-c">
+            <p class="title">{{"Volume(24h)" | translate}}</p>
+            <p class="value mt-2">{{PriceData?.quote.USD.volume_24h | numberSuffix}}</p>
+            <div>
+          <span class="txt-green d-flex" [ngClass]="{'txt-red' :PriceData?.quote.USD.volume_change_24h < 0}">
+            <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.volume_change_24h < 0">arrow_drop_down</span>
+            <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.volume_change_24h > 0">arrow_drop_up</span>
+            <span class=" align-self-center">{{PriceData?.quote.USD.volume_change_24h | number | removeMinus}} % </span>
+          </span>
+            </div>
+          </div>
+
+          <div class="block-c">
+            <p class="title">{{"Volume / Market Cap" | translate}}</p>
+            <p class="value mt-2">{{PriceData?.quote.USD.volume_24h / PriceData?.quote.USD.market_cap | number }}</p>
+          </div>
+          <div class="block-c">
+            <p class="title">{{"Circulating Supply" | translate}}</p>
+            <p class="value">{{PriceData?.circulating_supply | numberSuffix}} {{PriceData?.symbol}}</p>
+            <p class="title mt-2">{{"Max Supply" | translate}}</p>
+            <p class="value" *ngIf="PriceData?.max_supply">{{PriceData?.max_supply | numberSuffix}} {{PriceData?.symbol}}</p>
+            <p class="value" *ngIf="!PriceData?.max_supply">∞</p>
+          </div>
+        </div>
+        <div class="d-flex coin-info flex-wrap mt-4 ">
+          <div class="block-c ml-auto">
+            <p class="title">{{"1H" | translate}}</p>
+            <div>
+            <span class="txt-green d-flex" [ngClass]="{'txt-red' :PriceData?.quote.USD.percent_change_1h < 0}">
+               <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_1h < 0">arrow_drop_down</span>
+              <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_1h > 0">arrow_drop_up</span>
+              <span class="align-self-center">{{PriceData?.quote.USD.percent_change_1h | number}} %</span>
+            </span>
+            </div>
+          </div>
+          <div class="block-c">
+            <p class="title">{{"24H" | translate}}</p>
+            <div>
+            <span class="txt-green d-flex" [ngClass]="{'txt-red' :PriceData?.quote.USD.percent_change_24h < 0}">
+               <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_24h < 0">arrow_drop_down</span>
+               <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_24h > 0">arrow_drop_up</span>
+              <span class="align-self-center">{{PriceData?.quote.USD.percent_change_24h | number}} %</span>
+            </span>
+            </div>
+          </div>
+          <div class="block-c">
+            <p class="title">{{"7d" | translate}}</p>
+            <div>
+            <span class="txt-green d-flex" [ngClass]="{'txt-red' :PriceData?.quote.USD.percent_change_7d < 0}">
+               <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_7d < 0">arrow_drop_down</span>
+               <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_7d > 0">arrow_drop_up</span>
+               <span class="align-self-center">{{PriceData?.quote.USD.percent_change_7d | number}} %</span>
+            </span>
+            </div>
+          </div>
+          <div class="block-c">
+            <p class="title">{{"30d" | translate}}</p>
+            <div>
+            <span class="txt-green d-flex" [ngClass]="{'txt-red' :PriceData?.quote.USD.percent_change_30d < 0}">
+               <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_30d < 0">arrow_drop_down</span>
+               <span class="material-symbols-outlined align-self-center" *ngIf="PriceData?.quote.USD.percent_change_30d > 0">arrow_drop_up</span>
+               <span class="align-self-center">{{PriceData?.quote.USD.percent_change_30d | number}} %</span>
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <div class="d-flex">
+        <div class="sub-menu-btn btn mr-2" [ngClass]="{'sub-menu-btn-activate' : Submenu === 'overview'}" (click)="switchSubTab('overview')">{{"Overview" | translate}}</div>
+        <div class="sub-menu-btn btn mr-2" [ngClass]="{'sub-menu-btn-activate' : Submenu === 'markets'}" (click)="switchSubTab('markets')">{{"Markets" | translate}}</div>
+       <!-- <div class="sub-menu-btn btn mr-2" [ngClass]="{'sub-menu-btn-activate' : Submenu === 'historical'}" (click)="switchSubTab('historical')">Historical Data</div>-->
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+
+
+  <app-overview *ngIf="Submenu === 'overview'" [Data]="Data" [PriceData]="PriceData" [Param]="Param"></app-overview>
+  <app-markets *ngIf="Submenu === 'markets'" [coinData]="Data" [Param]="Param"> </app-markets>
+
+</div>
+</div>

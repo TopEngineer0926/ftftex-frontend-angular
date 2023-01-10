@@ -1,0 +1,84 @@
+<div class="vh-100">
+  <div class="container">
+    <div class="col-lg-10 offset-lg-1 px-0">
+      <div class="mt-4 wt-box p-3">
+        <div class="d-lg-flex flex-wrap d-block">
+          <h2 class="s-bld align-self-center mb-0">{{'Spot Asset' | translate}}</h2>
+          <div class="mt-2 ml-md-auto d-flex">
+          <!--  <div class="btn btn-primary" [routerLink]="'/spot-wallet/buy'">{{'Buy Crypto' | translate}}</div>-->
+            <div class="btn btn-primary" [routerLink]="'/spot-wallet/deposit'">{{'Deposit' | translate}}</div>
+            <div class="btn btn-primary ml-2">{{'Withdraw' | translate}}</div>
+          </div>
+
+        </div>
+        <hr>
+
+        <div class="d-flex mt-4 w-100">
+          <div class="d-flex justify-content-between w-100">
+            <div>
+            <p class="align-self-center mb-0 font-weight-bold">Estimated Balance</p>
+<!--            <h4 class="s-bld align-self-center mb-0">{{TotalUSD/ BTCTotal | number: '0.3-8'}} BTC </h4>-->
+            <h4 class="s-bld align-self-center mb-0">{{0 | number: '0.3-8'}} BTC </h4>
+<!--            <h5 class="s-bld align-self-center mb-0 mt-2"><span class="green-text font-weight-bold d-block">$ {{TotalUSD | number: '0.4-8'}}</span></h5>-->
+            <h5 class="s-bld align-self-center mb-0 mt-2"><span class="green-text font-weight-bold d-block">$ {{0 | number: '0.4-8'}}</span></h5>
+            </div>
+            <div class="ml-auto">
+              <p class="align-self-center mb-0 font-weight-bold">Today's PNL</p>
+              <h4 class="s-bld align-self-center mb-0"><span class="green-text font-weight-bold">$ 0.00</span></h4>
+            </div>
+          </div>
+        </div>
+
+
+        <table class="table mt-5">
+          <thead>
+          <tr class="fixed-header">
+            <th >Coin</th>
+            <th  class="text-left">Amount</th>
+            <th  class="text-left">USD Value</th>
+
+            <ng-container *ngIf="!isMobile">
+            <th  class="text-left">In Order</th>
+            <th  class="text-right"></th>
+            </ng-container>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let dta of Assets | orderBy: 'totalUSD' : true">
+            <tr>
+              <td class="font-weight-bold">
+                This section is empty
+              </td>
+            </tr>
+<!--            <tr>-->
+<!--              <td class="font-weight-bold">-->
+<!--                <div class="d-flex">-->
+<!--                  <img class="align-self-center" loading="lazy" [src]="'assets/images/coin-icons/'+dta.Coin+'.png'" height="30">-->
+<!--                  <div class="align-self-center ml-2">-->
+<!--                    <p class="mb-0 s-bld">{{dta.Coin.toUpperCase()}}</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--              <td class="s-bld text-left">{{dta.Total | number: '0.3-8'}}</td>-->
+<!--              <td class="text-left">$ {{dta.totalUSD | number: '0.3-8'}}</td>-->
+<!--              <ng-container *ngIf="!isMobile">-->
+<!--              <td class="text-left">{{dta.InOrder | number: '0.3-8'}} </td>-->
+<!--              <td class="s-bld text-right">-->
+<!--                <div class="d-flex">-->
+<!--                  <a class="btn btn-outline-primary ml-2">Deposit</a>-->
+<!--                  <a class="btn btn-outline-primary ml-2">Withdraw</a>-->
+<!--                  <a class="btn btn-outline-primary ml-2">Trade</a>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--              </ng-container>-->
+<!--            </tr>-->
+          </ng-container>
+          </tbody>
+        </table>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+.pg-main-sec{
+  h1{
+    font-size: 60px;
+  }
+  .b-main-img{
+
+  }
+  .content-b{
+    p{
+      color: #5d5d5d;
+      font-weight: bold;
+    }
+  }
+}
+
+.card-d-b{
+  background: #FFFFFF;
+  display: flex;
+  margin-bottom: 24px;
+  padding: 22px;
+  border-radius: 12px;
+  img{
+    height: 70px;
+    align-self: center;
+  }
+  .img-fit{
+    object-fit: contain;
+  }
+}
+
+.banner-header .hint {
+  font-size: 26px;
+}
