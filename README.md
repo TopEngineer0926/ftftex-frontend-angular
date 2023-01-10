@@ -27,6 +27,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 
-## STAGING and PRODUCTION
+## STAGING 
 
-data.service.ts containing both PROD and STAGING endpoints to switch between PROD and Staging before taking a build
+Run `ng build --configuration=staging` to build the project with staging environment. The build artifacts will be stored in the `dist/` directory.
+
+
+## PRODUCTION
+
+Run `ng build --prod` to build the project with prod environment. The build artifacts will be stored in the `dist/` directory.

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class DataService {
   // BaseURL2 = 'https://verification.ftftx.com/'; //PRODUCTION API
 
 
-  BaseURL = 'https://stgapi.ftftx.com/';    //STAGING API
-  BaseURL2 = 'https://staging-verification.ftftx.com/';  //STAGING API
+  // BaseURL = 'https://stgapi.ftftx.com/';    //STAGING API
+  // BaseURL2 = 'https://staging-verification.ftftx.com/';  //STAGING API
 
   DialingCode =  new BehaviorSubject({
     "name": "United Arab Emirates",
@@ -112,7 +113,7 @@ export class DataService {
 
 
   getCoinData(page , limit , tag , sort , sort_dir){
-    return   this.http.post(this.BaseURL + 'ftftx/cmcApi/getLeatestList' , {
+    return   this.http.post(`${environment.baseUrl}ftftx/cmcApi/getLeatestList`, {
       limit: limit ,
       tag: tag,
       start: (page - 1)*limit + 1,
@@ -121,21 +122,21 @@ export class DataService {
     })
   }
   getSingleCoinData(id , slug){
-    return   this.http.post(this.BaseURL +'ftftx/cmcApi/getMetaData', {
+    return   this.http.post(`${environment.baseUrl}ftftx/cmcApi/getMetaData`, {
       id: id,
       slug: slug
     })
   }
   getSingleCoinPrices(id ,slug){
-    return   this.http.post(this.BaseURL + 'ftftx/cmcApi/getOutletLeatest', {id:id, slug: slug})
+    return   this.http.post(`${environment.baseUrl}ftftx/cmcApi/getOutletLeatest`, {id:id, slug: slug})
   }
 
   getGlobalData(){
-    return   this.http.post(this.BaseURL + 'ftftx/cmcApi/getQuotesLeatest', {})
+    return   this.http.post(`${environment.baseUrl}ftftx/cmcApi/getQuotesLeatest`, {})
   }
 
   OCHLData(id, slug , period , interval , count){
-    return   this.http.post(this.BaseURL + 'ftftx/cmcApi/getOhlcvHistorical', {
+    return   this.http.post(`${environment.baseUrl}ftftx/cmcApi/getOhlcvHistorical`, {
       id:id,
       slug: slug,
       count: count,
@@ -148,7 +149,7 @@ export class DataService {
   }
 
   GetPairs(id ,slug , category){
-    return   this.http.post(this.BaseURL + 'ftftx/cmcApi/getMarketPairs', {
+    return   this.http.post(`${environment.baseUrl}ftftx/cmcApi/getMarketPairs`, {
       id: id,
       slug: slug,
       category: category
@@ -156,7 +157,7 @@ export class DataService {
   }
 
   GetExchangesList(category , page , limit){
-    return this.http.post(this.BaseURL + 'ftftx/cmcApi/getExchangeLeatest' , {
+    return this.http.post(`${environment.baseUrl}ftftx/cmcApi/getExchangeLeatest`, {
       category: category,
       start: (page - 1)*limit + 1,
       limit: limit,
@@ -166,11 +167,11 @@ export class DataService {
   }
 
   GetSingleExchange(id , slug){
-    return this.http.post(this.BaseURL +'ftftx/cmcApi/getExchange'  , {id : id})
+    return this.http.post(`${environment.baseUrl}ftftx/cmcApi/getExchange`, {id : id})
   }
 
   GetExchangePairs(id, slug , category , limit){
-    return this.http.post(this.BaseURL + 'ftftx/cmcApi/getExchangeMarketPrice' , {
+    return this.http.post(`${environment.baseUrl}ftftx/cmcApi/getExchangeMarketPrice` , {
       id: id,
       limit: limit,
       slug: slug,
@@ -180,28 +181,28 @@ export class DataService {
   }
 
   GainersAndLosers(sc , limit){
-    return this.http.post(this.BaseURL + 'ftftx/cmcApi/getGainersAndLosers', {sort_dir: sc , limit: limit, start: 1, sort:"percent_change_24h", time_period: '24h'})
+    return this.http.post(`${environment.baseUrl}ftftx/cmcApi/getGainersAndLosers`, {sort_dir: sc , limit: limit, start: 1, sort:"percent_change_24h", time_period: '24h'})
   }
 
   GetTrendingCoins(limit){
-    return this.http.post(this.BaseURL + 'ftftx/cmcApi/getTradingLeatest',
+    return this.http.post(`${environment.baseUrl}ftftx/cmcApi/getTradingLeatest`,
       {limit: limit, start : 1})
   }
 
   GlobalMetricsHistory(){
-    return this.http.post(this.BaseURL + 'ftftx/cmcApi/getQuotesHistorical', {})
+    return this.http.post(`${environment.baseUrl}ftftx/cmcApi/getQuotesHistorical`, {})
   }
 
   GetFearandGreed(){
-    return this.http.post(this.BaseURL + 'ftftx/mainApi/fearAndGreed/details', {})
+    return this.http.post(`${environment.baseUrl}ftftx/mainApi/fearAndGreed/details`, {})
   }
 
   GetCommunityData(){
-    return this.http.post(this.BaseURL + 'ftftx/topicApi/topicList', {end: 5})
+    return this.http.post(`${environment.baseUrl}ftftx/topicApi/topicList`, {end: 5})
   }
 
   GetNews(query){
-    return this.http.post(this.BaseURL + 'ftftx/newsApi/news' , {
+    return this.http.post(`${environment.baseUrl}ftftx/newsApi/news` , {
       language: 'en' ,
       country: 'us',
       q: query
@@ -219,11 +220,11 @@ export class DataService {
       avatar: "avatar",
       userName: `username${Date.now()}`,
     };
-    return this.http.post(this.BaseURL + 'ftftx/usersAPI/saveUserInitially' , DATA)
+    return this.http.post(`${environment.baseUrl}ftftx/usersAPI/saveUserInitially`, DATA)
   }
 
   VerifyUser(data){
-    return this.http.post(this.BaseURL + 'ftftx/usersAPI/varifyUser' , data)
+    return this.http.post(`${environment.baseUrl}ftftx/usersAPI/varifyUser`, data)
   }
 
   LoginUser(data , type , dialcode){
@@ -234,7 +235,7 @@ export class DataService {
     if (type === 'mobile'){
       fmData.userId = dialcode + data.phone;
     }
-    return this.http.post(this.BaseURL + 'ftftx/usersAPI/login' , fmData)
+    return this.http.post(`${environment.baseUrl}ftftx/usersAPI/login`, fmData)
   }
 
   ForgotPassword(data , type , dialcode){
@@ -243,7 +244,7 @@ export class DataService {
       phone: type === 'mobile' ? dialcode + data.phone : ''
     }
 
-    return this.http.post(this.BaseURL + 'ftftx/usersAPI/varifyEmail' , fmData)
+    return this.http.post(`${environment.baseUrl}ftftx/usersAPI/varifyEmail`, fmData)
   }
 
   changePassword(data , userId){
@@ -252,40 +253,40 @@ export class DataService {
       password:  data.password
     }
 
-    return this.http.post(this.BaseURL + 'ftftx/usersAPI/changePassword' , fmData)
+    return this.http.post(`${environment.baseUrl}ftftx/usersAPI/changePassword`, fmData)
   }
 
   GetCommunityFEED(){
-    return this.http.post(this.BaseURL + 'ftftx/topicApi/topicList' , {end: 5});
+    return this.http.post(`${environment.baseUrl}ftftx/topicApi/topicList`, {end: 5});
   }
 
   GetCommunityFeedSingle(postID){
-    return this.http.post(this.BaseURL + '/ftftx/communityApi/savePost' , {"postId": postID});
+    return this.http.post(`${environment.baseUrl}/ftftx/communityApi/savePost`, {"postId": postID});
   }
 
   PostCommunityFeed(data){
-    return this.http.post(this.BaseURL + '/ftftx/communityApi/savePost' , data);
+    return this.http.post(`${environment.baseUrl}/ftftx/communityApi/savePost`, data);
   }
 
   PostAComment(data){
-    return this.http.post(this.BaseURL + '/ftftx/communityApi/saveComment' , data);
+    return this.http.post(`${environment.baseUrl}/ftftx/communityApi/saveComment`, data);
   }
 
   GetAllPosts(userID){
-    return this.http.post(this.BaseURL + '/ftftx/communityApi/getAllPosts' , {"userId": userID});
+    return this.http.post(`${environment.baseUrl}/ftftx/communityApi/getAllPosts`, {"userId": userID});
   }
 
 
   SendingOTP(data){
-    return this.http.post(this.BaseURL2 + 'verification/sendingOTP', data);
+    return this.http.post(`${environment.baseUrl2}verification/sendingOTP`, data);
   }
 
   VerifyingOTP(data){
-    return this.http.post(this.BaseURL2 + 'verification/verifyingOTP', data);
+    return this.http.post(`${environment.baseUrl2}verification/verifyingOTP`, data);
   }
 
 
   walletSubscription(data) {
-    return this.http.post(this.BaseURL2 + 'verification/subscribe', data);
+    return this.http.post(`${environment.baseUrl2}verification/subscribe`, data);
   }
 }
