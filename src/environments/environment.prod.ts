@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: "https://api.ftftx.com/",
-  baseUrl2: "https://verification.ftftx.com/"
+  baseUrl: "https://stgapi.ftftx.com/",
+  baseUrl2: "https://staging-verification.ftftx.com/",
 };
