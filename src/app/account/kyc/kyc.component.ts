@@ -73,9 +73,9 @@ export class KycComponent implements OnInit {
                 middle_name: this.KYC.middle_name,
                 last_name: this.KYC.last_name,
             },
-            expiry_date: moment(this.KYC.expiry_date).format('yyyy-mm-DD'),
+            expiry_date: moment(this.KYC.expiry_date).format('yyyy-MM-DD'),
             // expiry_date     : '2030-11-04' moment(this.KYC.expiry_date).format('yyyy-mm-dd');,
-            issue_date: moment(this.KYC.issue_date).format('yyyy-mm-DD'),
+            issue_date: moment(this.KYC.issue_date).format('yyyy-MM-DD'),
             allow_offline: '1',
             allow_online: '1',
             supported_types: ['id_card', 'passport'],
@@ -87,7 +87,7 @@ export class KycComponent implements OnInit {
                 middle_name: this.KYC.middle_name,
                 last_name: this.KYC.last_name,
             },
-            dob: moment(this.KYC.dob).format('yyyy-mm-DD'),
+            dob: moment(this.KYC.dob).format('yyyy-MM-DD'),
         }
         let token = btoa("S5fV2CqhGoytOIWphkCOVtKRaI2txxLYA610gSIfuBa2dX9bpZ1645618464:$2y$10$wiZONU5Iq/D.Z1NnRFTj5uxQ29N6wFtbSmTp8xJJEg0Pa44Y0ajBG"); //BASIC AUTH TOKEN
         fetch('https://api.shuftipro.com/',
