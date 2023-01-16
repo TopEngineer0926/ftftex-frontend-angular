@@ -86,7 +86,7 @@
 
   <div class="row more-stories">
     <div class="col-lg-10 offset-lg-1 ">
-    <div class="wt-box h-100 my-5 p-2" *ngIf="NoImageNews.length > 0">
+    <div class="wt-box h-100 my-5 p-2" *ngIf="NoImageNews?.length > 0">
       <h3 class="s-bld p-3">{{"More Stories" | translate}}</h3>
       <div class="row">
       <ng-container *ngFor="let dta of NoImageNews">

@@ -50,7 +50,7 @@ export class WalletAccountComponent implements OnInit {
   }
   loadMarket(){
     this.api.GetExchangePairs(this.SelectedExchange.id, this.SelectedExchange.slug , 'spot' , 10).subscribe((res: any) => {
-      this.Pairs = JSON.parse(res.response).data.market_pairs;
+      this.Pairs = JSON.parse(res.response['Result: ']).data.market_pairs;
       this.SelectedPairFull = this.Pairs[0];
       this.SelectedPair.coin = this.Pairs[0].market_pair_base.currency_symbol;
       this.SelectedPair.pair =   this.Pairs[0].market_pair_quote.currency_symbol;

@@ -16,6 +16,7 @@ import {CoinSelectComponent} from "./coin-select/coin-select.component";
 export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit ,AfterContentChecked {
   @ViewChild('confirmation' , {static: false}) confirmation: ElementRef | undefined;
   Symbol;
+  SymbolOkx;
   SymbolSeperated;
   AllPairs;
   AllPairsPrice:any = {};
@@ -71,15 +72,20 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
       console.log(res);
     });
 
+    this.api.getTradingPairsOkx().subscribe({
+      next: (res) => {
+        console.log(res, 'res getTradingPairsOkx')
+      }
+
+    })
+
     this.api.getTradingPairs().subscribe((res: any) => {
       this.AllPairs = res.symbols;
-      console.log(this.AllPairs)
     });
     this.api.getPriceTicker().subscribe((res: any) => {
       for (let dta of res){
         this.AllPairsPrice[dta.symbol] = dta;
       }
-      console.log(this.AllPairsPrice);
     });
 
 
@@ -92,9 +98,18 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
       if (param['symbol']){
         this.SymbolSeperated = param['symbol'].replace('_' , '/');
         this.Symbol = param['symbol'].replace('_' , '');
+        this.SymbolOkx = param['symbol'].replace('_' , '-');
         this.Pair.Coin = param['symbol'].split('_')[0];
         this.Pair.Base = param['symbol'].split('_')[1];
         console.log(this.Symbol);
+        this.api.getMarketTradesOkx(this.SymbolOkx).subscribe({
+          next: (res) => {
+            console.log(res, 'res getMarketTradesOkx')
+          },
+          error: (err) => {
+            console.log(err, 'errr ')
+          }
+        })
         this.api.getMarketTrades(this.Symbol).subscribe((res: any) => {
           this.LatestTrade = res;
 
@@ -194,6 +209,15 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
   }
 
   getStaticBidsandAsks(){
+    this.api.getBidsandAsksOkx(this.SymbolOkx, 16).subscribe({
+      next: (res) => {
+        console.log(res, 'res');
+      },
+      error: (err) => {
+        console.log(err, 'err');
+      }
+    })
+
     this.api.getBidsandAsks(this.Symbol , 16).subscribe((res: any) => {
       this.bidsAndAsks = res;
       this.bidsTotal = 0;

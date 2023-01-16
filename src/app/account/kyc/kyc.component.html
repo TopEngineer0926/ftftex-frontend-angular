@@ -1,3 +1,8 @@
+
+<!--   <div class="w-100 h-100" style="min-height:600px">-->
+<!--          <iframe [src]="verificationUrl | safe" height="100%" width="100%" id="shuftipro-iframe" style="overflow:hidden; margin-top: 100px;height:600px;width:100%"  allow="camera" frameborder="0"></iframe>-->
+
+<!--     </div>-->
 <div class="vh-100">
   <div class="container">
     <div class="row">
@@ -14,7 +19,7 @@
             <div class="form-control ddrop d-flex" id="dropdownBasic1" ngbDropdownToggle (click)="search = ''">
               <ng-container *ngIf="SelectedNationality === '' ; else isNationality">-- Select --</ng-container>
               <ng-template #isNationality>
-                <img src="https://countryflagsapi.com/svg/{{SelectedNationality.alpha_3_code.toLowerCase()}}"  class="mr-2">
+                <img src="https://cdn.kcak11.com/CountryFlags/countries/{{SelectedNationality.alpha_2_code.toLowerCase()}}.svg"  class="mr-2">
                 {{SelectedNationality.nationality}}</ng-template>
               <span class="material-symbols-outlined align-self-center mb-0 ml-auto mr-2" style="font-size: 24px;">arrow_drop_down</span>
             </div>
@@ -24,7 +29,7 @@
               </div>
               <ng-container *ngFor="let cont of Countries">
                 <button ngbDropdownItem *ngIf="cont.nationality.toLowerCase().includes(search.toLowerCase())" (click)="SelectedANationality(cont)">
-                  <img src="https://countryflagsapi.com/svg/{{cont.alpha_3_code.toLowerCase()}}"  class="mr-2">
+                  <img src="https://cdn.kcak11.com/CountryFlags/countries/{{cont.alpha_2_code.toLowerCase()}}.svg"  class="mr-2">
                   {{cont.nationality}}
                 </button>
               </ng-container>
@@ -37,7 +42,7 @@
             <div class="form-control ddrop d-flex" id="dropdownBasic1" ngbDropdownToggle (click)="search = ''">
               <ng-container *ngIf="SelectedCountry === '' ; else isCountry">-- Select --</ng-container>
               <ng-template #isCountry>
-                <img src="https://countryflagsapi.com/svg/{{SelectedCountry.alpha_3_code.toLowerCase()}}"  class="mr-2">
+                <img src="https://cdn.kcak11.com/CountryFlags/countries/{{SelectedCountry.alpha_2_code.toLowerCase()}}.svg"  class="mr-2">
                 {{SelectedCountry.en_short_name}}</ng-template>
               <span class="material-symbols-outlined align-self-center mb-0 ml-auto mr-2" style="font-size: 24px;">arrow_drop_down</span>
             </div>
@@ -47,7 +52,7 @@
               </div>
               <ng-container *ngFor="let cont of Countries">
               <button ngbDropdownItem *ngIf="cont.en_short_name.toLowerCase().includes(search.toLowerCase())" (click)="SelectedACountry(cont)">
-                <img src="https://countryflagsapi.com/svg/{{cont.alpha_3_code.toLowerCase()}}"  class="mr-2">
+                <img src="https://cdn.kcak11.com/CountryFlags/countries/{{cont.alpha_2_code.toLowerCase()}}.svg"  class="mr-2">
                 {{cont.en_short_name}}
               </button>
               </ng-container>
@@ -147,6 +152,7 @@
             <button class="btn btn-primary px-5  ml-auto" (click)="Page = 4">Submit</button>
           </div>
         </div>
+
 
 
 

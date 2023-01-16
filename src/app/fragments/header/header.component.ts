@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getGlobalData().subscribe((res: any)=>{
-      this.GlobalData = JSON.parse(res.response).data;
+      this.GlobalData = JSON.parse(res.response['Result: '])?.data;
     });
     this.api.Loggedin.subscribe((res: any) => {
         this.LoggedIn = res;

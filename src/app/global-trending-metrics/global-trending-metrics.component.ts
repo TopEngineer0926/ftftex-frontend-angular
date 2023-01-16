@@ -125,7 +125,7 @@ export class GlobalTrendingMetricsComponent implements OnInit, AfterViewInit {
 
   syncData() {
     this.api.GlobalMetricsHistory().subscribe((res: any) => {
-      this.GlobalData = JSON.parse(res.response).data;
+      this.GlobalData = JSON.parse(res.response['Result: '])?.data;
     }, () => {
     }, () => {
       this.GlobalDataFiltered = [];

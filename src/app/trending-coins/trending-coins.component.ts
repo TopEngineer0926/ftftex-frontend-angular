@@ -40,7 +40,7 @@ export class TrendingCoinsComponent implements OnInit, AfterViewInit {
   syncData() {
     this.loader = true;
     this.api.GetTrendingCoins(this.limit).subscribe((res: any) => {
-      this.CoinData = JSON.parse(res.response).data;
+      this.CoinData = JSON.parse(res.response['Result: '])?.data;
     }, () => {
     }, () => {
       this.loader = false;

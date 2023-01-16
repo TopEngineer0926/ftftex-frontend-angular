@@ -12,6 +12,9 @@ export class TradingDataServiceService {
   baseURL = 'https://api.binance.com/';
   WSbaseURL = 'wss://stream.binance.com:9443/';
 
+
+  baseURLOkx = 'https://www.okx.com/'
+
   socket;
   Pairs = ["BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT","ADAUSDT","DOTUSDT","DOGEUSDT","SHIBUSDT","MATICUSDT","UNIUSDT","LTCUSDT","TRXUSDT","XRPUSDT"];
   liveData:Observable<any>;
@@ -22,6 +25,11 @@ export class TradingDataServiceService {
 
   getTradingPairs(){
     return this.http.get(this.baseURL + 'api/v3/exchangeInfo?symbols=' + JSON.stringify(this.Pairs));
+  }
+
+  ///api/v5/market/tickers
+  getTradingPairsOkx(){
+    return this.http.get(this.baseURLOkx + 'api/v5/market/tickers?instType=SPOT');
   }
   getLivePrices(symbol) {
     this.liveData = this.wsService.connect(this.WSbaseURL + 'stream?streams=!ticker@arr/'+ symbol+'@depth@1000ms/'+ symbol+'@trade/'+ symbol+'@bookTicker').pipe(map(
@@ -42,6 +50,10 @@ export class TradingDataServiceService {
     return this.http.get(this.baseURL + 'api/v3/trades?symbol='+symbol);
   }
 
+  getMarketTradesOkx(symbol: string){
+    return this.http.get(this.baseURLOkx + 'api/v5/market/trades?instId='+symbol);
+  }
+
   getKlines(symbol:string, interval:string){
     return this.http.get(this.baseURL + 'api/v3/trades?symbol='+symbol+'&interval='+ interval);
   }
@@ -49,6 +61,10 @@ export class TradingDataServiceService {
 
   getBidsandAsks(symbol , limit){
     return this.http.get(this.baseURL + 'api/v3/depth?symbol='+symbol+'&limit='+limit)
+  }
+
+  getBidsandAsksOkx(symbol , limit){
+    return this.http.get(this.baseURLOkx + 'api/v5/market/books?instId='+symbol+'&sz='+limit)
   }
 
 
