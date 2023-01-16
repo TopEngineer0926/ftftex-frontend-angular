@@ -37,7 +37,7 @@ export class TradingViewTDChartComponent implements OnInit , AfterViewInit {
 
   ngAfterViewInit(): void {
     //@ts-ignore
-    const SYMBOL = this.EXCHANGE + ":" + this.COIN.toUpperCase() + this.PAIR.toUpperCase();
+    const SYMBOL = this.EXCHANGE + ":" + this.COIN?.toUpperCase() + this.PAIR?.toUpperCase();
     //@ts-ignore
     if (this.coins.includes(this.COIN)) {
 

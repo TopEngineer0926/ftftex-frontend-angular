@@ -32,7 +32,7 @@ export class GainersAndLosersComponent implements OnInit {
   syncData(){
     this.loader = true;
     this.api.GainersAndLosers(this.sortDir , this.limit).subscribe((res: any) => {
-      this.CoinData = JSON.parse(res.response).data;
+      this.CoinData = JSON.parse(res.response['Result: '])?.data;
     }, () => {} , () => {this.loader = false;});
   }
 

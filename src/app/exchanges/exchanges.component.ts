@@ -32,8 +32,8 @@ export class ExchangesComponent implements OnInit {
   syncData(){
     this.loader = true;
     this.api.GetExchangesList(this.Category , this.page , this.limit).subscribe((res: any) => {
-      this.ExchangeData = JSON.parse(res.response).data;
-      this.totalCount = JSON.parse(res.response).status.total_count;
+      this.ExchangeData = JSON.parse(res.response['Result: '])?.data;
+      this.totalCount = JSON.parse(res.response['Result: ']).status.total_count;
     }, () => {} , () => {
       this.loader = false;
     })

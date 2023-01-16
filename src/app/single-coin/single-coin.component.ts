@@ -21,11 +21,11 @@ export class SingleCoinComponent implements OnInit {
     window.scroll(0,0);
     this.a_route.params.subscribe((param: any) => {
       this.api.getSingleCoinData(param.id , param.slug).subscribe((res: any) => {
-        this.Data = JSON.parse(res.response).data[param.id];
+        this.Data = JSON.parse(res.response['Result: ']).data[param.id];
         this.Param = param;
       },() => {} , () => {
         this.api.getSingleCoinPrices(param.id , this.Data.slug).subscribe((res: any) => {
-          this.PriceData = JSON.parse(res.response).data[param.id];
+          this.PriceData = JSON.parse(res.response['Result: ']).data[param.id];
         });
       });
     })

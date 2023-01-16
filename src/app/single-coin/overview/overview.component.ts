@@ -81,7 +81,7 @@ export class OverviewComponent implements OnInit {
     this.chartData = [];
     await  this.api.OCHLData(this.Param.id ,this.Data.slug , this.period , this.interval , this.count).subscribe((res: any) => {
       this.chartData = [];
-      const Data = JSON.parse(res.response).data.quotes;
+      const Data = JSON.parse(res.response['Result: ']).data.quotes;
       /* const Data = res.data.quotes;*/
 
       for (let dta of  Data){

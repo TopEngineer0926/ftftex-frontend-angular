@@ -71,6 +71,7 @@ import { KycComponent } from './account/kyc/kyc.component';
 import {PurchaseCryptoComponent} from './purchase-crypto/purchase-crypto.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SetPasswordComponent } from './set-password/set-password.component';
+import { SafePipe } from './pipes/safe.pipe';
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -133,7 +134,8 @@ export function createTranslateLoader(http: HttpClient) {
     KycComponent,
     PurchaseCryptoComponent,
     ForgotPasswordComponent,
-    SetPasswordComponent
+    SetPasswordComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

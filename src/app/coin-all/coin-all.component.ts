@@ -39,8 +39,8 @@ export class CoinAllComponent implements OnInit {
   syncData(){
     this.loader = true;
     this.api.getCoinData(this.page , this.limit , this.tag , this.sort , this.sort_dir).subscribe((res: any) => {
-      this.CoinData = JSON.parse(res.response).data;
-      this.totalCount = JSON.parse(res.response).status.total_count;
+      this.CoinData = JSON.parse(res.response['Result: '])?.data;
+      this.totalCount = JSON.parse(res.response['Result: ']).status.total_count;
     }, () => {} , () => {
       this.loader = false;
     });
