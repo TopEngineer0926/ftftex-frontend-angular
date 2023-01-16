@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {CountryDataService} from "../../country-data.service";
-import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
-import * as moment from "moment/moment";
 
 @Component({
     selector: 'app-kyc',
@@ -48,11 +46,10 @@ export class KycComponent implements OnInit {
         this.SelectedNationality = cont;
     }
 
-    onDateChange(date: NgbDateStruct, type: string) {
-        console.log(date, 'date');
-        // this.KYC[type] = new Date(`${date.month}/${date.day}/${date.year}`);
+    toModel(date: any) {
+        return date ? date.year + "-" + ('0' + date.month).slice(-2)
+            + "-" + ('0' + date.day).slice(-2) : null
     }
-
 
     continue() {
         const reference = `SP_REQUEST_${Math.random()}`;
@@ -73,9 +70,9 @@ export class KycComponent implements OnInit {
                 middle_name: this.KYC.middle_name,
                 last_name: this.KYC.last_name,
             },
-            expiry_date: moment(this.KYC.expiry_date).format('yyyy-MM-DD'),
+            expiry_date: this.toModel(this.KYC.expiry_date),
             // expiry_date     : '2030-11-04' moment(this.KYC.expiry_date).format('yyyy-mm-dd');,
-            issue_date: moment(this.KYC.issue_date).format('yyyy-MM-DD'),
+            issue_date: this.toModel(this.KYC.issue_date),
             allow_offline: '1',
             allow_online: '1',
             supported_types: ['id_card', 'passport'],
@@ -87,7 +84,7 @@ export class KycComponent implements OnInit {
                 middle_name: this.KYC.middle_name,
                 last_name: this.KYC.last_name,
             },
-            dob: moment(this.KYC.dob).format('yyyy-MM-DD'),
+            dob: this.toModel(this.KYC.dob),
         }
         let token = btoa("S5fV2CqhGoytOIWphkCOVtKRaI2txxLYA610gSIfuBa2dX9bpZ1645618464:$2y$10$wiZONU5Iq/D.Z1NnRFTj5uxQ29N6wFtbSmTp8xJJEg0Pa44Y0ajBG"); //BASIC AUTH TOKEN
         fetch('https://api.shuftipro.com/',
