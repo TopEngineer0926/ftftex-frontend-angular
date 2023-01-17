@@ -41,14 +41,23 @@
 
         <label class="mt-3">{{"Password" | translate}}</label>
         <input formControlName="password" type="password" placeholder="Password" class="form-control">
+
+
+          <div class="form-group form-check mt-3">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="terms">
+            <label class="form-check-label" for="exampleCheck1">
+              <p class="agree-txt">{{"Registration means that you have read and agreed to the FTFTex" | translate}}
+              <a [routerLink]="'/about/service-terms'" target="_blank">{{"Terms of Service" |  translate}}</a> ,
+              <a [routerLink]="'/about/aml-policy'" target="_blank">{{"Anti Money Laundering" | translate}}</a>.
+              </p></label>
+          </div>
+
         </form>
+
 
         <p class="mt-4 text-center error-msg">{{Errors}} </p>
         <button class="btn btn-primary btn-lg my-5 mx-auto d-block font-weight-bold px-5" [disabled]="Form.invalid" (click)="register()">Register</button>
 
-        <p class="agree-txt">{{"Registration means that you have read and agreed to the FTFTEX" | translate}}
-          <a [routerLink]="'/about/service-terms'" target="_blank">{{"Terms of Service" |  translate}}</a> ,
-          <a [routerLink]="'/about/aml-policy'" target="_blank">{{"Anti Money Laundering" | translate}}</a>.</p>
         <hr>
         <h5 class=" text-center">{{"Already have an account ?" | translate}} <a [routerLink]="'/login'"><b>{{"Login here" | translate}} </b></a></h5>
       </div>
