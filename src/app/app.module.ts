@@ -72,10 +72,45 @@ import {PurchaseCryptoComponent} from './purchase-crypto/purchase-crypto.compone
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SetPasswordComponent } from './set-password/set-password.component';
 import { SafePipe } from './pipes/safe.pipe';
+import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
+
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
+const cookieConfig:NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'https://www.ftftx.com/'
+  },
+  palette: {
+    popup: {
+      background: '#000'
+    },
+    button: {
+      background: '#1577ff'
+    }
+  },
+  theme: 'classic',
+  type: 'opt-out',
+  layout: 'my-custom-layout',
+  layouts: {
+    "my-custom-layout": '{{messagelink}}{{compliance}}'
+  },
+  elements:{
+    messagelink: `
+    <span id="cookieconsent:desc" class="cc-message">{{message}} 
+      <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{cookiePolicyHref}}" target="_blank" rel="noopener">{{cookiePolicyLink}}</a>
+    </span>
+    `,
+  },
+  content:{
+    message: 'This website uses cookies to ensure you get the best experience in our website.',
+
+    cookiePolicyLink: 'Learn More',
+    cookiePolicyHref: 'https://www.ftftx.com/about/service-terms',
+  }
+};
 
 @NgModule({
   declarations: [
@@ -149,6 +184,7 @@ export function createTranslateLoader(http: HttpClient) {
     StockChartAllModule, RangeNavigatorAllModule, ChartAllModule, OrderModule, SparklineAllModule,
     NgxMarqueeModule, ReactiveFormsModule, FormsModule,
     NgxEmojiPickerModule.forRoot(),
+    NgcCookieConsentModule.forRoot(cookieConfig),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
