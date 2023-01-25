@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://stgapi.ftftx.com/",
+  baseUrl: "https://stgapi.ftftex.com/",
   baseUrl2: "https://staging-verification.ftftx.com/"
 };
 
