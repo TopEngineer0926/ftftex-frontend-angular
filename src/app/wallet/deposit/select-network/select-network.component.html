@@ -1,0 +1,10 @@
+<div class="modal-header">
+    <span>Select Network</span>
+</div>
+<div class="modal-body">
+    <div class="network-list d-flex flex-column mt-1">
+        <div class="network-list-item" (click)="selectNetwork(chain)" *ngFor="let chain of chains">
+            <span>{{chain.chain}}</span>
+        </div>
+    </div>
+</div>

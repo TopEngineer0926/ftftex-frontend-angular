@@ -24,13 +24,13 @@ import {TradingPortalComponent} from "./trading-portal/trading-portal.component"
 import {AccountComponent} from "./account/account.component";
 import {WalletAssetComponent} from "./account/wallet-asset/wallet-asset.component";
 import {DepositeComponent} from "./account/deposite/deposite.component";
-import {BuyCryptoComponent} from "./account/buy-crypto/buy-crypto.component";
 import {MobileAcPageComponent} from "./account/mobile-ac-page/mobile-ac-page.component";
 import {SettingsComponent} from "./account/mobile-ac-page/settings/settings.component";
 import {KycComponent} from "./account/kyc/kyc.component";
 import {PurchaseCryptoComponent} from "./purchase-crypto/purchase-crypto.component";
 import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 import {SetPasswordComponent} from "./set-password/set-password.component";
+import {WalletMainComponent} from "./wallet-main/wallet-main.component";
 
 const routes: Routes = [
   {path: '' , component: HomeComponent},
@@ -54,6 +54,7 @@ const routes: Routes = [
   {path: 'news' , component: NewsComponent},
   {path: 'wallet' , component: WalletComponent},
   {path: 'wallet/account' , component: WalletAccountComponent},
+  {path: 'wallet/main' , component: WalletMainComponent},
   {path: 'wallet/purchase-crypto' , component: PurchaseCryptoComponent},
   {path: 'about' , component: AboutUsComponent , children: [
       {path: 'product-introduction' , component: ProductIntroComponent},

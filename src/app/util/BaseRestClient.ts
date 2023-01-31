@@ -269,12 +269,9 @@ export default abstract class BaseRestClient {
       this.options.strict_param_validation
     );
 
+    console.log(serializedParams, 'serializedParams');
     const message = tsISO + method + endpoint + serializedParams;
-    // console.log(new Date(), `Sign params: `, {
-    //   message,
-    //   secret: this.apiSecret,
-    // });
-
+    console.log(message, 'message');
     return {
       ...res,
       sign: signMessage(message, this.apiSecret),

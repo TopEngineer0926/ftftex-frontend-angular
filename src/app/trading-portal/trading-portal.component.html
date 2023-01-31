@@ -74,7 +74,7 @@
     </div>
     <div class="col-lg-7 px-0">
       <div class="card p-0">
-        <app-trading-view-td-chart [COIN]="Pair.Coin" [chartType]="'candle-chart'" [EXCHANGE]="'BINANCE'" [PAIR]="Pair.Base"></app-trading-view-td-chart>
+        <app-trading-view-td-chart [COIN]="Pair.Coin" [chartType]="'candle-chart'" [EXCHANGE]="'OKX'" [PAIR]="Pair.Base"></app-trading-view-td-chart>
         <div class="row">
           <div class="col-lg-12">
             <h5 class="s-bld px-3 pt-3">SPOT</h5>
@@ -246,7 +246,7 @@
     </div>
     <div class="col-lg-7 px-0" >
       <div class="card p-0">
-        <app-trading-view-td-chart *ngIf="currenttab === 'chart'" [COIN]="Pair.Coin" [chartType]="'candle-chart'" [EXCHANGE]="'BINANCE'" [PAIR]="Pair.Base"></app-trading-view-td-chart>
+        <app-trading-view-td-chart *ngIf="currenttab === 'chart'" [COIN]="Pair.Coin" [chartType]="'candle-chart'" [EXCHANGE]="'OKX'" [PAIR]="Pair.Base"></app-trading-view-td-chart>
 
         <ng-container *ngIf="currenttab === 'chart' || currenttab === 'orders'">
           <div class="row mb-4 mx-1">

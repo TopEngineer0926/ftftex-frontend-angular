@@ -24,7 +24,7 @@ export class SingleExchangeComponent implements OnInit {
   ngOnInit(): void {
     this.a_route.params.subscribe((param: any) => {
       this.api.GetSingleExchange(param.id , param.slug).subscribe((res: any) => {
-        this.Data = JSON.parse(res.response).data[param.id];
+        this.Data = JSON.parse(res.response['Result: ']).data[param.id];
 
         this.Param = param;
       },() => {} , () => {
@@ -36,7 +36,7 @@ export class SingleExchangeComponent implements OnInit {
 
   loadMarket(){
     this.api.GetExchangePairs(this.Param.id, this.Param.slug , this.category , 100).subscribe((res: any) => {
-      const Allpairs = JSON.parse(res.response).data.market_pairs;
+      const Allpairs = JSON.parse(res.response['Result: ']).data.market_pairs;
       console.log(Allpairs);
       this.Pairs = [];
       for (let dta of Allpairs){

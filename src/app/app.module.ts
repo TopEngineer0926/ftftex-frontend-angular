@@ -73,6 +73,11 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { SetPasswordComponent } from './set-password/set-password.component';
 import { SafePipe } from './pipes/safe.pipe';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
+import { WalletMainComponent } from './wallet-main/wallet-main.component';
+import { DepositComponent } from './wallet/deposit/deposit.component';
+import {SelectNetworkComponent} from "./wallet/deposit/select-network/select-network.component";
+import { DepositNetworkComponent } from './wallet/deposit/deposit-network/deposit-network.component';
+import { TransferComponent } from './wallet/transfer/transfer.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -170,7 +175,12 @@ const cookieConfig:NgcCookieConsentConfig = {
     PurchaseCryptoComponent,
     ForgotPasswordComponent,
     SetPasswordComponent,
-    SafePipe
+    SafePipe,
+    WalletMainComponent,
+    DepositComponent,
+    SelectNetworkComponent,
+    DepositNetworkComponent,
+    TransferComponent,
   ],
   imports: [
     BrowserModule,

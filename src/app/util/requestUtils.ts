@@ -17,7 +17,7 @@ export function serializeParams(
   const queryString = Object.keys(params)
     .map((key) => {
       const value = params[key];
-      if (strict_validation === true && typeof value === 'undefined') {
+      if (strict_validation && typeof value === 'undefined') {
         throw new Error(
           'Failed to sign API request due to undefined parameter'
         );

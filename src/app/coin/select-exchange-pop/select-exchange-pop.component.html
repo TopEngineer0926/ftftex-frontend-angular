@@ -1,21 +1,23 @@
 <div class="modal-body">
   <h5 class="s-bld text-center">Aggregate Trading Options </h5>
   <hr>
-  <div class="select-box" (click)="activeModal.dismiss()"  [routerLink]="'/trade/'+data?.coin+'_USDT'">
+
+</div>
+<div class="select-box"  (click)="activeModal.dismiss()"  [routerLink]="'/trade/'+data?.coin+'_USDT'">
+  <img class="align-self-center" src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/294.png" height="30">
+  <h6 class="mb-0 align-self-center ml-2 s-bld"> OKX</h6>
+</div>
+  <div class="select-box disabled">
     <img class="align-self-center" src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/270.png" height="30">
     <h6 class="mb-0 align-self-center ml-2 s-bld">Binance</h6>
+    <p class="mb-0 align-self-center ml-auto" style="font-size: 12px">Coming soon</p>
+
   </div>
 
   <div class="select-box disabled" >
     <img class="align-self-center" src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/102.png" height="30">
     <h6 class="mb-0 align-self-center ml-2 s-bld"> Huobi Global</h6>
     <p class="mb-0 align-self-center ml-auto" style="font-size: 12px">Coming soon</p>
-  </div>
-  <div class="select-box disabled" >
-    <img class="align-self-center" src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/294.png" height="30">
-    <h6 class="mb-0 align-self-center ml-2 s-bld"> OKX</h6>
-    <p class="mb-0 align-self-center ml-auto" style="font-size: 12px">Coming soon</p>
-  </div>
   <div class="select-box disabled" >
     <img class="align-self-center" src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/525.png" height="30">
     <h6 class="mb-0 align-self-center ml-2 s-bld"> XT</h6>

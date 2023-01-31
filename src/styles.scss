@@ -291,6 +291,10 @@ a{
   background: url("assets/images/white-bg.jpg");
 }
 
+.white {
+  color: white;
+}
+
 .modal-content{
   border: none !important;
   border-radius: 18px;
@@ -456,4 +460,16 @@ body.dark-theme{
   .n-title-top, .n-title {
     background-color: #1e253d;;
   }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.gray {
+  color: gray;
+}
+
+.network-modal-sm {
+  width: 400px !important;
 }
