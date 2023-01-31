@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <h3>{{selectedCoin ? 'Transfer' :'Select Coin'}}</h3>
+</div>
+<div class="modal-body">
+    <div class="coin-list d-flex flex-column mt-1" *ngIf="!selectedCoin">
+        <div class="coin-list-item" (click)="selectCoin()">
+            <span>BTC</span>
+            <small>0.012232432</small>
+        </div>
+        <div class="coin-list-item">
+            <span>ETH</span>
+            <small>0.232132</small>
+        </div>
+        <div class="coin-list-item">
+            <span>USDT</span>
+        </div>
+        <div class="coin-list-item">
+            <span>DOT</span>
+        </div>
+        <div class="coin-list-item">
+            <span>XRP</span>
+        </div>
+        <div class="coin-list-item">
+            <span>SOL</span>
+            <small>0.343</small>
+        </div>
+        <div class="coin-list-item">
+            <span>AED</span>
+        </div>
+        <div class="coin-list-item">
+            <span>00</span>
+        </div>
+        <div class="coin-list-item">
+            <span>ETCH</span>
+        </div>
+    </div>
+    <div class="transfer" *ngIf="selectedCoin">
+
+        <div class="transfer-currency">
+            <span>BTC</span>
+            <small class="gray">Bitcoin</small>
+        </div>
+
+        <div class="transfer-trading mt-2">
+            <div class="from-to d-flex">
+                <small class="gray">From</small>
+                <div class="ma">
+                    MA
+                </div>
+                <span class="white">Main Account</span>
+            </div>
+            <div class="from-to d-flex">
+                <small class="gray">To</small>
+                <div class="ma ta">
+                    TA
+                </div>
+                <span class="white">Trading Account</span>
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-between mt-1">
+            <small class="gray">Amount</small>
+            <span class="available">Available 0.1231312</span>
+        </div>
+        <input type="number" class="transfer-input mt-3" placeholder="0.0000000000">
+
+        <button class="btn btn-primary btn-lg mt-5 mb-3 mx-auto d-block font-weight-bold px-5"
+        >{{"Confirm" | translate}}</button>
+    </div>
+</div>

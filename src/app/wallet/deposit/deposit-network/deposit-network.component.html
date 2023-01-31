@@ -1,0 +1,18 @@
+<div class="modal-header justify-content-center">
+    <span>Deposit </span> <span *ngIf="createdDeposit">{{createdDeposit.ccy}}</span>
+</div>
+<div class="modal-body" *ngIf="createdDeposit">
+    <div class="deposit-network-main">
+        <span class="gray">Network</span>
+        <span class="address">{{createdDeposit.ccy}} <small class="gray">{{createdDeposit.chain}}</small></span>
+    </div>
+
+    <div class="deposit-network-main mt-2">
+        <span class="gray">Address</span>
+        <span class="address">{{createdDeposit.addr}}</span>
+    </div>
+</div>
+<div class="modal-footer" *ngIf="createdDeposit">
+    <button type="button" class="btn  d-block mx-auto">Save Address</button>
+    <button type="button" class="btn btn-outline-primary d-block mx-auto">Share Address</button>
+</div>

@@ -26,7 +26,7 @@ export class MarketsComponent implements OnInit {
   syncData(){
     this.loader = true;
     this.api.GetPairs(this.Param.id ,this.Param.slug , this.category).subscribe((res: any) => {
-      this.MarketData = JSON.parse(res.response).data.market_pairs;
+      this.MarketData = JSON.parse(res.response['Result: ']).data.market_pairs;
     }, () => {} , () => {
       this.loader = false;
     })

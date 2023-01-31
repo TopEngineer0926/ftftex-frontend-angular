@@ -571,8 +571,9 @@ export class RestClient extends BaseRestClient  {
 
 
   createSubAccount(
+      params
   ): Promise<AccountPositionModeResult[]> {
-    return this.postPrivate('/api/v5/broker/nd/create-subaccount', { subAcct: 'Arthur111' });
+    return this.postPrivate('/api/v5/broker/nd/create-subaccount', params);
   }
 
   setLeverage(params: SetLeverageRequest): Promise<AccountLeverageResult[]> {
@@ -716,8 +717,8 @@ export class RestClient extends BaseRestClient  {
    */
 
   /** View sub-account list */
-  getSubAccountList(params?: unknown): Promise<SubAccount[]> {
-    return this.getPrivate('/api/v5/users/subaccount/list', params);
+  getSubAccountList(params?: unknown): Promise<any> {
+    return this.getPrivate('/api/v5/broker/nd/subaccount-info', params);
   }
 
   /** Reset the APIKey of a sub-account */
@@ -740,6 +741,10 @@ export class RestClient extends BaseRestClient  {
   /** Get sub-account trading balance */
   getSubAccountBalances(subAcct: string): Promise<SubAccountBalances[]> {
     return this.getPrivate('/api/v5/account/subaccount/balances', { subAcct });
+  }
+
+  getSubAccountDepositAddresses(): Promise<SubAccountBalances[]> {
+    return this.getPrivate('/api/v5/asset/broker/nd/subaccount-deposit-address', );
   }
 
   /** Get sub-account funding balance */
@@ -770,6 +775,12 @@ export class RestClient extends BaseRestClient  {
     params: SubAccountTransferRequest
   ): Promise<SubAccountTransferResult[]> {
     return this.postPrivate('/api/v5/asset/subaccount/transfer', params);
+  }
+
+  createDepositAddressForSubAccount(
+      params: any,
+  ): Promise<any> {
+    return this.postPrivate('/api/v5/asset/broker/nd/subaccount-deposit-address', params);
   }
 
   /** Set Permission Of Transfer Out */

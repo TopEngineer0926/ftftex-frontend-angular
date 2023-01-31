@@ -1,0 +1,61 @@
+<div class="modal-header">
+    <div class="d-flex mt-4">
+        <div class="sub-menu-btn btn mr-2 px-4"
+             [ngClass]="{'sub-menu-btn-activate' : tab === 'crypto'}"
+             (click)="changeTab('crypto')">Crypto
+        </div>
+    </div>
+</div>
+<div class="modal-body">
+<!--    <div class="sub-menu-btn mt-3">-->
+<!--        History-->
+<!--    </div>-->
+<!--    <div class="mt-1 d-flex">-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            BTC-->
+<!--        </div>-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            AGLD-->
+<!--        </div>-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            ADA-->
+<!--        </div>-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            ADB-->
+<!--        </div>-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            USDT-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="sub-menu-btn mt-3">-->
+<!--        Hot-->
+<!--    </div>-->
+<!--    <div class="mt-1 d-flex">-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            USDT-->
+<!--        </div>-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            BTC-->
+<!--        </div>-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            TRX-->
+<!--        </div>-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            SWEAT-->
+<!--        </div>-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            ENQ-->
+<!--        </div>-->
+<!--        <div class="mr-2 currency-history-item">-->
+<!--            ETH-->
+<!--        </div>-->
+<!--    </div>-->
+    <ng-container *ngIf="currencies">
+        <div class="currency-list d-flex flex-column mt-3">
+            <div class="currency-list-item" *ngFor="let ccy of currencies| keyvalue" (click)="selectCurrency(ccy)">
+                <img [src]="ccy.value?.[0]?.logoLink" alt="">
+                <span>{{ccy.key}}</span>
+            </div>
+        </div>
+    </ng-container>
+</div>
