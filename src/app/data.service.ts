@@ -193,6 +193,10 @@ export class DataService {
     return this.http.post(`${environment.baseUrl}ftftx/cmcApi/getQuotesHistorical`, {})
   }
 
+  getUser(userId){
+    return this.http.post(`${environment.baseUrl}ftftx/usersAPI/getUserDetails`, {userId})
+  }
+
   GetFearandGreed(){
     return this.http.post(`${environment.baseUrl}ftftx/mainApi/fearAndGreed/details`, {})
   }

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: "https://stgapi.ftftex.com/",
-  baseUrl2: "https://staging-verification.ftftx.com/"
+  baseUrl2: "https://staging-verification.ftftex.com/"
 };
 
 /*
