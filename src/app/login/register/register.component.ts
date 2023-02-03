@@ -56,16 +56,21 @@ export class RegisterComponent implements OnInit {
     this.OTPVerificationMessage = '';
     this.api.RegisterUser(this.Form.value , this.RegisterType , this.DialingCode.dialCode).subscribe((res: any) => {
       this.RegisterResponse = res;
-      console.log(this.RegisterResponse);
+      this.OTP = res.pinCode;
 
       if (!res.result.exist) {
-        this.api.SendingOTP({"userid": res.result.userId, "type":"email", "email": this.Form.value.email}).subscribe((res2: any) => {
-          if (this.RegisterType === 'email'){
-            this.modalService.open(this.emailVerifyPop, {ariaLabelledBy: 'modal-basic-title' , centered: true , backdrop: 'static'}).result.then((result) => {
-            }, (reason) => {
-            });
-          }
-        });
+        if (this.RegisterType === 'email'){
+          this.modalService.open(this.emailVerifyPop, {ariaLabelledBy: 'modal-basic-title' , centered: true , backdrop: 'static'}).result.then((result) => {
+          }, (reason) => {
+          });
+        }
+        // this.api.SendingOTP({"userid": res.result.userId, "type":"email", "email": this.Form.value.email}).subscribe((res2: any) => {
+        //   if (this.RegisterType === 'email'){
+        //     this.modalService.open(this.emailVerifyPop, {ariaLabelledBy: 'modal-basic-title' , centered: true , backdrop: 'static'}).result.then((result) => {
+        //     }, (reason) => {
+        //     });
+        //   }
+        // });
 
       } else {
         this.Errors = "Email/Mobile Already Exist !"
@@ -82,16 +87,17 @@ export class RegisterComponent implements OnInit {
     };*/
 
     const data = {
-      "userid": this.RegisterResponse.result.userId,
-      "type":"email",
-      "OTP": this.OTP
+      "userId": this.RegisterResponse.result.userId,
+      "email":this.Form.value.email,
+      "pinCode": this.RegisterResponse.pinCode
     };
 
-    this.api.VerifyingOTP(data).subscribe((res: any) => {
+
+    this.api.VerifyUser(data).subscribe((res: any) => {
       this.modalService.dismissAll();
       this.modalService.open(this.registrationDone, {ariaLabelledBy: 'modal-basic-title' , centered: true}).result.then((result) => {
       }, (reason) => {
-        this.route.navigate(['/login']);
+        // this.route.navigate(['/']);
       });
     }, () => {
       this.OTPVerificationMessage = 'Invalid !';
@@ -112,8 +118,26 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  continue() {
+    this.api.getUser(this.RegisterResponse.result.userId).subscribe((res: any) => {
+      const usr = [
+          res.userDetails[0].firstName,
+          res.userDetails[0].lastName,
+          res.userDetails[0].userName,
+          res.userDetails[0].phone,
+          res.userDetails[0].email,
+          res.userDetails[0].trnNumber,
+          res.userDetails[0].status,
+          res.userDetails[0].userType,
+      ];
+      localStorage.setItem('usr' , JSON.stringify(usr));
+      this.api.ChangeLoginSession();
+      this.modalService.dismissAll();
+      this.route.navigate(['/']);
+    })
+  }
+
   open(content , type) {
-    this.OTP = '';
     this.modalService.open( content , {ariaLabelledBy: 'modal-basic-title' , backdrop: 'static', centered: true}).result.then((result) => {
 
     }, (reason) => {
