@@ -721,6 +721,11 @@ export class RestClient extends BaseRestClient  {
     return this.getPrivate('/api/v5/broker/nd/subaccount-info', params);
   }
 
+  /** View sub-account list */
+  resetAPIKey (params?: unknown): Promise<any> {
+    return this.getPrivate('/api/v5/broker/nd/subaccount/modify-apikey', params);
+  }
+
   /** Reset the APIKey of a sub-account */
   resetSubAccountAPIKey(
     subAcct: string,
