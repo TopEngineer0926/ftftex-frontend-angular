@@ -23,6 +23,7 @@
 
   .transfer-trading {
     background: #1e253d;
+    flex-direction: column;
   }
 
   .from-to {
@@ -55,5 +56,9 @@
     &:focus-visible {
       box-shadow: none;
     }
+  }
+
+  .topBottom {
+    flex-direction: column-reverse;
   }
 }
