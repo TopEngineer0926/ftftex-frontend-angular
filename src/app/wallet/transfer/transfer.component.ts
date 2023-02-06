@@ -30,7 +30,6 @@ export class TransferComponent implements OnInit {
   }
 
   transfer() {
-
     const params = {
       ccy: this.selectedCoin,
       amt: this.amount,
@@ -40,7 +39,6 @@ export class TransferComponent implements OnInit {
     client.fundsTransfer(params).then((res) => {
       console.log(res, 'res');
     })
-
   }
 
 }
