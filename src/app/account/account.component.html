@@ -21,10 +21,10 @@
           <span class="material-symbols-outlined acc-box-i align-self-center mr-3">verified_user</span>
           <div class="align-self-center">
             <p class="mb-0">Personal Verification</p>
-            <p class="mb-0 s-bld">-- Not verified -- </p>
+            <p class="mb-0 s-bld" *ngIf="LogginIn[5] !== 'verified'">-- Not verified -- </p>
           </div>
           <div class="align-self-center ml-auto">
-            <a class="btn btn-primary" [routerLink]="'/account/verification'">Verify</a>
+            <a class="btn btn-primary" [routerLink]="'/account/verification'" *ngIf="LogginIn[5] !== 'verified'">Verify</a>
           </div>
         </div>
 

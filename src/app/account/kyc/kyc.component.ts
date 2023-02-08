@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CountryDataService} from "../../country-data.service";
 
 @Component({
@@ -6,11 +6,12 @@ import {CountryDataService} from "../../country-data.service";
     templateUrl: './kyc.component.html',
     styleUrls: ['./kyc.component.scss']
 })
-export class KycComponent implements OnInit {
+export class KycComponent implements OnInit, OnDestroy {
 
     Countries: any = [];
     search = '';
     Page = 1;
+    reference: string;
 
     KYC = {
         first_name: '',
@@ -53,10 +54,11 @@ export class KycComponent implements OnInit {
 
     continue() {
         const reference = `SP_REQUEST_${Math.random()}`;
+        this.reference = reference;
         let payload = {
             reference,
             // callback_url: "http://localhost:4200/account/wallet",
-            // redirect_url: "http://localhost:4200/account/wallet",
+            // redirect_url: `http://localhost:4200/account/status/${reference}`,
             country: this.SelectedNationality.alpha_2_code,
             verification_mode: "any",
         }
@@ -106,4 +108,31 @@ export class KycComponent implements OnInit {
             }
         });
     }
+
+    ngOnDestroy() {
+        const payload = {
+            reference : this.reference
+        }
+        let token = btoa("S5fV2CqhGoytOIWphkCOVtKRaI2txxLYA610gSIfuBa2dX9bpZ1645618464:$2y$10$wiZONU5Iq/D.Z1NnRFTj5uxQ29N6wFtbSmTp8xJJEg0Pa44Y0ajBG"); //BASIC AUTH TOKEN
+        fetch('https://api.shuftipro.com/status',
+            {
+                method : 'post',
+                headers : {
+                    'Accept'        : 'application/json',
+                    'Content-Type'  : 'application/json',
+                    'Authorization' : 'Basic ' +token       // if access token then replace "Basic" with "Bearer"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                if (data.event === 'verification.accepted') {
+                    alert('stea');
+                }
+                console.log(data, 'data');
+            return data;
+        });
+    }
+
 }
