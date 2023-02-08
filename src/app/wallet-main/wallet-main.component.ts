@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {DepositComponent} from "../wallet/deposit/deposit.component";
-import {SelectExchangePopComponent} from "../coin/select-exchange-pop/select-exchange-pop.component";
 import {TransferComponent} from "../wallet/transfer/transfer.component";
 import {RestClient} from "../rest-client";
 import {DataService} from "../data.service";
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 const client = new RestClient({
-  apiKey: '7f9eedd1-56d7-4555-9d2b-2242668d4f2e',
-  // apiKey: 'apiKeyHere',
-  apiSecret: '5F28B22584E8689C5FF1E67C6BEC75DA',
-  // apiSecret: 'apiSecretHere',
-  apiPass: 'FTFTxOKX@123)',
-  // apiPass: 'apiPassHere',
+  apiKey: environment.apiKey,
+  apiSecret: environment.apiSecret,
+  apiPass: environment.apiPass,
 });
 
 @Component({
