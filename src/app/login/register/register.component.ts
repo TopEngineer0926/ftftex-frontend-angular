@@ -56,7 +56,6 @@ export class RegisterComponent implements OnInit {
     this.OTPVerificationMessage = '';
     this.api.RegisterUser(this.Form.value , this.RegisterType , this.DialingCode.dialCode).subscribe((res: any) => {
       this.RegisterResponse = res;
-      this.OTP = res.pinCode;
 
       if (!res.result.exist) {
         if (this.RegisterType === 'email'){
