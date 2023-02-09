@@ -9,6 +9,7 @@ import { signMessage } from './node-support';
 import { serializeParams, programKey, programId } from './requestUtils';
 import { isRawAPIResponse } from './typeGuards';
 import {RestClient} from "../rest-client";
+import {environment} from "../../environments/environment";
 
 // axios.interceptors.request.use((request) => {
 //   console.log(new Date(), 'Starting Request', JSON.stringify(request, null, 2));
@@ -110,9 +111,9 @@ export default abstract class BaseRestClient {
 
     this.globalRequestOptions.headers['Accept'] = 'application/json';
 
-    this.apiKey = '7f9eedd1-56d7-4555-9d2b-2242668d4f2e';
-    this.apiSecret = '5F28B22584E8689C5FF1E67C6BEC75DA';
-    this.apiPassphrase = 'FTFTxOKX@123)';
+    this.apiKey = environment.apiKey;
+    this.apiSecret = environment.apiSecret;
+    this.apiPassphrase = environment.apiSecret;
   }
 
   // private isDemoTrading(): boolean {
