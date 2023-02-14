@@ -85,7 +85,7 @@
 <ng-template #mobileVerifyPop let-modal>
   <div class="modal-body">
     <span class="material-symbols-outlined d-block mx-auto text-center mt-4" style="font-size: 90px">smartphone</span>
-    <p class="text-center mt-2">verification code has been sent to <br> <b>{{Form.value.phone}}</b></p>
+    <p class="text-center mt-2">Verification code has been sent to <br> <b>{{Form.value.phone}}</b></p>
     <h2 class="text-center">{{RegisterResponse.pinCode}}</h2>
     <input class="form-control mx-auto w-75 mt-4" [(ngModel)]="OTP" placeholder="OTP">
     <p class="text-center error-msg mt-4" *ngIf="OTPVerificationMessage">{{OTPVerificationMessage}}</p>

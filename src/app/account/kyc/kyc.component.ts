@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CountryDataService} from "../../country-data.service";
+import {DataService} from "../../data.service";
 
 @Component({
     selector: 'app-kyc',
@@ -12,7 +13,7 @@ export class KycComponent implements OnInit, OnDestroy {
     search = '';
     Page = 1;
     reference: string;
-
+    LogginIn;
     KYC = {
         first_name: '',
         middle_name: '',
@@ -32,7 +33,14 @@ export class KycComponent implements OnInit, OnDestroy {
     ];
     verificationUrl: string;
 
-    constructor(private countries: CountryDataService) {
+    constructor(private countries: CountryDataService,
+                private api: DataService) {
+        this.api.Loggedin.subscribe((res: any) => {
+            if (!res[0]){
+            } else {
+                this.LogginIn = res;
+            }
+        });
         this.Countries = countries.countries;
     }
 
@@ -109,6 +117,17 @@ export class KycComponent implements OnInit, OnDestroy {
         });
     }
 
+    verify() {
+        const params = {
+            id: '',
+            reference: this.reference,
+            status: 'verified'
+        }
+        this.api.verifyKyc(params).subscribe((res) => {
+            console.log(res, 'res');
+        })
+    }
+
     ngOnDestroy() {
         const payload = {
             reference : this.reference
@@ -128,11 +147,19 @@ export class KycComponent implements OnInit, OnDestroy {
                 return response.json();
             }).then(function(data) {
                 if (data.event === 'verification.accepted') {
-                    alert('stea');
+                    // const params = {
+                    //     id: '',
+                    //     reference: this.reference,
+                    //     status: 'verified'
+                    // }
+                    // this.api.verifyKyc(params).subscribe((res) => {
+                    //     console.log(res, 'res');
+                    // })
                 }
                 console.log(data, 'data');
             return data;
         });
     }
+
 
 }

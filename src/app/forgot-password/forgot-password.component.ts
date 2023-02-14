@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataService} from "../data.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
@@ -11,12 +11,15 @@ import {DialingCodesComponent} from "../login/dialing-codes/dialing-codes.compon
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
+  @ViewChild('emailVerifyPop' , {static: false}) emailVerifyPop: ElementRef | undefined;
 
   loginType = 'email';
   Form;
   DialingCode;
   LoginErrors;
-
+  OTP;
+  OTPVerificationMessage = '';
+  RegisterResponse
   constructor(private api: DataService, private modalService: NgbModal, private route: Router) {
     this.Form = new FormGroup({
       email: new FormControl(''),
@@ -47,58 +50,33 @@ export class ForgotPasswordComponent implements OnInit {
           }
         } else {
           if (res.userId) {
-            this.route.navigate(['/set-password'], {state: {userId: res.userId}})
+            this.RegisterResponse = res;
+            console.log(this.RegisterResponse, 'this.RegisterResponse');
+            this.modalService.open(this.emailVerifyPop, {ariaLabelledBy: 'modal-basic-title' , centered: true , backdrop: 'static'}).result.then((result) => {
+            }, (reason) => {
+            });
           }
         }
       }
     })
+  }
 
 
+  verifyUser() {
+    const data = {
+      "userId": this.RegisterResponse.userId,
+      "email":this.Form.value.email,
+      "pinCode": this.OTP,
+      "service": 'change_password'
+    };
 
+    this.api.VerifyUser(data).subscribe((res: any) => {
+      this.modalService.dismissAll();
+      this.route.navigate(['/set-password'], {state: {userId: this.RegisterResponse.userId}})
 
-
-    // this.api.LoginUser(this.Form.value, this.loginType, this.DialingCode.dialCode).subscribe((res: any) => {
-    //   if (res.message === 'User not found, Please Sign-up') {
-    //     if (this.loginType === 'mobile') {
-    //       this.LoginErrors = "Invalid mobile number or password !";
-    //     }
-    //     if (this.loginType === 'email') {
-    //       this.LoginErrors = "Invalid email or password !";
-    //     }
-    //
-    //   } else {
-    //     if (res['user-details']) {
-    //       localStorage.setItem('usr', JSON.stringify(res['user-details']));
-    //       if (JSON.stringify(res['user-details'][3] === 'test@ftftex.com')) {
-    //         this.api.ChangeAssets({
-    //           "ordered": [],
-    //           "coins": {
-    //             "usdt": 1000,
-    //             "eth": 0,
-    //             "bnb": 0,
-    //             "btc": 0,
-    //             "sol": 0,
-    //             "ada": 0,
-    //             "dot": 0,
-    //             "doge": 0,
-    //             "shib": 0,
-    //             "matic": 0,
-    //             "uni": 0,
-    //             "ltc": 0,
-    //             "trx": 0,
-    //             "xrp": 0,
-    //           }
-    //         });
-    //       }
-    //       this.api.ChangeLoginSession();
-    //       this.route.navigate(['/']);
-    //     } else {
-    //       this.LoginErrors = res.message;
-    //     }
-    //   }
-    // })
-
-
+    }, () => {
+      this.OTPVerificationMessage = 'Invalid !';
+    });
   }
 
   openDialingCodes() {

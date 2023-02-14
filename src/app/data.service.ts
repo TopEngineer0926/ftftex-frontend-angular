@@ -132,7 +132,7 @@ export class DataService {
   }
 
   getGlobalData(){
-    return   this.http.post(`${environment.baseUrl}ftftx/cmcApi/getQuotesLeatest`, {})
+    return this.http.post(`${environment.baseUrl}ftftx/cmcApi/getQuotesLeatest`, {})
   }
 
   OCHLData(id, slug , period , interval , count){
@@ -280,6 +280,9 @@ export class DataService {
     return this.http.post(`${environment.baseUrl}/ftftx/communityApi/getAllPosts`, {"userId": userID});
   }
 
+  verifyKyc(params){
+    return this.http.post(`${environment.baseUrl}/ftftx/usersAPI/verifyKyc`, params)
+  }
 
   SendingOTP(data){
     return this.http.post(`${environment.baseUrl2}verification/sendingOTP`, data);

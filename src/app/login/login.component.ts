@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../data.service";
 import {DialingCodesComponent} from "./dialing-codes/dialing-codes.component";
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  @ViewChild('registrationDone' , {static: false}) registrationDone: ElementRef | undefined;
   loginType = 'email';
   Form;
   DialingCode;
@@ -70,14 +70,18 @@ export class LoginComponent implements OnInit {
               });
             }
             this.api.ChangeLoginSession();
-            this.route.navigate(['/']);
+            this.modalService.open(this.registrationDone, {ariaLabelledBy: 'modal-basic-title' , centered: true}).result.then((result) => {
+            }, (reason) => {});
           } else {
             this.LoginErrors = res.message;
           }
         }
     })
+  }
 
-
+  continue() {
+    this.modalService.dismissAll();
+    this.route.navigate(['/']);
   }
   openDialingCodes(){
     const modalRef = this.modalService.open(DialingCodesComponent , {centered: true});
