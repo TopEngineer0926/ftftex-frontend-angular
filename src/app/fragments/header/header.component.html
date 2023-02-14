@@ -4,8 +4,8 @@
     <p class="mb-0">{{"Cryptos" | translate}}:  {{GlobalData?.total_cryptocurrencies | number}}</p>
     <p class="mb-0">{{"Exchanges" | translate}}:  {{GlobalData?.total_exchanges | number}} </p>
     <p class="mb-0">{{"Pairs" | translate}}:  {{GlobalData?.active_market_pairs | number}} </p>
-    <p class="mb-0">{{"Market Cap" | translate}}:  $ {{GlobalData?.quote.USD.total_market_cap}} </p>
-    <p class="mb-0">{{"24h Vol" | translate}}:  $ {{GlobalData?.quote.USD.total_volume_24h}} </p>
+    <p class="mb-0">{{"Market Cap" | translate}}:  $ {{GlobalData?.quote.USD.total_market_cap | number}} </p>
+    <p class="mb-0">{{"24h Vol" | translate}}:  $ {{GlobalData?.quote.USD.total_volume_24h | number}} </p>
     <p class="mb-0">{{"Dominance" | translate}}:
       <span> BTC: {{GlobalData?.btc_dominance | number}}% </span>
       <span class="ml-3">ETH: {{GlobalData?.eth_dominance | number}} % </span>
