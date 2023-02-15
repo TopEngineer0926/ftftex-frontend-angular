@@ -71,7 +71,7 @@ export class ForgotPasswordComponent implements OnInit {
     };
 
     this.api.VerifyUser(data).subscribe((res: any) => {
-      if (res.message === 'User verified successfully') {
+      if (res.Message === 'User verified successfully') {
         this.modalService.dismissAll();
         this.route.navigate(['/set-password'], {state: {userId: this.RegisterResponse.userId}})
       } else {
