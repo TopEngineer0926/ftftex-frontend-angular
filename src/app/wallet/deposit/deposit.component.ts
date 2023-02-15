@@ -3,6 +3,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {SelectNetworkComponent} from "./select-network/select-network.component";
 import {RestClient} from "../../rest-client";
 import {environment} from "../../../environments/environment";
+import {DataService} from "../../data.service";
 
 const client = new RestClient({
     apiKey: environment.apiKey,
@@ -25,15 +26,15 @@ export class DepositComponent implements OnInit {
     tab = 'crypto';
     currencies: Currency
 
-    constructor(private modalService: NgbModal
+    constructor(private modalService: NgbModal,
+                private api: DataService
     ) {
 
     }
 
     ngOnInit(): void {
-        client.getCurrencies().then((res) => {
+        this.api.getCurrencies().subscribe((res) => {
             this.currencies = this.groupBy(res, 'ccy');
-            console.log(this.currencies, 'this.currencies');
         })
     }
 
