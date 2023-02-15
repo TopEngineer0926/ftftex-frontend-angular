@@ -306,4 +306,8 @@ export class DataService {
     return this.http.post(`${environment.baseUrl}/ftftx/kyxAPI/getSubAccInfo`, params);
   }
 
+  getCurrencies() {
+    return this.http.post<any>(`${environment.baseUrl}/ftftx/kyxAPI/getCurrencies`, {});
+  }
+
 }
