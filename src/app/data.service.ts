@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 import {environment} from "../environments/environment";
+import {AccountPositionModeResult} from "./types";
 
 @Injectable({
   providedIn: 'root'
@@ -296,4 +297,13 @@ export class DataService {
   walletSubscription(data) {
     return this.http.post(`${environment.baseUrl2}verification/subscribe`, data);
   }
+
+  createSubAccount(params) {
+    return this.http.post(`${environment.baseUrl}/ftftx/kyxAPI/createSubAccount`, params);
+  }
+
+  getSubAccountList(params) {
+    return this.http.post(`${environment.baseUrl}/ftftx/kyxAPI/getSubAccInfo`, params);
+  }
+
 }

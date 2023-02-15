@@ -38,8 +38,8 @@ export class WalletComponent implements OnInit {
             subAcct: this.LogginIn[5]
         }
 
-        client.createSubAccount(createSubAccountParams).then((res) => {
-            console.log(res, 'res');
+        this.api.createSubAccount(createSubAccountParams).subscribe((res) => {
+
         })
 
         const params = {
@@ -47,10 +47,13 @@ export class WalletComponent implements OnInit {
             page: 1,
             limit: 100
         }
-        client.getSubAccountList(params).then((res) => {
-            console.log(res, 'res');
+        this.api.getSubAccountList(params).subscribe((res) => {
             this.walletInfo = res[0].details[0];
+
         })
+        // client.getSubAccountList(params).then((res) => {
+        //     console.log(res, 'res');
+        // })
 
         // client.getSubAccountDepositAddresses().then((res) => {
         //     console.log(res, 'res');
