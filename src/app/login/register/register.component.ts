@@ -130,6 +130,7 @@ export class RegisterComponent implements OnInit {
           res.userDetails[0].userType,
       ];
       localStorage.setItem('usr' , JSON.stringify(usr));
+      localStorage.setItem('userId', this.RegisterResponse.result.userId);
       this.api.ChangeLoginSession();
       this.modalService.dismissAll();
       this.route.navigate(['/']);
