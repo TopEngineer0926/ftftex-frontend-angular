@@ -71,7 +71,7 @@
 <ng-template #emailVerifyPop let-modal>
   <div class="modal-body">
     <span class="material-symbols-outlined d-block mx-auto text-center" style="font-size: 90px">mail</span>
-    <p class="text-center mt-2">verification code has been sent to <br> <b>{{Form.value.email}}</b></p>
+    <p class="text-center mt-2">Verification code has been sent to <br> <b>{{Form.value.email}}</b></p>
     <input class="form-control mx-auto w-75 mt-4" [(ngModel)]="OTP" placeholder="OTP">
     <p class="text-center error-msg mt-4" *ngIf="OTPVerificationMessage">{{OTPVerificationMessage}}</p>
     <div class="d-flex justify-content-center mt-5">
