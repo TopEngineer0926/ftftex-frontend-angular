@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 import {DataService} from "../../data.service";
+import {SelectExchangePopComponent} from "../../coin/select-exchange-pop/select-exchange-pop.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 @Component({
   selector: 'app-main-carousal',
@@ -30,7 +32,7 @@ export class MainCarousalComponent implements OnInit {
   ];
 
   isMobile = false;
-  constructor(private api: DataService) {
+  constructor(private api: DataService, private modalService: NgbModal) {
     this.isMobile = this.api.isMobile;
   }
 
@@ -40,4 +42,13 @@ export class MainCarousalComponent implements OnInit {
     })
   }
 
+
+  openAgg() {
+    const modalRef = this.modalService.open(SelectExchangePopComponent , {centered: true});
+    modalRef.componentInstance.data = {
+      "url": "1/bitcoin",
+      "coin": "BTC"
+    };
+
+  }
 }
