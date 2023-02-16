@@ -195,7 +195,7 @@ export class DataService {
   }
 
   getUser(userId){
-    return this.http.post(`${environment.baseUrl}ftftx/usersAPI/getUserDetails`, {userId})
+    return this.http.post<any>(`${environment.baseUrl}ftftx/usersAPI/getUserDetails`, {userId})
   }
 
   GetFearandGreed(){
@@ -282,7 +282,7 @@ export class DataService {
   }
 
   verifyKyc(params){
-    return this.http.post(`${environment.baseUrl}/ftftx/usersAPI/verifyKyc`, params)
+    return this.http.post(`${environment.baseUrl}ftftx/usersAPI/verifyKyc`, params)
   }
 
   SendingOTP(data){

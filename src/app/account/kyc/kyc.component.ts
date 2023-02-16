@@ -117,16 +117,6 @@ export class KycComponent implements OnInit, OnDestroy {
         });
     }
 
-    verify() {
-        const params = {
-            id: '',
-            reference: this.reference,
-            status: 'verified'
-        }
-        this.api.verifyKyc(params).subscribe((res) => {
-            console.log(res, 'res');
-        })
-    }
 
     ngOnDestroy() {
         const payload = {
@@ -145,20 +135,39 @@ export class KycComponent implements OnInit, OnDestroy {
             })
             .then(function(response) {
                 return response.json();
-            }).then(function(data) {
+            }).then((data) => {
                 if (data.event === 'verification.accepted') {
-                    // const params = {
-                    //     id: '',
-                    //     reference: this.reference,
-                    //     status: 'verified'
-                    // }
-                    // this.api.verifyKyc(params).subscribe((res) => {
-                    //     console.log(res, 'res');
-                    // })
+                    this.verifyKyc();
+
                 }
                 console.log(data, 'data');
             return data;
         });
+    }
+
+    verifyKyc() {
+        const params = {
+            id: localStorage.getItem('userId'),
+            reference: this.reference,
+            userType: 'verified',
+            status: 'verified',
+            docMap: []
+        }
+        this.api.verifyKyc(params).subscribe((result) => {
+            this.api.getUser(localStorage.getItem('userId')).subscribe((res) => {
+                const usr = [
+                    res.userDetails[0].firstName,
+                    res.userDetails[0].lastName,
+                    res.userDetails[0].userName,
+                    res.userDetails[0].phone,
+                    res.userDetails[0].email,
+                    res.userDetails[0].trnNumber,
+                    res.userDetails[0].status,
+                    res.userDetails[0].userType,
+                ];
+                localStorage.setItem('usr' , JSON.stringify(usr));
+            })
+        })
     }
 
 
