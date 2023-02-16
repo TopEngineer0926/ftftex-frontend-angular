@@ -33,8 +33,12 @@ export class DepositComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.api.getCurrencies().subscribe((res) => {
-            this.currencies = this.groupBy(res, 'ccy');
+        const params = {
+            "ccy":"BTC,ETH,USDT"
+        }
+        this.api.getCurrencies(params).subscribe((res) => {
+            console.log(JSON.parse(res['KYC Api resuult']).data, 'asdad');
+            this.currencies = this.groupBy(JSON.parse(res['KYC Api resuult']).data, 'ccy');
         })
     }
 
