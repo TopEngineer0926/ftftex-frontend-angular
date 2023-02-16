@@ -1,4 +1,4 @@
-<div class="bg-wt " *ngIf="LogginIn[6] !== 'verified'">
+<div class="bg-wt ">
     <div class="min-h-full">
         <section>
             <div class="container">
@@ -6,14 +6,13 @@
                     <div class="col-lg-4 justify-content-center d-flex flex-column content-b">
                         <h1 class="d-block s-bld mt-5 banner-header">
                             {{"FTFTex WALLET" | translate}}
-                            <span class="hint">{{"(Coming soon)" | translate}}</span>
                         </h1>
                         <h3>{{"FTFTex WALLET TXT1" | translate}}</h3>
                         <p class="mt-2">{{"FTFTex WALLET TXT2" | translate}}</p>
                         <div>
-                            <button class="btn btn-primary h-fit mb-auto w-fit  s-bld btn-lg px-4"
-                                    [routerLink]="'/wallet/account'">{{"Demo" | translate}}</button>
-                            <button class="btn btn-primary h-fit mb-auto w-fit  s-bld btn-lg px-4 ml-2"
+                            <button class="btn btn-primary h-fit mb-auto w-fit  s-bld btn-lg px-2"
+                                    [routerLink]="'/account-m'">{{"Verify Your Account" | translate}}</button>
+                            <button class="btn btn-primary h-fit mb-auto w-fit  s-bld btn-lg px-2 ml-2"
                                     [routerLink]="'/wallet/purchase-crypto'">{{"Purchase crypto" | translate}}</button>
                         </div>
                     </div>
@@ -87,7 +86,7 @@
 </div>
 
 
-<div class="bg-wt " *ngIf="LogginIn[6] === 'verified'">
+<div class="bg-wt " *ngIf="LogginIn[6] !== 'verified'">
     <div class="min-h-full">
         <section>
             <div class="container">
