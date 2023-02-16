@@ -67,6 +67,15 @@
 
     <ul class="navbar-nav ml-auto d-flex flex-row"  style="height: 38px" *ngIf="isMobile">
       <li class="nav-item ">
+        <a class="nav-link" (click)="changeLanguage('ch')">中文</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" >|</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" (click)="changeLanguage('en')">ENG</a>
+      </li>
+      <li class="nav-item ">
         <a class="nav-link" [routerLink]="'/about/product-introduction'">  <span class="material-symbols-outlined" style="opacity: 0.5">info</span> </a>
       </li>
       <li class="nav-item" (click)="toggleDarkTheme()">

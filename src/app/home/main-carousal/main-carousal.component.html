@@ -53,7 +53,7 @@
 <ng-container *ngIf="isMobile">
 <div class="row mt-2 mx-1" >
   <div class="col px-1">
-    <div class="m-btn" [routerLink]="'/spot-wallet/buy'">
+    <div class="m-btn" [routerLink]="'/wallet/purchase-crypto'">
       <span  class="material-symbols-outlined icon">toll</span>
       <p class="mb-0">Buy Crypto</p>
     </div>
@@ -85,7 +85,7 @@
       </div>
     </div>
     <div class="col px-1" *ngIf="LoggedIn[1]">
-      <div class="m-btn" [routerLink]="'/spot-wallet'">
+      <div class="m-btn" [routerLink]="'/wallet'">
         <span  class="material-symbols-outlined icon">wallet</span>
         <p class="mb-0">{{'My Wallet' | translate}}</p>
       </div>
