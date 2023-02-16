@@ -18,4 +18,8 @@ export class DepositNetworkComponent implements OnInit {
 
     }
 
+    copy(add) {
+        navigator.clipboard.writeText(add);
+    }
+
 }

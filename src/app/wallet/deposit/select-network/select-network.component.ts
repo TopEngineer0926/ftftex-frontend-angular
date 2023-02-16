@@ -51,7 +51,7 @@ export class SelectNetworkComponent implements OnInit {
                 centered: true, scrollable: true,
                 modalDialogClass: 'network-modal-sm'
             });
-            modalRef.componentInstance.createdDeposit = res[0];
+            modalRef.componentInstance.createdDeposit = JSON.parse(res['KYC Api resuult']).data[0] ;
         })
 
     }

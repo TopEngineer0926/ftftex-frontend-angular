@@ -13,6 +13,6 @@
     </div>
 </div>
 <div class="modal-footer" *ngIf="createdDeposit">
-    <button type="button" class="btn  d-block mx-auto">Save Address</button>
-    <button type="button" class="btn btn-outline-primary d-block mx-auto">Share Address</button>
+<!--    <button type="button" class="btn  d-block mx-auto">Save Address</button>-->
+    <button type="button" class="btn btn-outline-primary d-block mx-auto" (click)="copy(createdDeposit.addr)">Share Address</button>
 </div>

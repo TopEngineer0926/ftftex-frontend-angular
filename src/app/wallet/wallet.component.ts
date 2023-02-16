@@ -50,9 +50,7 @@ export class WalletComponent implements OnInit {
             limit: 100
         }
         this.api.getSubAccountList(params).subscribe((res) => {
-            console.log(JSON.parse(res['KYC Api resuult']), 'res');
             this.walletInfo = JSON.parse(res['KYC Api resuult']).data[0].details[0];
-            console.log(JSON.parse(res['KYC Api resuult']), 'JSON.parse(res[\'KYC Api resuult\'])');
         })
 
         const balanceParams = {
