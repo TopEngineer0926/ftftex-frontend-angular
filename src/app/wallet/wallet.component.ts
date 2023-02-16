@@ -19,7 +19,8 @@ export class WalletComponent implements OnInit {
     subEmail;
     message = '';
     LogginIn;
-    walletInfo
+    walletInfo;
+    balance;
 
     constructor(
         private api: DataService,
@@ -35,7 +36,8 @@ export class WalletComponent implements OnInit {
 
     ngOnInit(): void {
         const createSubAccountParams = {
-            subAcct: this.LogginIn[5]
+            subAcct: this.LogginIn[5],
+            label: '852422'
         }
 
         this.api.createSubAccount(createSubAccountParams).subscribe((res) => {
@@ -48,8 +50,16 @@ export class WalletComponent implements OnInit {
             limit: 100
         }
         this.api.getSubAccountList(params).subscribe((res) => {
-            this.walletInfo = res[0].details[0];
+            console.log(JSON.parse(res['KYC Api resuult']), 'res');
+            this.walletInfo = JSON.parse(res['KYC Api resuult']).data[0].details[0];
+            console.log(JSON.parse(res['KYC Api resuult']), 'JSON.parse(res[\'KYC Api resuult\'])');
+        })
 
+        const balanceParams = {
+            subAcct:this.LogginIn[5]
+        }
+        this.api.getSubAccBalance(balanceParams).subscribe((res) => {
+            this.balance  = res;
         })
         // client.getSubAccountList(params).then((res) => {
         //     console.log(res, 'res');

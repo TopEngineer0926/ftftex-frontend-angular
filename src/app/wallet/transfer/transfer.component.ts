@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RestClient} from "../../rest-client";
 import {environment} from "../../../environments/environment";
+import {DataService} from "../../data.service";
 
 const client = new RestClient({
   apiKey: environment.apiKey,
@@ -18,7 +19,7 @@ export class TransferComponent implements OnInit {
   selectedCoin: string;
   amount: string;
   fromMain: boolean = false;
-  constructor() { }
+  constructor(private api: DataService) { }
 
   ngOnInit(): void {
   }
@@ -34,7 +35,7 @@ export class TransferComponent implements OnInit {
       from: '6',
       to: '18'
     }
-    client.fundsTransfer(params).then((res) => {
+    this.api.fundsTransfer(params).subscribe((res) => {
       console.log(res, 'res');
     })
   }

@@ -299,15 +299,28 @@ export class DataService {
   }
 
   createSubAccount(params) {
-    return this.http.post(`${environment.baseUrl}/ftftx/kyxAPI/createSubAccount`, params);
+    return this.http.post(`${environment.baseUrl}ftftx/kyxAPI/createSubAccount`, params);
   }
 
   getSubAccountList(params) {
-    return this.http.post(`${environment.baseUrl}/ftftx/kyxAPI/getSubAccInfo`, params);
+    return this.http.post(`${environment.baseUrl}ftftx/kyxAPI/getSubAccInfo`, params);
   }
 
   getCurrencies() {
-    return this.http.post<any>(`${environment.baseUrl}/ftftx/kyxAPI/getCurrencies`, {});
+    return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/getCurrencies`, {});
+  }
+
+
+  getSubAccBalance(params) {
+    return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/getSubAccBalance`, params);
+  }
+
+  createDepositAddressForSubAccount(params) {
+    return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/createDepositAddress`, params);
+  }
+
+  fundsTransfer(params) {
+    return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/createTransfer`, params);
   }
 
 }

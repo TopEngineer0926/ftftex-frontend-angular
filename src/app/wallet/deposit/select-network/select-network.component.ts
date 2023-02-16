@@ -45,7 +45,7 @@ export class SelectNetworkComponent implements OnInit {
             subAcct: this.LogginIn[5],
             chain: network.chain
         }
-        client.createDepositAddressForSubAccount(params).then((res) => {
+        this.api.createDepositAddressForSubAccount(params).subscribe((res) => {
             console.log(res, 'res');
             const modalRef = this.modalService.open(DepositNetworkComponent, {
                 centered: true, scrollable: true,
