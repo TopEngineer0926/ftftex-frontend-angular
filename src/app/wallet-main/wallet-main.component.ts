@@ -36,12 +36,12 @@ export class WalletMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    client.getSubAccountBalances(this.LogginIn[5]).then((res) => {
-      console.log(res, 'res');
-    })
-    client.getSubAccountFundingBalances(this.LogginIn[5]).then((res) => {
-      console.log(res, 'res');
-    })
+    // client.getSubAccountBalances(this.LogginIn[5]).then((res) => {
+    //   console.log(res, 'res');
+    // })
+    // client.getSubAccountFundingBalances(this.LogginIn[5]).then((res) => {
+    //   console.log(res, 'res');
+    // })
   }
 
 

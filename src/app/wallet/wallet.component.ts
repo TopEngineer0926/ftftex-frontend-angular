@@ -58,6 +58,7 @@ export class WalletComponent implements OnInit {
                 subAcct:this.LogginIn[5]
             }
             this.api.getSubAccBalance(balanceParams).subscribe((res) => {
+                console.log(JSON.parse(res['KYC Api resuult']), 'JSON.parse(res[\'KYC Api resuult\'])');
                 this.balance  = res;
             })
             // client.getSubAccountList(params).then((res) => {
