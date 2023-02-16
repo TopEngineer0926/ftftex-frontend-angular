@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
         } else {
           if (res['user-details']) {
             localStorage.setItem('usr' , JSON.stringify(res['user-details']));
+            localStorage.setItem('userId', res['user-details'][8]);
             if (JSON.stringify(res['user-details'][3] === 'test@ftftex.com')){
               this.api.ChangeAssets( {
                 "ordered": [],

@@ -35,43 +35,44 @@ export class WalletComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const createSubAccountParams = {
-            subAcct: this.LogginIn[5],
-            label: '852422'
+        if (this.LogginIn[6] === 'verified') {
+            const createSubAccountParams = {
+                subAcct: this.LogginIn[5],
+                label: '852422'
+            }
+
+            this.api.createSubAccount(createSubAccountParams).subscribe((res) => {
+
+            })
+
+            const params = {
+                subAcct: this.LogginIn[5],
+                page: 1,
+                limit: 100
+            }
+            this.api.getSubAccountList(params).subscribe((res) => {
+                this.walletInfo = JSON.parse(res['KYC Api resuult']).data[0].details[0];
+            })
+
+            const balanceParams = {
+                subAcct:this.LogginIn[5]
+            }
+            this.api.getSubAccBalance(balanceParams).subscribe((res) => {
+                this.balance  = res;
+            })
+            // client.getSubAccountList(params).then((res) => {
+            //     console.log(res, 'res');
+            // })
+
+            // client.getSubAccountDepositAddresses().then((res) => {
+            //     console.log(res, 'res');
+            //     // this.walletInfo = res[0].details[0];
+            // })
+
+            // client.getBrokerAccountInformation().then((res) => {
+            //   console.log(res, 'res');
+            // })
         }
-
-        this.api.createSubAccount(createSubAccountParams).subscribe((res) => {
-
-        })
-
-        const params = {
-            subAcct: this.LogginIn[5],
-            page: 1,
-            limit: 100
-        }
-        this.api.getSubAccountList(params).subscribe((res) => {
-            this.walletInfo = JSON.parse(res['KYC Api resuult']).data[0].details[0];
-        })
-
-        const balanceParams = {
-            subAcct:this.LogginIn[5]
-        }
-        this.api.getSubAccBalance(balanceParams).subscribe((res) => {
-            this.balance  = res;
-        })
-        // client.getSubAccountList(params).then((res) => {
-        //     console.log(res, 'res');
-        // })
-
-        // client.getSubAccountDepositAddresses().then((res) => {
-        //     console.log(res, 'res');
-        //     // this.walletInfo = res[0].details[0];
-        // })
-
-        // client.getBrokerAccountInformation().then((res) => {
-        //   console.log(res, 'res');
-        // })
-
 
     }
 
