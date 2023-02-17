@@ -3,36 +3,41 @@
 </div>
 <div class="modal-body">
     <div class="coin-list d-flex flex-column mt-1" *ngIf="!selectedCoin">
-        <div class="coin-list-item" (click)="selectCoin()">
-            <span>BTC</span>
-            <small>0.012232432</small>
-        </div>
-        <div class="coin-list-item">
-            <span>ETH</span>
-            <small>0.232132</small>
-        </div>
-        <div class="coin-list-item">
-            <span>USDT</span>
-        </div>
-        <div class="coin-list-item">
-            <span>DOT</span>
-        </div>
-        <div class="coin-list-item">
-            <span>XRP</span>
-        </div>
-        <div class="coin-list-item">
-            <span>SOL</span>
-            <small>0.343</small>
-        </div>
-        <div class="coin-list-item">
-            <span>AED</span>
-        </div>
-        <div class="coin-list-item">
-            <span>00</span>
-        </div>
-        <div class="coin-list-item">
-            <span>ETCH</span>
-        </div>
+                <div class="coin-list-item">
+                    <span>No available coin</span>
+                    <small></small>
+                </div>
+
+<!--        <div class="coin-list-item" (click)="selectCoin()">-->
+<!--            <span>BTC</span>-->
+<!--            <small>0.012232432</small>-->
+<!--        </div>-->
+<!--        <div class="coin-list-item">-->
+<!--            <span>ETH</span>-->
+<!--            <small>0.232132</small>-->
+<!--        </div>-->
+<!--        <div class="coin-list-item">-->
+<!--            <span>USDT</span>-->
+<!--        </div>-->
+<!--        <div class="coin-list-item">-->
+<!--            <span>DOT</span>-->
+<!--        </div>-->
+<!--        <div class="coin-list-item">-->
+<!--            <span>XRP</span>-->
+<!--        </div>-->
+<!--        <div class="coin-list-item">-->
+<!--            <span>SOL</span>-->
+<!--            <small>0.343</small>-->
+<!--        </div>-->
+<!--        <div class="coin-list-item">-->
+<!--            <span>AED</span>-->
+<!--        </div>-->
+<!--        <div class="coin-list-item">-->
+<!--            <span>00</span>-->
+<!--        </div>-->
+<!--        <div class="coin-list-item">-->
+<!--            <span>ETCH</span>-->
+<!--        </div>-->
     </div>
     <div class="transfer" *ngIf="selectedCoin">
 
