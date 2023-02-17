@@ -21,6 +21,7 @@ const client = new RestClient({
 export class WalletMainComponent implements OnInit {
   LogginIn
   tab: string = ''
+  deposits: any;
   constructor(
       private api: DataService,
       private route: Router,
@@ -36,6 +37,13 @@ export class WalletMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const params = {
+      subAcct: this.LogginIn[5],
+    }
+    this.api.getSubAccFoundBalance(params).subscribe((res) => {
+      this.deposits = JSON.parse(res['KYC Api resuult'])?.data
+      console.log(this.deposits, 'deposits');
+    })
     // client.getSubAccountBalances(this.LogginIn[5]).then((res) => {
     //   console.log(res, 'res');
     // })
