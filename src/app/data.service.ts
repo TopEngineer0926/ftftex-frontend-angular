@@ -323,4 +323,8 @@ export class DataService {
     return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/createTransfer`, params);
   }
 
+  getSubAccFoundBalance(params) {
+    return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/getSubAccFoundBalance`, params);
+  }
+
 }
