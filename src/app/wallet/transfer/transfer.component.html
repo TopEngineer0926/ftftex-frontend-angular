@@ -3,44 +3,16 @@
 </div>
 <div class="modal-body">
     <div class="coin-list d-flex flex-column mt-1" *ngIf="!selectedCoin">
-        <div class="coin-list-item">
-            <span>BTC</span>
-            <small>0.00000000</small>
+        <div class="coin-list-item" *ngFor="let coin of balances" (click)="selectCoin(coin)">
+            <span>{{coin.ccy}}</span>
+            <small>{{coin.availBal | number: '0.3-8' }}</small>
         </div>
-        <div class="coin-list-item">
-            <span>ETH</span>
-            <small>0.00000000</small>
-        </div>
-        <div class="coin-list-item">
-            <span>USDT</span>
-            <small>0.00000000</small>
-
-        </div>
-        <div class="coin-list-item">
-            <span>DOT</span>
-            <small>0.00000000</small>
-
-        </div>
-        <div class="coin-list-item">
-            <span>XRP</span>
-            <small>0.00000000</small>
-
-        </div>
-        <div class="coin-list-item">
-            <span>SOL</span>
-            <small>0.00000000</small>
-        </div>
-        <div class="coin-list-item">
-            <span>AED</span>
-            <small>0.00000000</small>
-        </div>
-
     </div>
     <div class="transfer" *ngIf="selectedCoin">
 
         <div class="transfer-currency">
-            <span>BTC</span>
-            <small class="gray">Bitcoin</small>
+            <span>{{selectedCoin.ccy}}</span>
+<!--            <small class="gray">Bitcoin</small>-->
         </div>
 
 
@@ -67,9 +39,11 @@
 
         <div class="d-flex justify-content-between mt-1">
             <small class="gray">Amount</small>
-            <span class="available">Available 0.1231312</span>
+            <span class="available">Available {{selectedCoin.availBal | number: '0.3-8'}}</span>
         </div>
         <input type="number" class="transfer-input mt-3" [(ngModel)]="amount" placeholder="0.0000000000">
+
+        <p class="mt-4 text-center error-msg">{{errorMessage}} </p>
 
         <button class="btn btn-primary btn-lg mt-5 mb-3 mx-auto d-block font-weight-bold px-5"
                 (click)="transfer()">{{"Confirm" | translate}}</button>

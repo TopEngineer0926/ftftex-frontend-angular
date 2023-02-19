@@ -22,6 +22,7 @@ export class WalletMainComponent implements OnInit {
   LogginIn
   tab: string = ''
   deposits: any;
+  trading: any;
   constructor(
       private api: DataService,
       private route: Router,
@@ -44,6 +45,10 @@ export class WalletMainComponent implements OnInit {
       this.deposits = JSON.parse(res['KYC Api resuult'])?.data
       console.log(this.deposits, 'deposits');
     })
+    this.api.getSubAccTradeBalance(params).subscribe((res) => {
+      this.trading = JSON.parse(res['KYC Api resuult'])?.data?.details
+      console.log(this.trading, 'trading');
+    })
     // client.getSubAccountBalances(this.LogginIn[5]).then((res) => {
     //   console.log(res, 'res');
     // })
@@ -64,5 +69,6 @@ export class WalletMainComponent implements OnInit {
 
   openTransferModal() {
     const modalRef = this.modalService.open(TransferComponent , {centered: true, scrollable: true});
+    modalRef.componentInstance.balances = this.deposits;
   }
 }

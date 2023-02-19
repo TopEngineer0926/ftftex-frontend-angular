@@ -56,6 +56,8 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
     lastPrice: 0, Amount: 0, Coin: '' , type: 'sell'
   };
   OrderType = '';
+  errorMessage = '';
+  errorMessageSell = '';
   constructor(private api: TradingDataServiceService, private a_rote: ActivatedRoute ,private Dapi: DataService , private modalService: NgbModal ) {
     this.innerWidth = window.innerWidth;
     if (innerWidth < 990){
@@ -96,7 +98,7 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
 
     this.a_rote.params.subscribe((param: any) => {
       if (param['symbol']){
-        this.SymbolSeperated = param['symbol'].replace('_' , '/');
+        this.SymbolSeperated = param['symbol'].replace('_' , '-');
         this.Symbol = param['symbol'].replace('_' , '');
         this.SymbolOkx = param['symbol'].replace('_' , '-');
         this.Pair.Coin = param['symbol'].split('_')[0];
@@ -240,16 +242,58 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
     this.OrderBuy.Amount = Amount;
     this.OrderBuy.Coin = Coin;
     this.OrderBuy.type = 'buy';
-    this.modalService.open(this.confirmation , {centered: true});
+    // this.modalService.open(this.confirmation , {centered: true});
     this.OrderType = 'buy';
+    const params = {
+      "instId":this.SymbolSeperated,
+      "tdMode":"cash",
+      "clOrdId":`b${(Math.random() * 100).toFixed()}`,
+      "side":"buy",
+      "ordType":"limit",
+      "px":lastPrice,
+      "sz": Amount
+    }
+    this.Dapi.createTradeOrder(params).subscribe({
+      next: (res) => {
+        const result = JSON.parse(res['KYC Api resuult']);
+        if (result.data.length && result.data[0].sMsg) {
+          this.errorMessage = result.data[0].sMsg;
+        }
+        console.log(result, 'result');
+      },
+      error: () => {
+
+      }
+    })
   }
   doSell(lastPrice: any, Amount: number, Coin: string){
     this.OrderSell.lastPrice = lastPrice;
     this.OrderSell.Amount = Amount;
     this.OrderSell.Coin = Coin;
     this.OrderSell.type = 'buy';
-    this.modalService.open(this.confirmation , {centered: true});
+    // this.modalService.open(this.confirmation , {centered: true});
     this.OrderType = 'sell';
+    const params = {
+      "instId":this.SymbolSeperated,
+      "tdMode":"cash",
+      "clOrdId":`b${(Math.random() * 100).toFixed()}`,
+      "side":"sell",
+      "ordType":"limit",
+      "px":lastPrice,
+      "sz": Amount
+    }
+    this.Dapi.createTradeOrder(params).subscribe({
+      next: (res) => {
+        const result = JSON.parse(res['KYC Api resuult']);
+        if (result.data.length && result.data[0].sMsg) {
+          this.errorMessageSell = result.data[0].sMsg;
+        }
+        console.log(result, 'result');
+      },
+      error: () => {
+
+      }
+    })
   }
 
 

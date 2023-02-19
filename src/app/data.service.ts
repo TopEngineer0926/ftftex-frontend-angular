@@ -310,7 +310,6 @@ export class DataService {
     return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/getCurrencies`, params);
   }
 
-
   getSubAccBalance(params) {
     return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/getSubAccBalance`, params);
   }
@@ -325,6 +324,14 @@ export class DataService {
 
   getSubAccFoundBalance(params) {
     return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/getSubAccFoundBalance`, params);
+  }
+
+  getSubAccTradeBalance(params) {
+    return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/getSubAccTradeBalance`, params);
+  }
+
+  createTradeOrder(params) {
+    return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/createTradeOrder`, params);
   }
 
 }

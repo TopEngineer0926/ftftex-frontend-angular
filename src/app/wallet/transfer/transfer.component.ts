@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {RestClient} from "../../rest-client";
 import {environment} from "../../../environments/environment";
 import {DataService} from "../../data.service";
@@ -16,27 +16,34 @@ const client = new RestClient({
 })
 
 export class TransferComponent implements OnInit {
-  selectedCoin: string;
+  @Input('balances') balances;
+  selectedCoin;
   amount: string;
   fromMain: boolean = false;
+  errorMessage = ''
   constructor(private api: DataService) { }
 
   ngOnInit(): void {
   }
 
-  selectCoin() {
-    this.selectedCoin = 'BTC'
+  selectCoin(coin) {
+    this.selectedCoin = coin
   }
 
   transfer() {
     const params = {
-      ccy: this.selectedCoin,
+      ccy: this.selectedCoin.ccy,
       amt: this.amount,
       from: '6',
       to: '18'
     }
     this.api.fundsTransfer(params).subscribe((res) => {
-      console.log(res, 'res');
+      const result = JSON.parse(res['KYC Api resuult']);
+      console.log(result, 'result');
+      if (!result.data.length && result.msg) {
+        this.errorMessage = result.msg;
+      }
+      console.log(result)
     })
   }
 
