@@ -86,7 +86,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 const cookieConfig:NgcCookieConsentConfig = {
   cookie: {
-    domain: 'https://www.ftftx.com/'
+    domain: 'https://www.ftftex.com/'
   },
   palette: {
     popup: {
@@ -113,7 +113,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     message: 'This website uses cookies to ensure you get the best experience in our website.',
 
     cookiePolicyLink: 'Learn More',
-    cookiePolicyHref: 'https://www.ftftx.com/about/service-terms',
+    cookiePolicyHref: 'https://www.ftftex.com/about/service-terms',
   }
 };
 
