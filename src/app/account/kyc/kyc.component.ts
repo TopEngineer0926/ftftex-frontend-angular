@@ -166,6 +166,8 @@ export class KycComponent implements OnInit, OnDestroy {
                     res.userDetails[0].userType,
                 ];
                 localStorage.setItem('usr' , JSON.stringify(usr));
+                const parsed = JSON.parse(localStorage.getItem('usr') || '');
+                this.api.Loggedin.next(parsed);
             })
         })
     }

@@ -302,6 +302,10 @@ export class DataService {
     return this.http.post(`${environment.baseUrl}ftftx/kyxAPI/createSubAccount`, params);
   }
 
+  getSubAccApiKey(params) {
+    return this.http.post(`${environment.baseUrl}ftftx/kyxAPI/getSubAccApiKey`, params);
+  }
+
   getSubAccountList(params) {
     return this.http.post(`${environment.baseUrl}ftftx/kyxAPI/getSubAccInfo`, params);
   }

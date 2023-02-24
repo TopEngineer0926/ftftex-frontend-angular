@@ -50,11 +50,11 @@ export class TransferComponent implements OnInit {
         const params = {
             ccy: this.selectedCoin.ccy,
             amt: this.amount,
-            // subAcct: this.LogginIn[5],
             from: this.fromMain ? '18' : '6',
             to: this.fromMain ? '6' : '18',
             type: '0',
-            clientId: 'ftftex20230223testtransfer'
+            clientId: 'ftftex20230223testtransfer',
+            subAcct: this.LogginIn[5]
         }
         this.api.fundsTransfer(params).subscribe((res) => {
             const result = JSON.parse(res['KYC Api resuult']);

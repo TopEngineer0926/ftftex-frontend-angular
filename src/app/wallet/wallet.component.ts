@@ -21,6 +21,7 @@ export class WalletComponent implements OnInit {
     LogginIn;
     walletInfo;
     balance;
+    userId = localStorage.getItem('userId')
 
     constructor(
         private api: DataService,
@@ -38,13 +39,10 @@ export class WalletComponent implements OnInit {
         if (this.LogginIn[6] === 'verified') {
             const createSubAccountParams = {
                 subAcct: this.LogginIn[5],
-                label: '852422'
+                label: '852422',
+                userId: this.userId
             }
-
-            this.api.createSubAccount(createSubAccountParams).subscribe((res) => {
-
-            })
-
+            this.api.createSubAccount(createSubAccountParams).subscribe((res) => {});
             const params = {
                 subAcct: this.LogginIn[5],
                 page: 1,
@@ -61,18 +59,6 @@ export class WalletComponent implements OnInit {
                 console.log(JSON.parse(res['KYC Api resuult']), 'JSON.parse(res[\'KYC Api resuult\'])');
                 this.balance  = res;
             })
-            // client.getSubAccountList(params).then((res) => {
-            //     console.log(res, 'res');
-            // })
-
-            // client.getSubAccountDepositAddresses().then((res) => {
-            //     console.log(res, 'res');
-            //     // this.walletInfo = res[0].details[0];
-            // })
-
-            // client.getBrokerAccountInformation().then((res) => {
-            //   console.log(res, 'res');
-            // })
         }
 
     }

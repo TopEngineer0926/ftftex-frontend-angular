@@ -20,7 +20,7 @@ const client = new RestClient({
 })
 export class WalletMainComponent implements OnInit {
   LogginIn
-  tab: string = ''
+  tab: string = 'deposit'
   deposits: any;
   trading: any;
   constructor(
@@ -41,14 +41,9 @@ export class WalletMainComponent implements OnInit {
     const params = {
       subAcct: this.LogginIn[5],
     }
-    this.api.getSubAccFoundBalance(params).subscribe((res) => {
-      this.deposits = JSON.parse(res['KYC Api resuult'])?.data
-      console.log(this.deposits, 'deposits');
-    })
-    this.api.getSubAccTradeBalance(params).subscribe((res) => {
-      this.trading = JSON.parse(res['KYC Api resuult'])?.data?.details
-      console.log(this.trading, 'trading');
-    })
+    this.getSubAccTradeBalance();
+    this.getSubAccFoundBalance();
+
     // client.getSubAccountBalances(this.LogginIn[5]).then((res) => {
     //   console.log(res, 'res');
     // })
@@ -58,7 +53,36 @@ export class WalletMainComponent implements OnInit {
   }
 
 
+  getSubAccTradeBalance() {
+    const params = {
+      subAcct: this.LogginIn[5],
+    }
+    this.api.getSubAccTradeBalance(params).subscribe((res) => {
+      this.trading = JSON.parse(res['KYC Api resuult'])?.data[0].details
+      console.log(this.trading, 'trading');
+    })
+  }
+
+  getSubAccFoundBalance() {
+    const params = {
+      subAcct: this.LogginIn[5],
+    };
+    this.api.getSubAccFoundBalance(params).subscribe((res) => {
+      this.deposits = JSON.parse(res['KYC Api resuult'])?.data
+      console.log(this.deposits, 'deposits');
+    })
+  }
+
+
   changeTag(value){
+    if (this.tab === value && this.tab === 'deposit') {
+      this.openDepositModal();
+    }
+    if (value === 'trading') {
+      this.getSubAccTradeBalance()
+    } else if (value === 'deposit') {
+      this.getSubAccFoundBalance();
+    }
     this.tab = value;
   }
 
