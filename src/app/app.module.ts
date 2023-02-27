@@ -78,6 +78,7 @@ import { DepositComponent } from './wallet/deposit/deposit.component';
 import {SelectNetworkComponent} from "./wallet/deposit/select-network/select-network.component";
 import { DepositNetworkComponent } from './wallet/deposit/deposit-network/deposit-network.component';
 import { TransferComponent } from './wallet/transfer/transfer.component';
+import { WithdrawComponent } from './wallet/withdraw/withdraw.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -181,6 +182,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     SelectNetworkComponent,
     DepositNetworkComponent,
     TransferComponent,
+    WithdrawComponent,
   ],
   imports: [
     BrowserModule,

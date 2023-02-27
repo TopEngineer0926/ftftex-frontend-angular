@@ -83,7 +83,7 @@
         <div class="row mb-4">
           <div class="col-lg-6">
             <div class="px-3">
-              <p class="mt-2" style="font-size: 14px">Avl. {{Assets.coins[Pair.Base.toLowerCase()] | number: '0.3-6'}} <b>{{Pair.Base}}</b></p>
+              <p class="mt-2" style="font-size: 14px">Avl. {{1.5 | number: '0.3-6'}} <b>{{Pair.Base}}</b></p>
               <input class="form-control" placeholder="Market Price" disabled type="number">
               <input class="form-control mt-3" placeholder="Amount {{Pair.Base}}" [(ngModel)]="BUY.Amount" (ngModelChange)="errorMessage = ''" type="number">
               <div class="d-flex p-select-cont">
@@ -94,13 +94,13 @@
               </div>
               <div class="form-control mt-3">{{  BUY.Amount / AllPairsPrice[Symbol].lastPrice | number: '0.4-8'}} {{Pair.Coin}}</div>
               <p class="mt-4 text-center error-msg">{{errorMessage}}</p>
-              <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld"  [disabled]="Assets.coins[Pair.Base.toLowerCase()] <  BUY.Amount || !BUY.Amount" (click)="doBuy(AllPairsPrice[Symbol].lastPrice , BUY.Amount , Pair.Coin)">BUY {{Pair.Coin}}</button>
+              <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld" (click)="doBuy(AllPairsPrice[Symbol].lastPrice , BUY.Amount , Pair.Coin)">BUY {{Pair.Coin}}</button>
               <button *ngIf="!LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld" [routerLink]="'/login'">{{'LOGIN' | translate}}</button>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="px-3">
-              <p class="mt-2" style="font-size: 14px">Avl. <b>{{Assets.coins[Pair.Coin.toLowerCase()] | number: '0.3-6'}} {{Pair.Coin}}</b></p>
+              <p class="mt-2" style="font-size: 14px">Avl. <b>{{0.000042 | number: '0.3-6'}} {{Pair.Coin}}</b></p>
               <input class="form-control" placeholder="Market Price" disabled type="number">
               <input class="form-control mt-3" [(ngModel)]="SELL.Amount" (ngModelChange)="errorMessageSell = ''" placeholder="Amount {{Pair.Coin}}" type="number">
               <div class="d-flex p-select-cont">
@@ -111,7 +111,7 @@
               </div>
               <div class="form-control mt-3" >{{  SELL.Amount * AllPairsPrice[Symbol].lastPrice | number: '0.4-8'}} {{Pair.Base}} </div>
               <p class="mt-4 text-center error-msg">{{errorMessageSell}}</p>
-              <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" [disabled]="Assets.coins[Pair.Coin.toLowerCase()] <  SELL.Amount || !SELL.Amount" (click)="doSell(AllPairsPrice[Symbol].lastPrice , SELL.Amount , Pair.Coin)">SELL {{(Pair.Base)}}</button>
+              <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" (click)="doSell(AllPairsPrice[Symbol].lastPrice , SELL.Amount , Pair.Coin)">SELL {{(Pair.Base)}}</button>
               <button *ngIf="!LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" [routerLink]="'/login'">{{'LOGIN' | translate}}</button>
             </div>
           </div>
@@ -143,6 +143,7 @@
           </table>
         </div>
       </div>
+
       <div class="card">
         <p class="mb-0 card-title">Market Trade</p>
         <div class="card-pair">
@@ -167,6 +168,51 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="card">
+  <p class="mb-0 card-title">Trade History</p>
+  <div class="card-pair">
+    <table class="table">
+      <thead>
+      <tr class="fixed-header">
+        <th scope="col">Symbol</th>
+        <th scope="col">Time</th>
+        <th scope="col">Order Type</th>
+        <th scope="col">Side</th>
+        <th scope="col">Price</th>
+        <th scope="col">Avg Price</th>
+        <th scope="col">Executed</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Trigger Conditions</th>
+      </tr>
+      </thead>
+      <tbody>
+<!--      <tr class="bidder-r">-->
+<!--        <td>BTC_USDT</td>-->
+<!--        <td>2023-02-24 18:55:22</td>-->
+<!--        <td>Market</td>-->
+<!--        <td style="color: #f23645">Sell</td>-->
+<!--        <td>-</td>-->
+<!--        <td>3.0398</td>-->
+<!--        <td>0.000042 BTC</td>-->
+<!--        <td>-</td>-->
+<!--        <td>-</td>-->
+<!--      </tr>-->
+<!--      <tr class="bidder-r">-->
+<!--        <td>BTC_USDT</td>-->
+<!--        <td>2023-02-23 18:55:22</td>-->
+<!--        <td>Market</td>-->
+<!--        <td style="color: #089981">Buy</td>-->
+<!--        <td>-</td>-->
+<!--        <td>1.0800</td>-->
+<!--        <td>1.500 USDT</td>-->
+<!--        <td>1.500 USDT</td>-->
+<!--        <td>-</td>-->
+<!--      </tr>-->
+      </tbody>
+    </table>
   </div>
 </div>
 
@@ -267,13 +313,13 @@
                   <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()]">100%</div>
                 </div>
                 <div class="form-control mt-3">{{  BUY.Amount / AllPairsPrice[Symbol].lastPrice | number: '0.4-8'}} {{Pair.Coin}}</div>
-                <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld"  [disabled]="Assets.coins[Pair.Base.toLowerCase()] <  BUY.Amount || !BUY.Amount" (click)="doBuy(AllPairsPrice[Symbol].lastPrice , BUY.Amount , Pair.Coin)">BUY {{Pair.Coin}}</button>
+                <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld" (click)="doBuy(AllPairsPrice[Symbol].lastPrice , BUY.Amount , Pair.Coin)">BUY {{Pair.Coin}}</button>
                 <button *ngIf="!LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld" [routerLink]="'/login'">{{'LOGIN' | translate}}</button>
               </div>
             </div>
             <div class="col px-1">
               <div class="mx-0">
-                <p class="mt-2" style="font-size: 14px">Avl. <b>{{Assets.coins[Pair.Coin.toLowerCase()] | number: '0.3-6'}} {{Pair.Coin}}</b></p>
+                <p class="mt-2" style="font-size: 14px">Avl. <b>{{0.000042 | number: '0.3-6'}} {{Pair.Coin}}</b></p>
                 <input class="form-control" placeholder="Market Price" disabled type="number">
                 <input class="form-control mt-3" [(ngModel)]="SELL.Amount" placeholder="Amount {{Pair.Coin}}" type="number">
                 <div class="d-flex p-select-cont">
@@ -284,7 +330,7 @@
                 </div>
                 <div class="form-control mt-3" >{{  SELL.Amount * AllPairsPrice[Symbol].lastPrice | number: '0.4-8'}} {{Pair.Base}} </div>
                 <p class="mt-4 text-center error-msg">{{errorMessageSell}}</p>
-                <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" [disabled]="Assets.coins[Pair.Coin.toLowerCase()] <  SELL.Amount || !SELL.Amount" (click)="doSell(AllPairsPrice[Symbol].lastPrice , SELL.Amount , Pair.Coin)">SELL {{(Pair.Base)}}</button>
+                <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" (click)="doSell(AllPairsPrice[Symbol].lastPrice , SELL.Amount , Pair.Coin)">SELL {{(Pair.Base)}}</button>
                 <button *ngIf="!LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" [routerLink]="'/login'">{{'LOGIN' | translate}}</button>
               </div>
             </div>
@@ -318,7 +364,48 @@
       </div>
     </div>
     <div class="col px-0" *ngIf="currenttab === 'my_orders'">
-      <p class="mx-auto my-5 text-center">You don't have any active orders</p>
+      <div class="vw-100 overflow-auto">
+        <table class="table">
+          <thead>
+          <tr class="fixed-header">
+            <th scope="col">Symbol</th>
+            <th scope="col">Time</th>
+            <th scope="col">Order Type</th>
+            <th scope="col">Side</th>
+            <th scope="col">Price</th>
+            <th scope="col">Avg Price</th>
+            <th scope="col">Executed</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Trigger Conditions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="bidder-r">
+            <td>MANAUSDT Perpetual</td>
+            <td>2023-02-24 18:55:22</td>
+            <td>Market</td>
+            <td style="color: #f23645">Sell</td>
+            <td>-</td>
+            <td>3.0398</td>
+            <td>4,729.9288 USDT</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr class="bidder-r">
+            <td>MANAUSDT Perpetual</td>
+            <td>2023-02-23 18:55:22</td>
+            <td>Market</td>
+            <td style="color: #089981">Buy</td>
+            <td>1.0800</td>
+            <td>1.0800</td>
+            <td>498.9600 USDT</td>
+            <td>498.9600 USDT</td>
+            <td>-</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 </div>

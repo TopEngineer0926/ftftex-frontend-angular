@@ -6,6 +6,7 @@ import {RestClient} from "../rest-client";
 import {DataService} from "../data.service";
 import {Router} from "@angular/router";
 import {environment} from "../../environments/environment";
+import {WithdrawComponent} from "../wallet/withdraw/withdraw.component";
 
 const client = new RestClient({
   apiKey: environment.apiKey,
@@ -93,6 +94,11 @@ export class WalletMainComponent implements OnInit {
 
   openTransferModal() {
     const modalRef = this.modalService.open(TransferComponent , {centered: true, scrollable: true});
+    modalRef.componentInstance.balances = this.deposits;
+  }
+
+  openWithdrawalModal() {
+    const modalRef = this.modalService.open(WithdrawComponent , {centered: true, scrollable: true});
     modalRef.componentInstance.balances = this.deposits;
   }
 }
