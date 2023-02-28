@@ -68,11 +68,22 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
     })
   }
 
+  getTradeHistory() {
+    const params = {
+      instType: "SPOT"
+    }
+    this.Dapi.getOrderHistory(params).subscribe((res) => {
+      console.log(res, 'ress getOrderHistorygetOrderHistorygetOrderHistory');
+    })
+
+  }
+
   ngOnInit(): void {
     this.Dapi.Assets.subscribe((res: any) => {
       this.Assets = res;
       console.log(res);
     });
+
 
     this.api.getTradingPairsOkx().subscribe({
       next: (res) => {
@@ -193,13 +204,12 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
       }
     });
 
+    this.getTradeHistory();
 
   }
 
   ngOnDestroy() {
     this.api.disconnect();
-
-
   }
 
   ngAfterViewInit(): void {
@@ -242,59 +252,16 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
     this.OrderBuy.Amount = Amount;
     this.OrderBuy.Coin = Coin;
     this.OrderBuy.type = 'buy';
-    this.modalService.open(this.confirmation , {centered: true});
     this.OrderType = 'buy';
-    // const params = {
-    //   "instId":this.SymbolSeperated,
-    //   "tdMode":"cash",
-    //   "clOrdId":`b${(Math.random() * 100).toFixed()}`,
-    //   "side":"buy",
-    //   "ordType":"market",
-    //   "px":lastPrice,
-    //   "sz": Amount,
-    //   "subAcct": this.LoggedIn[5]
-    // }
-    // this.Dapi.createTradeOrder(params).subscribe({
-    //   next: (res) => {
-    //     const result = JSON.parse(res['KYC Api resuult']);
-    //     if (result.data.length && result.data[0].sMsg) {
-    //       this.errorMessage = result.data[0].sMsg;
-    //     }
-    //     console.log(result, 'result');
-    //   },
-    //   error: () => {
-    //
-    //   }
-    // })
+    this.modalService.open(this.confirmation , {centered: true});
   }
   doSell(lastPrice: any, Amount: number, Coin: string){
     this.OrderSell.lastPrice = lastPrice;
     this.OrderSell.Amount = Amount;
     this.OrderSell.Coin = Coin;
     this.OrderSell.type = 'buy';
-    this.modalService.open(this.confirmation , {centered: true});
     this.OrderType = 'sell';
-    // const params = {
-    //   "instId":this.SymbolSeperated,
-    //   "tdMode":"cash",
-    //   "clOrdId":`b${(Math.random() * 100).toFixed()}`,
-    //   "side":"sell",
-    //   "ordType":"limit",
-    //   "px":lastPrice,
-    //   "sz": Amount
-    // }
-    // this.Dapi.createTradeOrder(params).subscribe({
-    //   next: (res) => {
-    //     const result = JSON.parse(res['KYC Api resuult']);
-    //     if (result.data.length && result.data[0].sMsg) {
-    //       this.errorMessageSell = result.data[0].sMsg;
-    //     }
-    //     console.log(result, 'result');
-    //   },
-    //   error: () => {
-    //
-    //   }
-    // })
+    this.modalService.open(this.confirmation , {centered: true});
   }
 
 
@@ -305,14 +272,57 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
        this.Assets.coins[this.OrderBuy.Coin.toLowerCase()] = this.Assets.coins[this.OrderBuy.Coin.toLowerCase()] + this.OrderBuy.Amount / this.OrderBuy.lastPrice;
        this.Assets.coins.usdt = this.Assets.coins.usdt - this.OrderBuy.Amount;
        this.Dapi.ChangeAssets(this.Assets);
-       const modalRef = this.modalService.open(OrderStatusPopComponent , {centered: true});
+       // const modalRef = this.modalService.open(OrderStatusPopComponent , {centered: true});
+      const params = {
+        "instId":this.SymbolSeperated,
+        "tdMode":"cash",
+        "clOrdId":`b${(Math.random() * 100).toFixed()}`,
+        "side":"buy",
+        "ordType":"market",
+        // "px":lastPrice,
+        "sz": this.BUY.Amount,
+        "subAcct": this.LoggedIn[5]
+      }
+      this.Dapi.createTradeOrder(params).subscribe({
+        next: (res) => {
+          const result = JSON.parse(res['KYC Api resuult']);
+          if (result.data.length && result.data[0].sMsg) {
+            this.errorMessage = result.data[0].sMsg;
+          } else {
+          }
+          console.log(result, 'result');
+        },
+        error: () => {
+
+        }
+      })
        this.resetFields();
     }
     if (this.OrderType === 'sell'){
       this.Assets.coins[this.OrderSell.Coin.toLowerCase()] = this.Assets.coins[this.OrderSell.Coin.toLowerCase()] - this.OrderSell.Amount;
       this.Assets.coins.usdt =  this.Assets.coins.usdt + this.OrderSell.Amount * this.OrderSell.lastPrice;
       this.Dapi.ChangeAssets(this.Assets);
-      const modalRef = this.modalService.open(OrderStatusPopComponent , {centered: true});
+      // const modalRef = this.modalService.open(OrderStatusPopComponent , {centered: true});
+      const params = {
+        "instId":this.SymbolSeperated,
+        "tdMode":"cash",
+        "clOrdId":`b${(Math.random() * 100).toFixed()}`,
+        "side":"sell",
+        "ordType":"market",
+        "sz": this.SELL.Amount
+      }
+      this.Dapi.createTradeOrder(params).subscribe({
+        next: (res) => {
+          const result = JSON.parse(res['KYC Api resuult']);
+          if (result.data.length && result.data[0].sMsg) {
+            this.errorMessageSell = result.data[0].sMsg;
+          }
+          console.log(result, 'result');
+        },
+        error: () => {
+
+        }
+      })
       this.resetFields();
     }
   }

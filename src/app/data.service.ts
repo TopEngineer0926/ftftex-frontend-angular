@@ -338,6 +338,10 @@ export class DataService {
     return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/createTradeOrder`, params);
   }
 
+  getOrderHistory(params) {
+    return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/getOrderHistory`, params);
+  }
+
   createWithdrawal(params) {
     return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/createWithdrawal`, params);
   }
