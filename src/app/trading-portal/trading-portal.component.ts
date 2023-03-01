@@ -57,7 +57,9 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
   };
   OrderType = '';
   errorMessage = '';
+  succesMessage = '';
   errorMessageSell = '';
+  succesMessageSell = '';
   constructor(private api: TradingDataServiceService, private a_rote: ActivatedRoute ,private Dapi: DataService , private modalService: NgbModal ) {
     this.innerWidth = window.innerWidth;
     if (innerWidth < 990){
@@ -267,6 +269,23 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
     this.modalService.open(this.confirmation , {centered: true});
   }
 
+  toFixed(x) {
+    if (Math.abs(x) < 1.0) {
+      let e = parseInt(x.toString().split('e-')[1]);
+      if (e) {
+        x *= Math.pow(10,e-1);
+        x = '0.' + (new Array(e)).join('0') + x.toString().substring(2);
+      }
+    } else {
+      let e = parseInt(x.toString().split('+')[1]);
+      if (e > 20) {
+        e -= 20;
+        x /= Math.pow(10,e);
+        x += (new Array(e+1)).join('0');
+      }
+    }
+    return x;
+  }
 
   performOrder(){
     console.log(this.OrderType, 'OrderType');
@@ -283,16 +302,17 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
         "side":"buy",
         "ordType":"market",
         // "px":lastPrice,
-        "sz": this.BUY.Amount,
+        "sz": this.toFixed(this.BUY.Amount),
         "subAcct": this.LoggedIn[5]
       }
       this.Dapi.createTradeOrder(params).subscribe({
         next: (res) => {
           const result = JSON.parse(res['KYC Api resuult']);
-          if (result.data.length && result.data[0].sMsg) {
+          if (result.data.length && result.data[0].sMsg && !result.data[0].ordId) {
             this.errorMessage = result.data[0].sMsg;
             this.getTradeHistory();
           } else {
+            this.succesMessage = result.data[0].sMsg;
           }
           console.log(result, 'result');
         },
@@ -302,7 +322,9 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
       })
        this.resetFields();
     }
+
     if (this.OrderType === 'sell'){
+      console.log(this.SELL.Amount, 'this.SELL.Amount');
       this.Assets.coins[this.OrderSell.Coin.toLowerCase()] = this.Assets.coins[this.OrderSell.Coin.toLowerCase()] - this.OrderSell.Amount;
       this.Assets.coins.usdt =  this.Assets.coins.usdt + this.OrderSell.Amount * this.OrderSell.lastPrice;
       this.Dapi.ChangeAssets(this.Assets);
@@ -313,14 +335,17 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
         "clOrdId":`b${(Math.random() * 100).toFixed()}`,
         "side":"sell",
         "ordType":"market",
-        "sz": this.SELL.Amount
+        "sz": this.toFixed(this.SELL.Amount),
+        "subAcct": this.LoggedIn[5]
       }
       this.Dapi.createTradeOrder(params).subscribe({
         next: (res) => {
           const result = JSON.parse(res['KYC Api resuult']);
-          if (result.data.length && result.data[0].sMsg) {
+          if (result.data.length && result.data[0].sMsg && !result.data[0].ordId) {
             this.errorMessageSell = result.data[0].sMsg;
             this.getTradeHistory();
+          } else {
+            this.succesMessageSell = result.data[0].sMsg;
           }
           console.log(result, 'result');
         },

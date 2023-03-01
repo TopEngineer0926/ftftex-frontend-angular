@@ -85,7 +85,7 @@
             <div class="px-3">
 <!--              <p class="mt-2" style="font-size: 14px">Avl. {{1.5 | number: '0.3-6'}} <b>{{Pair.Base}}</b></p>-->
               <input class="form-control" placeholder="Market Price" disabled type="number">
-              <input class="form-control mt-3" placeholder="Amount {{Pair.Base}}" [(ngModel)]="BUY.Amount" (ngModelChange)="errorMessage = ''" type="number">
+              <input class="form-control mt-3" placeholder="Amount {{Pair.Base}}" [(ngModel)]="BUY.Amount" (ngModelChange)="errorMessage = ''; succesMessage = ''" type="number">
               <div class="d-flex p-select-cont">
                 <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()] * 0.25">25%</div>
                 <div class="p-select" (click)="BUY.Amount = Assets.coins[Pair.Base.toLowerCase()] * 0.50">50%</div>
@@ -94,6 +94,7 @@
               </div>
               <div class="form-control mt-3">{{  BUY.Amount / AllPairsPrice[Symbol].lastPrice | number: '0.4-8'}} {{Pair.Coin}}</div>
               <p class="mt-4 text-center error-msg">{{errorMessage}}</p>
+              <p class="mt-4 text-center green-text">{{succesMessage}}</p>
               <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld" (click)="doBuy(AllPairsPrice[Symbol].lastPrice , BUY.Amount , Pair.Coin)">BUY {{Pair.Coin}}</button>
               <button *ngIf="!LoggedIn[1]" class="btn btn-primary mt-4 w-100 buy-btn s-bld" [routerLink]="'/login'">{{'LOGIN' | translate}}</button>
             </div>
@@ -102,7 +103,7 @@
             <div class="px-3">
 <!--              <p class="mt-2" style="font-size: 14px">Avl. <b>{{0.000042 | number: '0.3-6'}} {{Pair.Coin}}</b></p>-->
               <input class="form-control" placeholder="Market Price" disabled type="number">
-              <input class="form-control mt-3" [(ngModel)]="SELL.Amount" (ngModelChange)="errorMessageSell = ''" placeholder="Amount {{Pair.Coin}}" type="number">
+              <input class="form-control mt-3" [(ngModel)]="SELL.Amount" (ngModelChange)="errorMessageSell = ''; succesMessageSell = ''" placeholder="Amount {{Pair.Coin}}" type="number">
               <div class="d-flex p-select-cont">
                 <div class="p-select" (click)="SELL.Amount = Assets.coins[Pair.Coin.toLowerCase()] * 0.25">25%</div>
                 <div class="p-select" (click)="SELL.Amount = Assets.coins[Pair.Coin.toLowerCase()] * 0.50">50%</div>
@@ -111,6 +112,7 @@
               </div>
               <div class="form-control mt-3" >{{  SELL.Amount * AllPairsPrice[Symbol].lastPrice | number: '0.4-8'}} {{Pair.Base}} </div>
               <p class="mt-4 text-center error-msg">{{errorMessageSell}}</p>
+              <p class="mt-4 text-center green-text">{{succesMessageSell}}</p>
               <button *ngIf="LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" (click)="doSell(AllPairsPrice[Symbol].lastPrice , SELL.Amount , Pair.Coin)">SELL {{(Pair.Base)}}</button>
               <button *ngIf="!LoggedIn[1]" class="btn btn-primary mt-4 w-100 sell-btn s-bld" [routerLink]="'/login'">{{'LOGIN' | translate}}</button>
             </div>
@@ -184,6 +186,7 @@
         <th scope="col">Price</th>
         <th scope="col">Avg Price</th>
         <th scope="col">Amount</th>
+        <th scope="col">State</th>
       </tr>
       </thead>
       <tbody>
@@ -195,6 +198,7 @@
         <td>{{order.sz }}</td>
         <td>{{order.avgPx}}</td>
         <td>{{order.sz}}</td>
+        <td>{{order.state}}</td>
       </tr>
       </tbody>
     </table>
