@@ -41,7 +41,7 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
   Total = 0;
   Available1 = 0;
   Available2 = 0;
-
+  history
   Pair = {Coin: '' , Base : ''};
   currenttab = 'chart';
   innerWidth;
@@ -70,10 +70,13 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
 
   getTradeHistory() {
     const params = {
-      instType: "SPOT"
+      instType: "SPOT",
+      subAcct: this.LoggedIn[5],
     }
     this.Dapi.getOrderHistory(params).subscribe((res) => {
-      console.log(res, 'ress getOrderHistorygetOrderHistorygetOrderHistory');
+      if (JSON.parse(res['Order history last 7 dayes'])?.data) {
+       this.history = JSON.parse(res['Order history last 7 dayes']).data
+      }
     })
 
   }
@@ -288,6 +291,7 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
           const result = JSON.parse(res['KYC Api resuult']);
           if (result.data.length && result.data[0].sMsg) {
             this.errorMessage = result.data[0].sMsg;
+            this.getTradeHistory();
           } else {
           }
           console.log(result, 'result');
@@ -316,6 +320,7 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
           const result = JSON.parse(res['KYC Api resuult']);
           if (result.data.length && result.data[0].sMsg) {
             this.errorMessageSell = result.data[0].sMsg;
+            this.getTradeHistory();
           }
           console.log(result, 'result');
         },

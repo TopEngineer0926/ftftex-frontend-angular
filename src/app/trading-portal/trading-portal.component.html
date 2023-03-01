@@ -183,34 +183,19 @@
         <th scope="col">Side</th>
         <th scope="col">Price</th>
         <th scope="col">Avg Price</th>
-        <th scope="col">Executed</th>
         <th scope="col">Amount</th>
-        <th scope="col">Trigger Conditions</th>
       </tr>
       </thead>
       <tbody>
-<!--      <tr class="bidder-r">-->
-<!--        <td>BTC_USDT</td>-->
-<!--        <td>2023-02-24 18:55:22</td>-->
-<!--        <td>Market</td>-->
-<!--        <td style="color: #f23645">Sell</td>-->
-<!--        <td>-</td>-->
-<!--        <td>3.0398</td>-->
-<!--        <td>0.000042 BTC</td>-->
-<!--        <td>-</td>-->
-<!--        <td>-</td>-->
-<!--      </tr>-->
-<!--      <tr class="bidder-r">-->
-<!--        <td>BTC_USDT</td>-->
-<!--        <td>2023-02-23 18:55:22</td>-->
-<!--        <td>Market</td>-->
-<!--        <td style="color: #089981">Buy</td>-->
-<!--        <td>-</td>-->
-<!--        <td>1.0800</td>-->
-<!--        <td>1.500 USDT</td>-->
-<!--        <td>1.500 USDT</td>-->
-<!--        <td>-</td>-->
-<!--      </tr>-->
+      <tr class="bidder-r" *ngFor="let order of history">
+        <td>{{order.instId}}</td>
+        <td>{{order.uTime | date: 'dd/MM/yyyy HH:MM'}}</td>
+        <td>{{order.ordType}}</td>
+        <td [style.color]="order.side === 'sell' ? '#f23645' : '#089981'">{{order.side}}</td>
+        <td>{{order.sz }}</td>
+        <td>{{order.avgPx}}</td>
+        <td>{{order.sz}}</td>
+      </tr>
       </tbody>
     </table>
   </div>
