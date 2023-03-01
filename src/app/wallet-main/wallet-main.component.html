@@ -9,37 +9,24 @@
                         <h1 class="d-block s-bld  banner-header">
                             {{"OKX Main Wallet" | translate}}
                         </h1>
-
-<!--                        <div class="total-wrapper mt-4">-->
-<!--                            <span>Total assets in BTC</span>-->
-<!--                        </div>-->
-<!--                        <div class="mt-3 d-flex align-items-center">-->
-<!--                            <h2>0.0000000</h2> <small class="gray"> = $ 0</small>-->
-<!--                        </div>-->
                         <div class="d-flex mt-4">
                             <div class="sub-menu-btn btn mr-2 px-4"
-                                 (click)="changeTag('deposit')">Deposit
+                                 (click)="changeTag('deposit')">{{'Deposit' | translate}}
                             </div>
                             <div class="sub-menu-btn btn mr-2 px-4"
-                                 (click)="changeTag('trading')">Trading Account
+                                 (click)="changeTag('trading')">{{'Trading Account' | translate}}
                             </div>
                             <div class="sub-menu-btn btn mr-2 px-4"
-                                 (click)="changeTag('transfer'); openTransferModal()">Transfer
+                                 (click)="changeTag('transfer'); openTransferModal()">{{'Transfer' | translate}}
                             </div>
                             <div class="sub-menu-btn btn mr-2 px-4"
-                                 (click)="changeTag('withdrawal'); openWithdrawalModal()">Withdrawal
+                                 (click)="changeTag('withdrawal'); openWithdrawalModal()">{{'Withdrawal' | translate}}
                             </div>
                         </div>
 
-
-
-<!--                        <div *ngIf="tab === 'trading'" class="mt-3">-->
-<!--                            <button type="button" (click)="changeTag('transfer')" class="btn btn-outline-primary d-block mx-auto">Transfer</button>-->
-<!--                        </div>-->
-
                         <div class="coin-lit" *ngIf="tab === 'deposit'">
                             <h6 class="d-block s-bld mt-2">
-                                Funding Account
+                                {{'Funding Account' | translate}}
                             </h6>
                             <div class="mt-5" *ngFor="let coin of deposits">
                                 <div class="d-flex align-items-center">
@@ -62,9 +49,9 @@
 
                             </div>
                         </div>
-                        <div class="coin-lit" *ngIf="tab === 'trading' && trading?.length">
+                        <div class="coin-lit" *ngIf="tab === 'trading'">
                             <h6 class="d-block s-bld mt-2">
-                                Trading Account
+                                {{'Trading Account' | translate}}
                             </h6>
                             <div class="mt-5" *ngFor="let coin of trading">
                                 <div class="d-flex align-items-center">
