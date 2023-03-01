@@ -36,7 +36,7 @@ export class WalletComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.LogginIn[6] === 'verified') {
+        // if (this.LogginIn[6] === 'verified') {
             const createSubAccountParams = {
                 subAcct: this.LogginIn[5],
                 label: '852422',
@@ -59,7 +59,7 @@ export class WalletComponent implements OnInit {
                 console.log(JSON.parse(res['KYC Api resuult']), 'JSON.parse(res[\'KYC Api resuult\'])');
                 this.balance  = res;
             })
-        }
+        // }
 
     }
 

@@ -75,12 +75,10 @@ export class CoinAllComponent implements OnInit {
   }
 
   navigationCheck(url , coin) {
-
-    if (this.AlowedPairs.includes(coin+'USDT')){
       const modalRef = this.modalService.open(SelectExchangePopComponent , {centered: true});
       modalRef.componentInstance.data = {url , coin};
-    } else {
-      this.route.navigate(['/coin/' + url])
-    }
+    // } else {
+    //   this.route.navigate(['/coin/' + url])
+    // }
   }
 }

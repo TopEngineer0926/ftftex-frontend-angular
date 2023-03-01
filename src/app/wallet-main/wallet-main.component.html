@@ -36,7 +36,11 @@
 <!--                        <div *ngIf="tab === 'trading'" class="mt-3">-->
 <!--                            <button type="button" (click)="changeTag('transfer')" class="btn btn-outline-primary d-block mx-auto">Transfer</button>-->
 <!--                        </div>-->
-                        <div class="coin-lit" *ngIf="tab === 'deposit' && deposits?.length">
+
+                        <div class="coin-lit" *ngIf="tab === 'deposit'">
+                            <h6 class="d-block s-bld mt-2">
+                                Funding Account
+                            </h6>
                             <div class="mt-5" *ngFor="let coin of deposits">
                                 <div class="d-flex align-items-center">
                                     <h6 class="mb-0 align-self-center s-bld"> {{coin.ccy}}</h6>
@@ -59,6 +63,9 @@
                             </div>
                         </div>
                         <div class="coin-lit" *ngIf="tab === 'trading' && trading?.length">
+                            <h6 class="d-block s-bld mt-2">
+                                Trading Account
+                            </h6>
                             <div class="mt-5" *ngFor="let coin of trading">
                                 <div class="d-flex align-items-center">
                                     <h6 class="mb-0 align-self-center s-bld"> {{coin.ccy}}</h6>

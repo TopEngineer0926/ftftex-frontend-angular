@@ -20,6 +20,7 @@ const client = new RestClient({
 export class TransferComponent implements OnInit {
     @ViewChild('transferDone' , {static: false}) transferDone: ElementRef | undefined;
     @Input('balances') balances;
+    @Input('tradings') tradings;
     selectedCoin;
     amount: string;
     fromMain: boolean = false;

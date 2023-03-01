@@ -60,7 +60,6 @@ export class WalletMainComponent implements OnInit {
     }
     this.api.getSubAccTradeBalance(params).subscribe((res) => {
       this.trading = JSON.parse(res['KYC Api resuult'])?.data[0].details
-      console.log(this.trading, 'trading');
     })
   }
 
@@ -70,7 +69,6 @@ export class WalletMainComponent implements OnInit {
     };
     this.api.getSubAccFoundBalance(params).subscribe((res) => {
       this.deposits = JSON.parse(res['KYC Api resuult'])?.data
-      console.log(this.deposits, 'deposits');
     })
   }
 
@@ -95,6 +93,7 @@ export class WalletMainComponent implements OnInit {
   openTransferModal() {
     const modalRef = this.modalService.open(TransferComponent , {centered: true, scrollable: true});
     modalRef.componentInstance.balances = this.deposits;
+    modalRef.componentInstance.tradings = this.trading;
   }
 
   openWithdrawalModal() {

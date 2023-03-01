@@ -83,7 +83,7 @@
         <div class="row mb-4">
           <div class="col-lg-6">
             <div class="px-3">
-              <p class="mt-2" style="font-size: 14px">Avl. {{1.5 | number: '0.3-6'}} <b>{{Pair.Base}}</b></p>
+<!--              <p class="mt-2" style="font-size: 14px">Avl. {{1.5 | number: '0.3-6'}} <b>{{Pair.Base}}</b></p>-->
               <input class="form-control" placeholder="Market Price" disabled type="number">
               <input class="form-control mt-3" placeholder="Amount {{Pair.Base}}" [(ngModel)]="BUY.Amount" (ngModelChange)="errorMessage = ''" type="number">
               <div class="d-flex p-select-cont">
@@ -100,7 +100,7 @@
           </div>
           <div class="col-lg-6">
             <div class="px-3">
-              <p class="mt-2" style="font-size: 14px">Avl. <b>{{0.000042 | number: '0.3-6'}} {{Pair.Coin}}</b></p>
+<!--              <p class="mt-2" style="font-size: 14px">Avl. <b>{{0.000042 | number: '0.3-6'}} {{Pair.Coin}}</b></p>-->
               <input class="form-control" placeholder="Market Price" disabled type="number">
               <input class="form-control mt-3" [(ngModel)]="SELL.Amount" (ngModelChange)="errorMessageSell = ''" placeholder="Amount {{Pair.Coin}}" type="number">
               <div class="d-flex p-select-cont">
@@ -171,7 +171,7 @@
   </div>
 </div>
 
-<div class="card">
+<div class="card" *ngIf="!isMobile">
   <p class="mb-0 card-title">Trade History</p>
   <div class="card-pair">
     <table class="table">
@@ -359,33 +359,18 @@
             <th scope="col">Side</th>
             <th scope="col">Price</th>
             <th scope="col">Avg Price</th>
-            <th scope="col">Executed</th>
             <th scope="col">Amount</th>
-            <th scope="col">Trigger Conditions</th>
           </tr>
           </thead>
           <tbody>
-          <tr class="bidder-r">
-            <td>MANAUSDT Perpetual</td>
-            <td>2023-02-24 18:55:22</td>
-            <td>Market</td>
-            <td style="color: #f23645">Sell</td>
-            <td>-</td>
-            <td>3.0398</td>
-            <td>4,729.9288 USDT</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-          <tr class="bidder-r">
-            <td>MANAUSDT Perpetual</td>
-            <td>2023-02-23 18:55:22</td>
-            <td>Market</td>
-            <td style="color: #089981">Buy</td>
-            <td>1.0800</td>
-            <td>1.0800</td>
-            <td>498.9600 USDT</td>
-            <td>498.9600 USDT</td>
-            <td>-</td>
+          <tr class="bidder-r" *ngFor="let order of history">
+            <td>{{order.instId}}</td>
+            <td>{{order.uTime | date: 'dd/MM/yyyy HH:MM'}}</td>
+            <td>{{order.ordType}}</td>
+            <td [style.color]="order.side === 'sell' ? '#f23645' : '#089981'">{{order.side}}</td>
+            <td>{{order.sz }}</td>
+            <td>{{order.avgPx}}</td>
+            <td>{{order.sz}}</td>
           </tr>
           </tbody>
         </table>
