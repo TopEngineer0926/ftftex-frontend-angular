@@ -83,7 +83,7 @@
         <div class="row mb-4">
           <div class="col-lg-6">
             <div class="px-3">
-<!--              <p class="mt-2" style="font-size: 14px">Avl. {{1.5 | number: '0.3-6'}} <b>{{Pair.Base}}</b></p>-->
+              <p class="mt-2" style="font-size: 14px">Avl. {{buyBalance || 0 | number: '0.3-6'}} <b>{{Pair.Base}}</b></p>
               <input class="form-control" placeholder="Market Price" disabled type="number">
               <input class="form-control mt-3" placeholder="Amount {{Pair.Base}}" [(ngModel)]="BUY.Amount" (ngModelChange)="errorMessage = ''; succesMessage = ''" type="number">
               <div class="d-flex p-select-cont">
@@ -101,7 +101,7 @@
           </div>
           <div class="col-lg-6">
             <div class="px-3">
-<!--              <p class="mt-2" style="font-size: 14px">Avl. <b>{{0.000042 | number: '0.3-6'}} {{Pair.Coin}}</b></p>-->
+              <p class="mt-2" style="font-size: 14px">Avl. <b>{{sellBalance || 0 | number: '0.3-6'}} {{Pair.Coin}}</b></p>
               <input class="form-control" placeholder="Market Price" disabled type="number">
               <input class="form-control mt-3" [(ngModel)]="SELL.Amount" (ngModelChange)="errorMessageSell = ''; succesMessageSell = ''" placeholder="Amount {{Pair.Coin}}" type="number">
               <div class="d-flex p-select-cont">

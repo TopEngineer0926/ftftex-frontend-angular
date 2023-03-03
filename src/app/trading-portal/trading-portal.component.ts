@@ -48,7 +48,8 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
   isMobile = false;
   Assets: any = {};
   LoggedIn = {0: ''};
-
+  buyBalance;
+  sellBalance;
   OrderBuy: any = {
     lastPrice: 0, Amount: 0, Coin: '' , type: 'buy'
   };
@@ -83,19 +84,39 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
 
   }
 
+  getTradeAvailableBalance(ccy) {
+    const params = {
+      ccy: `${ccy.Coin},${ccy.Base}`,
+      subAcct: this.LoggedIn[5],
+    }
+    console.log(this.Pair, '');
+    this.Dapi.getTradeAvailableBalance(params).subscribe({
+      next: (res) => {
+        const result = JSON.parse(res['Account avaibale balance']).data[0];
+        console.log(result, 'result');
+        if (result.details?.length) {
+          result.details.forEach((bal) => {
+            console.log(bal.ccy === this.Pair.Base, 'bal.ccy === this.Pair.Base');
+            if (bal.ccy === this.Pair.Coin) {
+              this.sellBalance = bal.availBal;
+            }
+            if (bal.ccy === this.Pair.Base) {
+              this.buyBalance = bal.availBal;
+            }
+          })
+        }
+        console.log(result, 'res getTradeAvailableBalance')
+      }
+
+    })
+  }
+
   ngOnInit(): void {
     this.Dapi.Assets.subscribe((res: any) => {
       this.Assets = res;
       console.log(res);
     });
 
-
-    this.api.getTradingPairsOkx().subscribe({
-      next: (res) => {
-        console.log(res, 'res getTradingPairsOkx')
-      }
-
-    })
 
     this.api.getTradingPairs().subscribe((res: any) => {
       this.AllPairs = res.symbols;
@@ -208,7 +229,7 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
 
       }
     });
-
+    this.getTradeAvailableBalance(this.Pair);
     this.getTradeHistory();
 
   }
@@ -312,6 +333,7 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
             this.errorMessage = result.data[0].sMsg;
             this.getTradeHistory();
           } else {
+            this.getTradeAvailableBalance(this.Pair);
             this.succesMessage = result.data[0].sMsg;
           }
           console.log(result, 'result');
@@ -346,6 +368,7 @@ export class TradingPortalComponent implements OnInit , OnDestroy ,AfterViewInit
             this.getTradeHistory();
           } else {
             this.succesMessageSell = result.data[0].sMsg;
+            this.getTradeAvailableBalance(this.Pair);
           }
           console.log(result, 'result');
         },

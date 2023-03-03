@@ -346,4 +346,8 @@ export class DataService {
     return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/createWithdrawal`, params);
   }
 
+  getTradeAvailableBalance(params) {
+    return this.http.post<any>(`${environment.baseUrl}ftftx/kyxAPI/getTradeAvailableBalance`, params);
+  }
+
 }
