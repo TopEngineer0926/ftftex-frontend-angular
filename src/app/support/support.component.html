@@ -1,0 +1,96 @@
+<div class="vh-100">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-5">
+                <div class="wt-box mt-3 p-lg-3">
+                    <div class="d-flex">
+                        <span class="material-symbols-outlined align-self-center mr-2" style="font-size: 50px">account_circle</span>
+                        <div class="d-flex flex-column">
+                            <small>UID: {{LogginIn[5]}}</small>
+                            <h4 class="gray">{{'Support' | translate}}</h4>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="acc-box mb-2">
+                        <div class="align-self-center">
+                            <p class="mb-0">Help Center</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <ngb-accordion class="range-accordion">
+                            <ngb-panel>
+                                <ng-template ngbPanelTitle>
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="d-flex flex-column align-items-start">
+                                            <div class="d-flex btn-link">Support</div>
+                                        </div>
+                                        <span class="material-symbols-outlined acc-box-i align-self-center">keyboard_arrow_down</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="ml-auto d-flex flex-row align-self-center">
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                        </ngb-accordion>
+                    </div>
+
+                    <div class="mb-2">
+                        <ngb-accordion class="range-accordion">
+                            <ngb-panel>
+                                <ng-template ngbPanelTitle>
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="d-flex flex-column align-items-start">
+                                            <div class="d-flex btn-link">Feedback & ideas</div>
+                                        </div>
+                                        <span class="material-symbols-outlined acc-box-i align-self-center">keyboard_arrow_down</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="ml-auto d-flex flex-row align-self-center">
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                        </ngb-accordion>
+                    </div>
+
+                    <div class="mb-2">
+                        <ngb-accordion class="range-accordion">
+                            <ngb-panel>
+                                <ng-template ngbPanelTitle>
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="d-flex flex-column align-items-start">
+                                            <div class="d-flex btn-link">Complains and Issues</div>
+                                        </div>
+                                        <span class="material-symbols-outlined acc-box-i align-self-center">keyboard_arrow_down</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="ml-auto d-flex flex-row align-self-center">
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                        </ngb-accordion>
+                    </div>
+
+
+                    <div class="acc-box mb-2" [routerLink]="'/about/product-introduction'">
+                        <div class="align-self-center">
+                            <p class="mb-0">About Us</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -30,6 +30,7 @@
     "bootstrap": "^4.5.0",
     "cookieconsent": "^3.1.1",
     "crypto-js": "^4.1.1",
+    "isomorphic-ws": "^4.0.1",
     "hammerjs": "^2.0.8",
     "jquery": "^3.6.1",
     "moment": "^2.29.4",

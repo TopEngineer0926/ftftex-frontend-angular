@@ -2,6 +2,7 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 body{
   --wht: #FFF
 }
@@ -9,7 +10,7 @@ body{
 
 body , html{
   background: var(--wht);
-  font-family: 'Lato', sans-serif;
+  font-family: 'Montserrat';
   overflow-x: hidden;
 /*  background: url("assets/images/white-bg.jpg");*/
 }
@@ -467,6 +468,16 @@ body.dark-theme{
   .n-title-top, .n-title {
     background-color: #1e253d;;
   }
+
+  .header-dropdown {
+    //background: #161D32FF;
+    .drop-item {
+      a {
+
+      color: #FFFFFF !important;
+      }
+    }
+  }
 }
 
 .pointer {
@@ -480,3 +491,4 @@ body.dark-theme{
 .network-modal-sm {
   width: 400px !important;
 }
+

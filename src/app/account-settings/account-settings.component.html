@@ -1,0 +1,165 @@
+<div class="vh-100">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-5">
+                <div class="wt-box mt-3 p-lg-3">
+                    <div class="d-flex">
+                        <span class="material-symbols-outlined align-self-center mr-2" style="font-size: 50px">account_circle</span>
+                        <div class="d-flex flex-column">
+                            <small>UID: {{LogginIn[5]}}</small>
+                            <h4 class="gray">{{'Account Settings' | translate}}</h4>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-2">
+                        <ngb-accordion class="range-accordion">
+                            <ngb-panel>
+                                <ng-template ngbPanelTitle>
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="d-flex flex-column align-items-start">
+                                            <div class="d-flex btn-link">Language</div>
+                                            <span class="mb-0 font-weight-bold">{{selectedLang}}</span>
+
+                                        </div>
+                                        <span class="material-symbols-outlined acc-box-i align-self-center">keyboard_arrow_down</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="ml-auto d-flex flex-row align-self-center">
+                                        <div class="nav-item ">
+                                            <a class="nav-link" (click)="changeLanguage('ch')">中文</a>
+                                        </div>
+                                        <div class="nav-item ">
+                                            <a class="nav-link" >|</a>
+                                        </div>
+                                        <div class="nav-item ">
+                                            <a class="nav-link" (click)="changeLanguage('en')">ENG</a>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                        </ngb-accordion>
+                    </div>
+
+                    <div class="mb-2">
+                        <ngb-accordion class="range-accordion">
+                            <ngb-panel>
+                                <ng-template ngbPanelTitle>
+                                    <div class="d-flex justify-content-between w-100">
+                                        <div class="d-flex flex-column align-items-start">
+                                            <div class="d-flex btn-link">Currency</div>
+                                            <span class="mb-0 font-weight-bold">EUR</span>
+
+                                        </div>
+                                        <span class="material-symbols-outlined acc-box-i align-self-center">keyboard_arrow_down</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="ml-auto d-flex flex-row align-self-center">
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                        </ngb-accordion>
+                    </div>
+
+                    <div class="acc-box mb-2">
+                        <div class="align-self-center">
+                            <p class="mb-0">Transaction History</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+                    <div class="acc-box mb-2">
+                        <div class="align-self-center">
+                            <p class="mb-0">Trading History</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+                    <div class="acc-box mb-2">
+                        <div class="align-self-center">
+                            <p class="mb-0">Color Reference</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+                    <div class="acc-box mb-2">
+                        <div class="align-self-center">
+                            <p class="mb-0">Volume Unit</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+
+
+                    <!--                    <div class="acc-box mb-2">-->
+                    <!--                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">verified_user</span>-->
+                    <!--                        <div class="align-self-center">-->
+                    <!--                            <p class="mb-0">{{LogginIn[6] === 'verified' ? 'Verified' : 'Personal Verification'}}</p>-->
+                    <!--                            <p class="mb-0 s-bld" *ngIf="LogginIn[6] !== 'verified'">&#45;&#45; Not verified &#45;&#45; </p>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="align-self-center ml-auto">-->
+                    <!--                            <a class="btn btn-primary" [routerLink]="'/account/verification'" *ngIf="LogginIn[6] !== 'verified'">Verify</a>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+                    <!--                    <div class="acc-box mb-2">-->
+                    <!--                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">smartphone</span>-->
+                    <!--                        <div class="align-self-center">-->
+                    <!--                            <p class="mb-0">Mobile No.</p>-->
+                    <!--                            <p class="mb-0 s-bld sht-txt">{{LogginIn[3]}}</p>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="align-self-center ml-auto">-->
+                    <!--                            <a class="btn btn-outline-primary mr-3">Edit</a>-->
+                    <!--                            <a class="btn btn-primary">Verify</a>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+
+                    <!--                    <div class="acc-box mb-2">-->
+                    <!--                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">email</span>-->
+                    <!--                        <div class="align-self-center ">-->
+                    <!--                            <p class="mb-0">Email</p>-->
+                    <!--                            <p class="mb-0 s-bld sht-txt">{{LogginIn[4]}}</p>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="align-self-center ml-auto">-->
+                    <!--                            <a class="btn btn-outline-primary mr-3">Edit</a>-->
+                    <!--                            <a class="btn btn-primary">Verify</a>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+                    <!--                    <div class="acc-box mb-2">-->
+                    <!--                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">lock</span>-->
+                    <!--                        <div class="align-self-center ">-->
+                    <!--                            <p class="mb-0">Password</p>-->
+                    <!--                            <p class="mb-0 s-bld ">*******</p>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="align-self-center ml-auto">-->
+                    <!--                            <a class="btn btn-outline-primary">Change</a>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+
+                    <div class="acc-box mb-2">
+                        <div class="align-self-center">
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <button class="trading-delete">Delete Trading Account</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

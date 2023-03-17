@@ -81,7 +81,7 @@ export class DataService {
       // @ts-ignore
       this.Theme.next(mode);
     } else {
-      localStorage.setItem('mode' , 'dark')
+      localStorage.setItem('mode' , 'light')
     }
 
 

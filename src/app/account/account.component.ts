@@ -21,6 +21,7 @@ export class AccountComponent implements OnInit {
       }
     })
   }
+
   logOut() {
     localStorage.clear();
     window.location.reload();

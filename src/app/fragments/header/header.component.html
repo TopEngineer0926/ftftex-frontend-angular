@@ -43,22 +43,24 @@
 <!--      </li>-->
     </ul>
   </div>
-    <ul class="navbar-nav ml-auto d-lg-flex flex-row d-none"  style="height: 25px">
-      <li class="nav-item dropdown cu-p" (click)="toggleDarkTheme()">
-        <span class="material-symbols-outlined align-self-center" style="font-size: 25px">dark_mode</span>
-      </li>
-    </ul>
-    <ul class="navbar-nav mx-auto d-lg-flex d-none flex-row">
-      <li class="nav-item ">
-        <a class="nav-link" (click)="changeLanguage('ch')">中文</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" >|</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" (click)="changeLanguage('en')">ENG</a>
-      </li>
-    </ul>
+
+
+<!--    <ul class="navbar-nav ml-auto d-lg-flex flex-row d-none"  style="height: 25px">-->
+<!--      <li class="nav-item dropdown cu-p" (click)="toggleDarkTheme()">-->
+<!--        <span class="material-symbols-outlined align-self-center" style="font-size: 25px">dark_mode</span>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    <ul class="navbar-nav mx-auto d-lg-flex d-none flex-row">-->
+<!--      <li class="nav-item ">-->
+<!--        <a class="nav-link" (click)="changeLanguage('ch')">中文</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item ">-->
+<!--        <a class="nav-link" >|</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item ">-->
+<!--        <a class="nav-link" (click)="changeLanguage('en')">ENG</a>-->
+<!--      </li>-->
+<!--    </ul>-->
     <ul class="navbar-nav ml-auto d-lg-block d-none" *ngIf="!LoggedIn[0]" style="height: 38px">
       <li class="nav-item ">
         <a class="nav-link" [routerLink]="'/login'">{{"Login" | translate}} </a>
@@ -86,11 +88,22 @@
       </li>
     </ul>
 
-    <ul class="navbar-nav ml-auto d-lg-flex flex-row d-none" *ngIf="LoggedIn[0]" style="height: 35px">
-      <li class="nav-item dropdown cu-p" [routerLink]="'/account-m'">
-        <span class="material-symbols-outlined align-self-center" style="font-size: 35px">account_circle</span>
-      </li>
-    </ul>
+<!--    <ul class="navbar-nav ml-auto d-lg-flex flex-row d-none" *ngIf="LoggedIn[0]" style="height: 35px">-->
+<!--      <li class="nav-item dropdown cu-p" [routerLink]="'/account-m'">-->
+<!--        <span class="material-symbols-outlined align-self-center" style="font-size: 35px">account_circle</span>-->
+<!--      </li>-->
+<!--    </ul>-->
+
+      <ul class="navbar-nav ml-auto d-lg-flex flex-row d-none mr-4" ngbDropdown *ngIf="LoggedIn[0]">
+          <li class="nav-item dropdown cu-p d-flex align-items-center user-avatar-wrapper" ngbDropdownToggle id="navbarDropdown2" role="button">
+              <span class="material-symbols-outlined align-self-center mr-2" style="font-size: 35px">account_circle</span>
+            {{LoggedIn[0] }} {{LoggedIn[1]}}
+          </li>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="dropdown-menu dropdown-menu-right header-dropdown">
+              <a ngbDropdownItem (click)="$event.preventDefault()" class="drop-item" [routerLink]="'/my-account'">My Account</a>
+              <a ngbDropdownItem (click)="$event.preventDefault()" class="drop-item" (click)="logOut()">Log Out</a>
+          </div>
+      </ul>
 
 
   </div>

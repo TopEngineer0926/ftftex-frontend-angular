@@ -1,0 +1,71 @@
+.acc-box {
+  padding: 10px;
+  display: flex;
+  border-radius: 8px;
+
+  .acc-box-i {
+    font-size: 38px;
+  }
+}
+
+.acc-box:hover{
+  background: #fafafa;
+}
+
+@media only screen and (max-width: 600px) {
+  .vh-100{
+    height: auto !important;
+  }
+  .wt-box{
+    box-shadow: none !important;
+  }
+  .acc-box {
+    padding: 10px;
+    display: flex;
+    border-radius: 8px;
+    font-size: 16px;
+    .sht-txt{
+      max-width: 160px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .acc-box-i {
+      font-size: 15px;
+    }
+  }
+}
+
+.range-accordion {
+  padding-left: 0;
+  padding-right: 0;
+}
+::ng-deep  .range-accordion .btn-link {
+  color: #212529;
+  width: 100%;
+  text-decoration-line: none;
+  .acc-box-i {
+    font-size: 38px;
+
+  }
+}
+::ng-deep .card-header {
+  padding-left: 0;
+  background-color: transparent !important;
+  border: none;
+}
+::ng-deep .card {
+  background-color: transparent !important;
+  border: none;
+}
+
+::ng-deep .card-body {
+  //padding-left: 0;
+}
+
+.trading-delete {
+  color: red;
+  background: white;
+  border: none;
+  outline: none;
+  padding: 5px 15px;
+}

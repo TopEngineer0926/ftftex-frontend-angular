@@ -79,6 +79,13 @@ import {SelectNetworkComponent} from "./wallet/deposit/select-network/select-net
 import { DepositNetworkComponent } from './wallet/deposit/deposit-network/deposit-network.component';
 import { TransferComponent } from './wallet/transfer/transfer.component';
 import { WithdrawComponent } from './wallet/withdraw/withdraw.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { CommunitySettingsComponent } from './community-settings/community-settings.component';
+import { SecurityComponent } from './security/security.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { SupportComponent } from './support/support.component';
+import { EnvironmentComponent } from './environment/environment.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -183,6 +190,13 @@ const cookieConfig:NgcCookieConsentConfig = {
     DepositNetworkComponent,
     TransferComponent,
     WithdrawComponent,
+    MyAccountComponent,
+    AccountSettingsComponent,
+    CommunitySettingsComponent,
+    SecurityComponent,
+    PrivacyComponent,
+    SupportComponent,
+    EnvironmentComponent,
   ],
   imports: [
     BrowserModule,

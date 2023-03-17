@@ -1,0 +1,127 @@
+<div class="vh-100">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-5">
+                <div class="wt-box mt-3 p-lg-3">
+                    <div class="d-flex" >
+                        <span class="material-symbols-outlined align-self-center mr-2" style="font-size: 50px">account_circle</span>
+                        <div class="d-flex flex-column">
+                            <small>UID: {{LogginIn[5]}}</small>
+                            <h4 class="s-bld">{{'My Account' | translate}}</h4>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="acc-box mb-2" (click)="navigate()">
+                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">account_circle</span>
+                        <div class="align-self-center">
+                            <p class="mb-0">Account Settings</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+                    <div class="acc-box mb-2" [routerLink]="'/community-settings'">
+                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">people</span>
+                        <div class="align-self-center">
+                            <p class="mb-0">Community Settings</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+                    <div class="acc-box mb-2" [routerLink]="'/security'">
+                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">lock</span>
+                        <div class="align-self-center">
+                            <p class="mb-0">Security</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+                    <div class="acc-box mb-2" [routerLink]="'/privacy'">
+                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">verified_user</span>
+                        <div class="align-self-center">
+                            <p class="mb-0">Privacy</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+                    <div class="acc-box mb-2" [routerLink]="'/environment'">
+                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">phone_iphone</span>
+                        <div class="align-self-center">
+                            <p class="mb-0">Environment</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+                    <div class="acc-box mb-2" [routerLink]="'/support'">
+                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">call</span>
+                        <div class="align-self-center">
+                            <p class="mb-0">Support</p>
+                        </div>
+                        <div class="align-self-center ml-auto">
+                            <span class="material-symbols-outlined acc-box-i align-self-center mr-3">keyboard_arrow_right</span>
+                        </div>
+                    </div>
+
+<!--                    <div class="acc-box mb-2">-->
+<!--                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">verified_user</span>-->
+<!--                        <div class="align-self-center">-->
+<!--                            <p class="mb-0">{{LogginIn[6] === 'verified' ? 'Verified' : 'Personal Verification'}}</p>-->
+<!--                            <p class="mb-0 s-bld" *ngIf="LogginIn[6] !== 'verified'">&#45;&#45; Not verified &#45;&#45; </p>-->
+<!--                        </div>-->
+<!--                        <div class="align-self-center ml-auto">-->
+<!--                            <a class="btn btn-primary" [routerLink]="'/account/verification'" *ngIf="LogginIn[6] !== 'verified'">Verify</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="acc-box mb-2">-->
+<!--                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">smartphone</span>-->
+<!--                        <div class="align-self-center">-->
+<!--                            <p class="mb-0">Mobile No.</p>-->
+<!--                            <p class="mb-0 s-bld sht-txt">{{LogginIn[3]}}</p>-->
+<!--                        </div>-->
+<!--                        <div class="align-self-center ml-auto">-->
+<!--                            <a class="btn btn-outline-primary mr-3">Edit</a>-->
+<!--                            <a class="btn btn-primary">Verify</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+
+<!--                    <div class="acc-box mb-2">-->
+<!--                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">email</span>-->
+<!--                        <div class="align-self-center ">-->
+<!--                            <p class="mb-0">Email</p>-->
+<!--                            <p class="mb-0 s-bld sht-txt">{{LogginIn[4]}}</p>-->
+<!--                        </div>-->
+<!--                        <div class="align-self-center ml-auto">-->
+<!--                            <a class="btn btn-outline-primary mr-3">Edit</a>-->
+<!--                            <a class="btn btn-primary">Verify</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="acc-box mb-2">-->
+<!--                        <span class="material-symbols-outlined acc-box-i align-self-center mr-3">lock</span>-->
+<!--                        <div class="align-self-center ">-->
+<!--                            <p class="mb-0">Password</p>-->
+<!--                            <p class="mb-0 s-bld ">*******</p>-->
+<!--                        </div>-->
+<!--                        <div class="align-self-center ml-auto">-->
+<!--                            <a class="btn btn-outline-primary">Change</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
