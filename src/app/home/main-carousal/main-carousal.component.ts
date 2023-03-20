@@ -19,7 +19,7 @@ export class MainCarousalComponent implements OnInit {
     {type: 'video' , image: 'assets/images/slides/v2.png' , link: 'https://www.youtube.com/watch?v=FExp9YuTzbY'},
     {type: 'image' , image: 'assets/images/slides/f4.png' , link: ''},
     {type: 'video' , image: 'assets/images/slides/v3.png' , link: 'https://www.youtube.com/watch?v=KHm0uUPqmVE'},
-    {type: 'image' , image: 'assets/images/slides/f1.png' , link: ''},
+    // {type: 'image' , image: 'assets/images/slides/f1.png' , link: ''},
     {type: 'image' , image: 'assets/images/slides/f3.png' , link: ''},
   ];
 
@@ -27,7 +27,7 @@ export class MainCarousalComponent implements OnInit {
     {type: 'image' , image: 'assets/images/slides/f2.png' , link: ''},
     {type: 'video' , image: 'assets/images/slides/v2.png' , link: 'https://www.youtube.com/watch?v=FExp9YuTzbY'},
     {type: 'image' , image: 'assets/images/slides/f4.png' , link: ''},
-    {type: 'image' , image: 'assets/images/slides/f1.png' , link: ''},
+    // {type: 'image' , image: 'assets/images/slides/f1.png' , link: ''},
     {type: 'image' , image: 'assets/images/slides/f3.png' , link: ''},
   ];
 
