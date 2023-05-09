@@ -48,8 +48,28 @@ export class WalletComponent implements OnInit {
                 page: 1,
                 limit: 100
             }
+        const createSubAccountHoubi = {
+            "userList":[
+                {
+                    "userName": this.LogginIn[5],
+                    "note":"huobi"
+                }
+            ],
+            userId: this.userId
+        }
+            this.api.createSubAccountHuobi(createSubAccountHoubi).subscribe((res) => {});
             this.api.getSubAccountList(params).subscribe((res) => {
                 this.walletInfo = JSON.parse(res['KYC Api resuult']).data[0].details[0];
+            })
+
+
+        const getSubUserparams = {
+            // subUid: this.LogginIn[5],
+            userId: this.userId
+
+        }
+            this.api.getSubAccountHuobi(getSubUserparams).subscribe((res) => {
+                // this.walletInfo = JSON.parse(res['KYC Api resuult']).data[0].details[0];
             })
 
             const balanceParams = {

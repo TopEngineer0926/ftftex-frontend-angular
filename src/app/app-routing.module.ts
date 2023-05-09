@@ -31,48 +31,66 @@ import {PurchaseCryptoComponent} from "./purchase-crypto/purchase-crypto.compone
 import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 import {SetPasswordComponent} from "./set-password/set-password.component";
 import {WalletMainComponent} from "./wallet-main/wallet-main.component";
+import { AccountSettingsComponent } from './account/account-settings/account-settings.component';
+import { SettingsAccountComponent } from './account/settings-account/settings-account.component';
+import { CommunitySettingsComponent } from './account/community-settings/community-settings.component';
+import { SecurityComponent } from './account/security/security.component';
+import { PrivacyComponent } from './account/privacy/privacy.component';
+import { EnvironmentComponent } from './account/environment/environment.component';
+import { SupportComponent } from './account/support/support.component';
+import { TermsPoliciesComponent } from './account/terms-policies/terms-policies.component';
 
 const routes: Routes = [
-  {path: '' , component: HomeComponent},
-  {path: 'coins' , component: CoinAllComponent},
-  {path: 'coin/:id/:slug' , component: SingleCoinComponent},
-  {path: 'exchanges' , component: ExchangesComponent},
-  {path: 'exchange/:id/:slug' , component: SingleExchangeComponent},
-  {path: 'login' , component: LoginComponent},
-  {path: 'forgot-password' , component: ForgotPasswordComponent},
-  {path: 'set-password' , component: SetPasswordComponent},
-  {path: 'register' , component: RegisterComponent},
-  {path: 'trade' , component: TradingPortalComponent},
-  {path: 'trade/:symbol' , component: TradingPortalComponent},
-  {path: 'community' , component: CommunityComponent ,  children: [
-      {path: '' , redirectTo: 'feed' , pathMatch: 'full'},
-      {path: 'profile' , component: ProfileComponent},
-      {path: 'feed' , component: FeedComponent},
-      {path: 'notifications' , component: NotificationsComponent},
-      {path: 'post/:id' , component: PostComponent},
-    ]},
-  {path: 'news' , component: NewsComponent},
-  {path: 'wallet' , component: WalletComponent},
-  {path: 'wallet/account' , component: WalletAccountComponent},
-  {path: 'wallet/main' , component: WalletMainComponent},
-  {path: 'wallet/purchase-crypto' , component: PurchaseCryptoComponent},
-  {path: 'about' , component: AboutUsComponent , children: [
-      {path: 'product-introduction' , component: ProductIntroComponent},
-      {path: 'service-terms' , component: ServiceTermsComponent},
-      {path: 'aml-policy' , component: AmlPolicyComponent},
-      {path: 'privacy-policy' , component: PrivacyPolicyComponent},
-    ]},
-  {path: 'account' , component: AccountComponent},
-  {path: 'account/settings' , component: SettingsComponent},
-  {path: 'account-m' , component: MobileAcPageComponent},
-  {path: 'account/verification' , component: KycComponent},
-  {path: 'spot-wallet' , component: WalletAssetComponent},
-  {path: 'spot-wallet/deposit' , component: DepositeComponent},
-  {path: 'spot-wallet/buy' , component: PurchaseCryptoComponent},
+    {path: '' , component: HomeComponent},
+    {path: 'coins' , component: CoinAllComponent},
+    {path: 'coin/:id/:slug' , component: SingleCoinComponent},
+    {path: 'exchanges' , component: ExchangesComponent},
+    {path: 'exchange/:id/:slug' , component: SingleExchangeComponent},
+    {path: 'login' , component: LoginComponent},
+    {path: 'forgot-password' , component: ForgotPasswordComponent},
+    {path: 'set-password' , component: SetPasswordComponent},
+    {path: 'register' , component: RegisterComponent},
+    {path: 'trade' , component: TradingPortalComponent},
+    {path: 'trade/:symbol' , component: TradingPortalComponent},
+    {path: 'community' , component: CommunityComponent ,  children: [
+            {path: '' , redirectTo: 'feed' , pathMatch: 'full'},
+            {path: 'profile' , component: ProfileComponent},
+            {path: 'feed' , component: FeedComponent},
+            {path: 'notifications' , component: NotificationsComponent},
+            {path: 'post/:id' , component: PostComponent},
+        ]},
+    {path: 'news' , component: NewsComponent},
+    {path: 'wallet' , component: WalletComponent},
+    {path: 'wallet/account' , component: WalletAccountComponent},
+    {path: 'wallet/main' , component: WalletMainComponent},
+    {path: 'wallet/purchase-crypto' , component: PurchaseCryptoComponent},
+    {path: 'about' , component: AboutUsComponent , children: [
+            {path: 'product-introduction' , component: ProductIntroComponent},
+            {path: 'service-terms' , component: ServiceTermsComponent},
+            {path: 'aml-policy' , component: AmlPolicyComponent},
+            {path: 'privacy-policy' , component: PrivacyPolicyComponent},
+        ]},
+    {path: 'account' , component: AccountComponent},
+    {path: 'account/settings' , component: SettingsComponent},
+    {path: 'account-m' , component: MobileAcPageComponent},
+    {path: 'account-settings' , component: AccountSettingsComponent,  children: [
+            {path: '' , redirectTo: 'settings' , pathMatch: 'full'},
+            {path: 'settings' , component: SettingsAccountComponent},
+            {path: 'community-settings' , component: CommunitySettingsComponent},
+            {path: 'security' , component: SecurityComponent},
+            {path: 'privacy' , component: PrivacyComponent},
+            {path: 'environment' , component: EnvironmentComponent},
+            {path: 'support' , component: SupportComponent},
+            {path: 'terms-policies' , component: TermsPoliciesComponent},
+        ]},
+    {path: 'account/verification' , component: KycComponent},
+    {path: 'spot-wallet' , component: WalletAssetComponent},
+    {path: 'spot-wallet/deposit' , component: DepositeComponent},
+    {path: 'spot-wallet/buy' , component: PurchaseCryptoComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes , {scrollPositionRestoration: 'enabled'})],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes , {scrollPositionRestoration: 'enabled'})],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

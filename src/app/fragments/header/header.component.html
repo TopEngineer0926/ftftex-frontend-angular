@@ -1,48 +1,48 @@
 <div class="top-bar" *ngIf="!isMobile">
   <div class="container-lg">
-  <div class="d-flex justify-content-between h-ticker">
-    <p class="mb-0">{{"Cryptos" | translate}}:  {{GlobalData?.total_cryptocurrencies | number}}</p>
-    <p class="mb-0">{{"Exchanges" | translate}}:  {{GlobalData?.total_exchanges | number}} </p>
-    <p class="mb-0">{{"Pairs" | translate}}:  {{GlobalData?.active_market_pairs | number}} </p>
-    <p class="mb-0">{{"Market Cap" | translate}}:  $ {{GlobalData?.quote.USD.total_market_cap | number}} </p>
-    <p class="mb-0">{{"24h Vol" | translate}}:  $ {{GlobalData?.quote.USD.total_volume_24h | number}} </p>
-    <p class="mb-0">{{"Dominance" | translate}}:
-      <span> BTC: {{GlobalData?.btc_dominance | number}}% </span>
-      <span class="ml-3">ETH: {{GlobalData?.eth_dominance | number}} % </span>
-    </p>
-  </div>
+    <div class="d-flex justify-content-between h-ticker">
+      <p class="mb-0">{{"Cryptos" | translate}}:  {{GlobalData?.total_cryptocurrencies | number}}</p>
+      <p class="mb-0">{{"Exchanges" | translate}}:  {{GlobalData?.total_exchanges | number}} </p>
+      <p class="mb-0">{{"Pairs" | translate}}:  {{GlobalData?.active_market_pairs | number}} </p>
+      <p class="mb-0">{{"Market Cap" | translate}}:  $ {{GlobalData?.quote.USD.total_market_cap | number}} </p>
+      <p class="mb-0">{{"24h Vol" | translate}}:  $ {{GlobalData?.quote.USD.total_volume_24h | number}} </p>
+      <p class="mb-0">{{"Dominance" | translate}}:
+        <span> BTC: {{GlobalData?.btc_dominance | number}}% </span>
+        <span class="ml-3">ETH: {{GlobalData?.eth_dominance | number}} % </span>
+      </p>
+    </div>
   </div>
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container d-flex">
-  <a class="navbar-brand" href="/">
-    <img src="assets/images/logo.svg" height="40">
-  </a>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto ml-5">
-      <li class="nav-item ">
-        <a class="nav-link" [routerLink]="'/'">{{"Home" | translate}} </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="'/coins'">{{"Currencies" | translate}} </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="'/exchanges'">{{"Exchange" | translate}}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="'/news'">{{"News" | translate}}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="'/community/feed'">{{"Community" | translate}}</a>
-      </li>
-      <li class="nav-item" *ngIf="LoggedIn[0]">
-        <a class="nav-link" [routerLink]="'/wallet'">{{"Wallet" | translate}}</a>
-      </li>
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link" href="https://faq.ftftx.com">{{"FAQ" | translate}}</a>-->
-<!--      </li>-->
-    </ul>
-  </div>
+    <a class="navbar-brand" href="/">
+      <img src="assets/images/logo.svg" height="40">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto ml-5">
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="'/'">{{"Home" | translate}} </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/coins'">{{"Currencies" | translate}} </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/exchanges'">{{"Exchange" | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/news'">{{"News" | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/community/feed'">{{"Community" | translate}}</a>
+        </li>
+        <li class="nav-item" *ngIf="LoggedIn[0]">
+          <a class="nav-link" [routerLink]="'/wallet'">{{"Wallet" | translate}}</a>
+        </li>
+        <!--      <li class="nav-item">-->
+        <!--        <a class="nav-link" href="https://faq.ftftx.com">{{"FAQ" | translate}}</a>-->
+        <!--      </li>-->
+      </ul>
+    </div>
     <ul class="navbar-nav ml-auto d-lg-flex flex-row d-none"  style="height: 25px">
       <li class="nav-item dropdown cu-p" (click)="toggleDarkTheme()">
         <span class="material-symbols-outlined align-self-center" style="font-size: 25px">dark_mode</span>
@@ -80,14 +80,14 @@
       </li>
       <li class="nav-item" (click)="toggleDarkTheme()">
         <a class="nav-link">
-        <span class="material-symbols-outlined align-self-center" style="font-size: 25px" *ngIf="Theme === 'light'">dark_mode</span>
-        <span class="material-symbols-outlined align-self-center" style="font-size: 25px" *ngIf="Theme === 'dark'">light_mode</span>
+          <span class="material-symbols-outlined align-self-center" style="font-size: 25px" *ngIf="Theme === 'light'">dark_mode</span>
+          <span class="material-symbols-outlined align-self-center" style="font-size: 25px" *ngIf="Theme === 'dark'">light_mode</span>
         </a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto d-lg-flex flex-row d-none" *ngIf="LoggedIn[0]" style="height: 35px">
-      <li class="nav-item dropdown cu-p" [routerLink]="'/account-m'">
+      <li class="nav-item dropdown cu-p" [routerLink]="'/account-settings'">
         <span class="material-symbols-outlined align-self-center" style="font-size: 35px">account_circle</span>
       </li>
     </ul>
@@ -99,7 +99,7 @@
 
 <div class="m-menu d-flex justify-content-between" *ngIf="isMobile">
   <a class="mb-0" [routerLink]="''" [routerLinkActive]="'selected'" [routerLinkActiveOptions]="{ exact: true }"><span class="material-symbols-outlined">home</span>{{"Home" | translate}}</a>
-<!--  <a class="mb-0" [routerLink]="'/exchanges'" [routerLinkActive]="'selected'"><span class="material-symbols-outlined">monitoring</span>{{"Exchanges" | translate}}</a>-->
+  <!--  <a class="mb-0" [routerLink]="'/exchanges'" [routerLinkActive]="'selected'"><span class="material-symbols-outlined">monitoring</span>{{"Exchanges" | translate}}</a>-->
   <a class="mb-0" [routerLink]="'/news'" [routerLinkActive]="'selected'"><span class="material-symbols-outlined">newspaper</span>{{"News" | translate}}</a>
   <a class="mb-0" [routerLink]="'/wallet'" [routerLinkActive]="'selected'" *ngIf="LoggedIn[0]"><span class="material-symbols-outlined">wallet</span>{{"Wallet"  | translate}}</a>
   <a class="mb-0" [routerLink]="'/community'" [routerLinkActive]="'selected'"><span class="material-symbols-outlined">people</span>{{"Community" | translate}}</a>

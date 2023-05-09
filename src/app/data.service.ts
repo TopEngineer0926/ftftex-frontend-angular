@@ -302,6 +302,14 @@ export class DataService {
     return this.http.post(`${environment.baseUrl}ftftx/kyxAPI/createSubAccount`, params);
   }
 
+  createSubAccountHuobi(params) {
+    return this.http.post(`${environment.baseUrl}ftftx/hupiAPI/createSubUser`, params);
+  }
+
+  getSubAccountHuobi(params) {
+    return this.http.post(`${environment.baseUrl}ftftx/hupiAPI/getUsers`, params);
+  }
+
   getSubAccApiKey(params) {
     return this.http.post(`${environment.baseUrl}ftftx/kyxAPI/getSubAccApiKey`, params);
   }

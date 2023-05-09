@@ -11,7 +11,7 @@ body , html{
   background: var(--wht);
   font-family: 'Lato', sans-serif;
   overflow-x: hidden;
-/*  background: url("assets/images/white-bg.jpg");*/
+  /*  background: url("assets/images/white-bg.jpg");*/
 }
 @media (min-width: 576px){
   .container-sm, .container {
@@ -31,6 +31,11 @@ body , html{
   border: none !important;
   background: #FFFFFF !important;
 }
+
+.btn-outlined {
+  border: 1px solid #1577FF;
+}
+
 .placeholder__container--light{
   background: #FFFFFF !important;
 }
@@ -295,6 +300,10 @@ a{
   color: white;
 }
 
+.light-border-bottom {
+  border-bottom: 1px solid #e3e3e3;
+}
+
 .modal-content{
   border: none !important;
   border-radius: 18px;
@@ -479,4 +488,8 @@ body.dark-theme{
 
 .network-modal-sm {
   width: 400px !important;
+}
+
+.radius-10 {
+  border-radius: 10px !important;
 }

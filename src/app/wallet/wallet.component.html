@@ -1,92 +1,92 @@
-<div class="bg-wt " *ngIf="LogginIn[6] !== 'verified'">
-    <div class="min-h-full">
-        <section>
-            <div class="container">
-                <div class="row pg-main-sec">
-                    <div class="col-lg-4 justify-content-center d-flex flex-column content-b">
-                        <h1 class="d-block s-bld mt-5 banner-header">
-                            {{"FTFTex WALLET" | translate}}
-                        </h1>
-                        <h3>{{"FTFTex WALLET TXT1" | translate}}</h3>
-                        <p class="mt-2">{{"FTFTex WALLET TXT2" | translate}}</p>
-                        <div>
-                            <button class="btn btn-primary h-fit mb-auto w-fit  s-bld btn-lg px-2"
-                                    [routerLink]="'/account-m'">{{"Verify Your Account" | translate}}</button>
-                            <button class="btn btn-primary h-fit mb-auto w-fit  s-bld btn-lg px-2 ml-2"
-                                    [routerLink]="'/wallet/purchase-crypto'">{{"Purchase crypto" | translate}}</button>
-                        </div>
-                    </div>
-                    <div class="col-lg-8 d-none d-lg-block">
-                        <img src="assets/images/wallet.svg" class="b-main-img">
-                    </div>
-                </div>
-                <hr>
-            </div>
-        </section>
-        <section>
-            <div class="container">
-                <div class="row pg-main-sec">
-                    <div class="col-md-6">
-                        <video width="100%" height="600" autoplay muted loop>
-                            <source src="assets/videos/wallet_anim.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="card-d-b">
-                            <img src="assets/images/security.png" class="img-fit " height="160">
-                            <div class="ml-4 align-self-center">
-                                <h2 class="s-bld ">{{"Security" | translate}}</h2>
-                                <p class="mb-0">{{"Security TXT" | translate}}</p>
-                            </div>
-                        </div>
-                        <div class="card-d-b">
-                            <img src="assets/images/trending-up.png" class="img-fit " height="160">
-                            <div class="ml-4 align-self-center">
-                                <h2 class="s-bld ">{{"Asset Management" | translate}}</h2>
-                                <p class="mb-0">{{"Asset Management TXT" | translate}}</p>
-                            </div>
-                        </div>
-                        <div class="card-d-b">
-                            <img src="assets/images/ease-of-use.png" class="img-fit " height="160">
-                            <div class="ml-4 align-self-center">
-                                <h2 class="s-bld ">{{"Ease of use" | translate}}</h2>
-                                <p class="mb-0">{{"Ease of use TXT" | translate}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section>
-            <div class="container mb-5">
-                <div class="wt-box">
-                    <div class="row">
-                        <div class="col-lg-6 d-lg-block d-none">
-                            <img src="assets/images/subscribe-art.png" class="w-100" style="height: 480px;object-fit: cover">
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="p-4">
-                                <h1 class="s-bld my-lg-5 my-4">{{"Stay tuned !" | translate}}</h1>
-                                <h5>{{"Stay tuned TXT1" | translate}}</h5>
-                                <h5 class="mt-3">{{"Stay tuned TXT2" | translate}}</h5>
-                                <hr>
-                                <div class="d-flex mt-5">
-                                    <input class="form-control rounded-0" placeholder="Email" [(ngModel)]="subEmail">
-                                    <button class="btn btn-primary rounded-0" [disabled]="!subEmail"
-                                            (click)="Subscribe()">{{"Subscribe" | translate}}</button>
-                                </div>
-                                <p class="text-center my-4">{{message}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-</div>
+<!--<div class="bg-wt " *ngIf="LogginIn[6] !== 'verified'">-->
+<!--    <div class="min-h-full">-->
+<!--        <section>-->
+<!--            <div class="container">-->
+<!--                <div class="row pg-main-sec">-->
+<!--                    <div class="col-lg-4 justify-content-center d-flex flex-column content-b">-->
+<!--                        <h1 class="d-block s-bld mt-5 banner-header">-->
+<!--                            {{"FTFTex WALLET" | translate}}-->
+<!--                        </h1>-->
+<!--                        <h3>{{"FTFTex WALLET TXT1" | translate}}</h3>-->
+<!--                        <p class="mt-2">{{"FTFTex WALLET TXT2" | translate}}</p>-->
+<!--                        <div>-->
+<!--                            <button class="btn btn-primary h-fit mb-auto w-fit  s-bld btn-lg px-2"-->
+<!--                                    [routerLink]="'/account-m'">{{"Verify Your Account" | translate}}</button>-->
+<!--                            <button class="btn btn-primary h-fit mb-auto w-fit  s-bld btn-lg px-2 ml-2"-->
+<!--                                    [routerLink]="'/wallet/purchase-crypto'">{{"Purchase crypto" | translate}}</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-8 d-none d-lg-block">-->
+<!--                        <img src="assets/images/wallet.svg" class="b-main-img">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <hr>-->
+<!--            </div>-->
+<!--        </section>-->
+<!--        <section>-->
+<!--            <div class="container">-->
+<!--                <div class="row pg-main-sec">-->
+<!--                    <div class="col-md-6">-->
+<!--                        <video width="100%" height="600" autoplay muted loop>-->
+<!--                            <source src="assets/videos/wallet_anim.mp4" type="video/mp4">-->
+<!--                        </video>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-5">-->
+<!--                        <div class="card-d-b">-->
+<!--                            <img src="assets/images/security.png" class="img-fit " height="160">-->
+<!--                            <div class="ml-4 align-self-center">-->
+<!--                                <h2 class="s-bld ">{{"Security" | translate}}</h2>-->
+<!--                                <p class="mb-0">{{"Security TXT" | translate}}</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="card-d-b">-->
+<!--                            <img src="assets/images/trending-up.png" class="img-fit " height="160">-->
+<!--                            <div class="ml-4 align-self-center">-->
+<!--                                <h2 class="s-bld ">{{"Asset Management" | translate}}</h2>-->
+<!--                                <p class="mb-0">{{"Asset Management TXT" | translate}}</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="card-d-b">-->
+<!--                            <img src="assets/images/ease-of-use.png" class="img-fit " height="160">-->
+<!--                            <div class="ml-4 align-self-center">-->
+<!--                                <h2 class="s-bld ">{{"Ease of use" | translate}}</h2>-->
+<!--                                <p class="mb-0">{{"Ease of use TXT" | translate}}</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </section>-->
+<!--        <section>-->
+<!--            <div class="container mb-5">-->
+<!--                <div class="wt-box">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-lg-6 d-lg-block d-none">-->
+<!--                            <img src="assets/images/subscribe-art.png" class="w-100" style="height: 480px;object-fit: cover">-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-6">-->
+<!--                            <div class="p-4">-->
+<!--                                <h1 class="s-bld my-lg-5 my-4">{{"Stay tuned !" | translate}}</h1>-->
+<!--                                <h5>{{"Stay tuned TXT1" | translate}}</h5>-->
+<!--                                <h5 class="mt-3">{{"Stay tuned TXT2" | translate}}</h5>-->
+<!--                                <hr>-->
+<!--                                <div class="d-flex mt-5">-->
+<!--                                    <input class="form-control rounded-0" placeholder="Email" [(ngModel)]="subEmail">-->
+<!--                                    <button class="btn btn-primary rounded-0" [disabled]="!subEmail"-->
+<!--                                            (click)="Subscribe()">{{"Subscribe" | translate}}</button>-->
+<!--                                </div>-->
+<!--                                <p class="text-center my-4">{{message}}</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </section>-->
+<!--    </div>-->
+<!--</div>-->
 
 
-<div class="bg-wt " *ngIf="LogginIn[6] === 'verified'">
+<div class="bg-wt">
     <div class="min-h-full">
         <section>
             <div class="container">

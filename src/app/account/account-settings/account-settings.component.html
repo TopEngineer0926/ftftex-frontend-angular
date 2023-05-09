@@ -1,0 +1,63 @@
+<div class="min-h-full">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-3 wt-box ml-4 mr-4 p-4" style="position: sticky;top: 0">
+                <div class="d-flex align-items-center mb-2">
+                    <div class="mr-2">
+                        <span class="material-symbols-outlined align-self-center"
+                            style="font-size: 35px">account_circle</span>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex">
+                            <p class="tab-text m-0 mr-1">UID: 123 456 678</p>
+                            <p class="tab-text txt-green m-0">Verified</p>
+                        </div>
+                        <h4 class="s-bld">{{"My Account" | translate}}</h4>
+                    </div>
+                </div>
+                <div class="d-flex d-lg-block mb-4">
+                    <div class="btn sub-menu-btn w-100 radius-10"
+                        [routerLink]="'/account-settings/settings'" [routerLinkActive]="['btn-primary']">
+                        <span class="material-symbols-outlined">rss_feed</span>
+                        <span class="ml-4">{{"Account Settings" | translate}}</span>
+                    </div>
+                    <div class="btn sub-menu-btn light-border-bottom w-100 radius-10"
+                        [routerLink]="'/account-settings/community-settings'" [routerLinkActive]="['btn-primary']">
+                        <span class="material-symbols-outlined">rss_feed</span>
+                        <span class="ml-4">{{"Community Settings" | translate}}</span>
+                    </div>
+                    <div class="btn sub-menu-btn light-border-bottom w-100 radius-10" [routerLink]="'/account-settings/security'" [routerLinkActive]="['btn-primary']">
+                        <span class="material-symbols-outlined">rss_feed</span>
+                        <span class="ml-4">{{"Security" | translate}}</span>
+                    </div>
+                    <div class="btn sub-menu-btn light-border-bottom w-100 radius-10" [routerLink]="'/account-settings/privacy'" [routerLinkActive]="['btn-primary']">
+                        <span class="material-symbols-outlined">rss_feed</span>
+                        <span class="ml-4">{{"Privacy" | translate}}</span>
+                    </div>
+                    <div class="btn sub-menu-btn light-border-bottom w-100 radius-10"
+                        [routerLink]="'/account-settings/environment'" [routerLinkActive]="['btn-primary']">
+                        <span class="material-symbols-outlined">rss_feed</span>
+                        <span class="ml-4">{{"Environment" | translate}}</span>
+                    </div>
+                    <div class="btn sub-menu-btn light-border-bottom w-100 radius-10" [routerLink]="'/account-settings/support'" [routerLinkActive]="['btn-primary']">
+                        <span class="material-symbols-outlined">rss_feed</span>
+                        <span class="ml-4">{{"Support" | translate}}</span>
+                    </div>
+                    <div class="btn sub-menu-btn light-border-bottom w-100 radius-10"
+                        [routerLink]="'/account-settings/terms-policies'" [routerLinkActive]="['btn-primary']">
+                        <span class="material-symbols-outlined">rss_feed</span>
+                        <span class="ml-4">{{"Terms & Policies" | translate}}</span>
+                    </div>
+                    <div class="btn sub-menu-btn w-100 radius-10" (click)="onLogout()" [routerLink]="'/account-settings'">
+                        <span class="material-symbols-outlined">rss_feed</span>
+                        <span class="ml-4">{{"Logout" | translate}}</span>
+                    </div>
+                </div>
+                <p class="tab-text m-0 mr-1">Version 1.0.0</p>
+            </div>
+            <div class="col-lg-8 wt-box" style="overflow: visible">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
